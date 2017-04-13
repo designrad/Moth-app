@@ -1,0 +1,39 @@
+{
+  "name": "Designrad",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "postinstall": "remotedev-debugger --hostname localhost --port 8889 --injectserver",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.43.3",
+    "react-native-vector-icons": "^4.0.1",
+    "react-navigation": "git+https://github.com/react-community/react-navigation.git#fb2a0ad33d476807c9380967c2570f944c4345d0",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.6"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.2",
+    "babel-jest": "19.0.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-native": "^1.9.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "jest": "19.0.2",
+    "react-test-renderer": "16.0.0-alpha.6",
+    "remote-redux-devtools": "^0.5.7",
+    "remote-redux-devtools-on-debugger": "^0.7.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
