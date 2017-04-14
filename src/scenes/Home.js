@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { push } from '../redux/actions/navigation';
 import { colors, images } from '../global';
-import { screenWidth, screenHeight, scale } from '../global/constants';
+import { screenWidth, screenHeight, scale, Routes } from '../global/constants';
 
 import TakeFotoButton from '../components/TakeFotoButton';
 
@@ -40,9 +40,12 @@ const styles = StyleSheet.create({
   dispatch => bindActionCreators({ push }, dispatch)
 )
 export default class Home extends Component {
-  takeFoto() {
-
-  }
+  static navigationOptions = {
+    header:{
+      visible: false
+    }
+  };
+  openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
   render() {
     return (
       <View style={styles.container}>
@@ -57,7 +60,7 @@ export default class Home extends Component {
           <TakeFotoButton image={images.fotoMoth} onPress={() => this.takeFoto()} />
           <Button icon={'picture-o'} title={'Send old photo'} onPress={() => {}} style={styles.buttonsContainer} />
           <Button icon={'map'} title={'Show map'} onPress={() => {}} style={styles.buttonsContainer} />
-          <Button icon={'info-circle'} title={'Learn More'} onPress={() => {}} style={styles.buttonsContainer} />
+          <Button icon={'info-circle'} title={'Learn More'} onPress={this.openLearnMore} style={styles.buttonsContainer} />
           <Button icon={'check-circle'} title={'Log'} onPress={() => {}} style={styles.buttonsContainer} />
         </View>
       </View>

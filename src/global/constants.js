@@ -6,6 +6,10 @@ export const Routes = {
   home: {
     name: 'Home',
     title: 'Home'
+  },
+  learnMore: {
+    name: 'LearnMore',
+    title: 'Learn more'
   }
 };
 export const screenWidth = width;
