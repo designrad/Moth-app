@@ -8,4 +8,6 @@ export default StackNavigator({
   [Routes.home.name]: {
     screen: Home
   }
+}, {
+  headerMode: 'none'
 });
