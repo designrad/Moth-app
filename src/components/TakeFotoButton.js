@@ -52,7 +52,7 @@ export default function TakeFotoBtn(props) {
           style={styles.img}
         />
         <View style={styles.textContainer}>
-          <Text style={styles.text}>Take photo</Text>
+          <Text style={styles.text}>{'Take photo'.localized}</Text>
         </View>
       </LinearGradient>
     </TouchableOpacity>

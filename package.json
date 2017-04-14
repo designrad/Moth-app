@@ -10,6 +10,7 @@
   "dependencies": {
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.3",
+    "react-native-i18n": "^1.0.0",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-vector-icons": "^4.0.1",
     "react-navigation": "git+https://github.com/react-community/react-navigation.git#fb2a0ad33d476807c9380967c2570f944c4345d0",

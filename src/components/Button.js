@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import { colors } from '../global';
 import { scale } from '../global/constants';
@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
 });
 
 export default function Button(props) {
-  const { onPress, icon, text } = props;
+  const { onPress, icon, title, style } = props;
   return (
     <TouchableOpacity
-      style={styles.button}
+      style={[styles.button, style]}
       onPress={onPress}
     >
       <AIcon name={icon} style={styles.icon} />
-      <Text style={styles.label}>{text}</Text>
+      <Text style={styles.label}>{title.localized}</Text>
     </TouchableOpacity>
   );
 }
@@ -43,5 +43,10 @@ export default function Button(props) {
 Button.propTypes = {
   onPress: PropTypes.func.isRequired,
   icon: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  style: View.propTypes.style,
 };
+
+Button.defaultProps = {
+  style: {}
+}
