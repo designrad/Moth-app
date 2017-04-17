@@ -49,4 +49,4 @@ Button.propTypes = {
 
 Button.defaultProps = {
   style: {}
-}
+};

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 import Button from '../components/Button';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -34,6 +35,12 @@ const styles = StyleSheet.create({
     marginTop: scale(20),
   }
 });
+const options = {
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
 
 @connect(
   state => ({}),
@@ -41,12 +48,38 @@ const styles = StyleSheet.create({
 )
 export default class Home extends Component {
   static navigationOptions = {
-    header:{
+    header: {
       visible: false
     },
     title: Routes.home.title
   };
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
+
+  takePhoto = () => {
+    ImagePicker.launchCamera(options, (response) => {
+      console.log('Response = ', response);
+      if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        const source = { uri: response.uri };
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
+  };
+
+  oldPhoto = () => {
+    ImagePicker.launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+      if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        const source = response //{ uri: `data:image/jpeg;base64,${response.data}` };
+        this.props.navigation.navigate(Routes.finalize.name, { source });
+      }
+    });
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -56,10 +89,9 @@ export default class Home extends Component {
           style={styles.backgroundMoths}
           resizeMode={Image.resizeMode.contain}
         />
-
         <View style={styles.itemContainer}>
-          <TakeFotoButton image={images.photoMoth} onPress={() => this.takeFoto()} />
-          <Button icon={'picture-o'} title={'Send old photo'} onPress={() => {}} style={styles.buttonsContainer} />
+          <TakeFotoButton image={images.photoMoth} onPress={this.takePhoto} />
+          <Button icon={'picture-o'} title={'Send old photo'} onPress={this.oldPhoto} style={styles.buttonsContainer} />
           <Button icon={'map'} title={'Show map'} onPress={() => {}} style={styles.buttonsContainer} />
           <Button icon={'info-circle'} title={'Learn More'} onPress={this.openLearnMore} style={styles.buttonsContainer} />
           <Button icon={'check-circle'} title={'Log'} onPress={() => {}} style={styles.buttonsContainer} />

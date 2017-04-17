@@ -2,6 +2,7 @@ import { StackNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import Home from '../scenes/Home';
 import LearnMore from '../scenes/LearnMore';
+import Finalize from '../scenes/Finalize';
 
 import { colors } from '../global';
 
@@ -24,6 +25,9 @@ export default StackNavigator({
   },
   [Routes.learnMore.name]: {
     screen: LearnMore
+  },
+  [Routes.finalize.name]: {
+    screen: Finalize
   }
 }, {
   headerMode: 'screen',

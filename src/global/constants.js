@@ -10,6 +10,10 @@ export const Routes = {
   learnMore: {
     name: 'LearnMore',
     title: 'Learn more'
+  },
+  finalize: {
+    name: 'Finalize',
+    title: 'Finalize'
   }
 };
 export const screenWidth = width;
@@ -17,3 +21,5 @@ export const screenHeight = height;
 
 export const scale = value => (width / 414) * value;
 export const scaleByVertical = value => (height / 736) * value;
+
+export const dataFormat = 'lll';
