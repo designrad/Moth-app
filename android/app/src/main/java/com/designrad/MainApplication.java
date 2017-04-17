@@ -1,7 +1,6 @@
 package com.designrad;
 
 import android.app.Application;
-
 import com.facebook.react.ReactApplication;
 import com.i18n.reactnativei18n.ReactNativeI18n;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -31,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage()
       );
     }
+
   };
 
   @Override
