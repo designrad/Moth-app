@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     width: sizeContainer,
     bottom: scale(42),
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   text: {
     fontWeight: 'bold',

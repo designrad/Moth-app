@@ -43,7 +43,8 @@ export default class Home extends Component {
   static navigationOptions = {
     header:{
       visible: false
-    }
+    },
+    title: Routes.home.title
   };
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
   render() {
@@ -57,7 +58,7 @@ export default class Home extends Component {
         />
 
         <View style={styles.itemContainer}>
-          <TakeFotoButton image={images.fotoMoth} onPress={() => this.takeFoto()} />
+          <TakeFotoButton image={images.photoMoth} onPress={() => this.takeFoto()} />
           <Button icon={'picture-o'} title={'Send old photo'} onPress={() => {}} style={styles.buttonsContainer} />
           <Button icon={'map'} title={'Show map'} onPress={() => {}} style={styles.buttonsContainer} />
           <Button icon={'info-circle'} title={'Learn More'} onPress={this.openLearnMore} style={styles.buttonsContainer} />
