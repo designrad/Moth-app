@@ -1,8 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { showAlert } from '../redux/actions/app';
 import { Routes, scale, scaleByVertical, screenWidth } from '../global/constants';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { colors } from '../global';
@@ -11,6 +8,7 @@ import LocationButton from '../components/LocationButton';
 import CommentButton from '../components/CommentButton';
 import Input from '../components/Input';
 import SendButton from '../components/SendButton';
+import CommentEditor from '../components/CommentEditor';
 
 
 const styles = StyleSheet.create({
@@ -18,7 +16,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.mainOrange,
   },
   container: {
-    flex: 1,
     backgroundColor: colors.mainOrange,
     paddingTop: scaleByVertical(11),
     alignItems: 'center'
@@ -50,33 +47,27 @@ const styles = StyleSheet.create({
   }
 });
 
-@connect(
-  state => ({}),
-  dispatch => bindActionCreators({ showAlert }, dispatch)
-)
 export default class Finalize extends Component {
   static navigationOptions = {
     title: Routes.finalize.title.localized
   };
-  static propTypes = {
-    showAlert: PropTypes.func.isRequired
-  };
-
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       team: '',
-      email: ''
+      email: '',
+      modal: false,
+      comment: ''
     };
   }
 
   render() {
-    const { navigation, showAlert } = this.props;
+    const { navigation } = this.props;
     const { source } = navigation.state.params;
     const { data, timestamp, latitude, longitude } = source;
     const dataTime = Moment(timestamp).format('lll');
-    // const openEditComment = () => showAlert('Add comments', onChangeText={text => this.setState({ email: text })}, () => {});
+    const openEditor = show => this.setState({ modal: show });
     return (
       <KeyboardAwareScrollView
         style={styles.scrollView}
@@ -95,8 +86,8 @@ export default class Finalize extends Component {
               onPressNolocation={() => {}}
             />
             <CommentButton
-              onPress={openEditComment}
-              text={''}
+              onPress={() => openEditor(true)}
+              text={this.state.comment}
             />
             <Input
               placeholder={'Name (optional)'.localized}
@@ -117,7 +108,15 @@ export default class Finalize extends Component {
             <SendButton longitude={longitude} latitude={latitude} onPress={() => {}} />
           </View>
         </View>
+        <CommentEditor
+          show={this.state.modal}
+          close={() => openEditor(false)}
+          value={this.state.comment}
+          onChangeText={text => this.setState({ comment: text })}
+        />
       </KeyboardAwareScrollView>
+
+
     );
   }
 }

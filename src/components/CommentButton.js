@@ -5,7 +5,6 @@ import { colors } from '../global';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row'
   },
   text: {
@@ -42,7 +41,7 @@ export default function CommentButton(props) {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{newText.localized}</Text>
+      <Text numberOfLines={1} style={styles.text}>{newText.localized}</Text>
       <Text
         style={styles.noText}
         onPress={onPress}
