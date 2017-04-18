@@ -68,6 +68,7 @@ export default class Finalize extends Component {
     const { data, timestamp, latitude, longitude } = source;
     const dataTime = Moment(timestamp).format('lll');
     const openEditor = show => this.setState({ modal: show });
+    const openMap = () => navigation.navigate(Routes.addLocation.name)
     return (
       <KeyboardAwareScrollView
         style={styles.scrollView}
@@ -83,7 +84,7 @@ export default class Finalize extends Component {
               longitude={longitude}
               latitude={latitude}
               onPress={() => {}}
-              onPressNolocation={() => {}}
+              onPressNolocation={openMap}
             />
             <CommentButton
               onPress={() => openEditor(true)}

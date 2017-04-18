@@ -14,6 +14,10 @@ export const Routes = {
   finalize: {
     name: 'Finalize',
     title: 'Finalize'
+  },
+  addLocation: {
+    name: 'AddLocation',
+    title: 'Add location'
   }
 };
 export const screenWidth = width;
