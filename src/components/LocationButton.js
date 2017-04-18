@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     color: colors.flatRed,
     textDecorationLine: 'underline',
+    fontWeight: 'bold'
   }
 });
 
@@ -26,7 +27,7 @@ export default function LocationButton(props) {
         onPress={onPressNolocation}
         style={styles.noLocation}
       >
-        {'Add location'}
+        {'Add location'.localized}
       </Text>
     );
   }

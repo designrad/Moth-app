@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     paddingTop: scaleByVertical(12),
     fontSize: scale(13),
     color: colors.flatBlue,
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
+    fontWeight: 'bold'
   }
 });
 
@@ -29,14 +30,25 @@ export default function CommentButton(props) {
         onPress={onPress}
         style={styles.noText}
       >
-        {'Add comments (optional)'}
+        {'Add comments (optional)'.localized}
       </Text>
     );
   }
+  let newText;
+  if (text.length > 35) {
+    newText = `${text.substr(0, 35)}...`;
+  } else {
+    newText = text;
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{text.localized}</Text>
-      <Text style={styles.noText}>{'Edit'.localized}</Text>
+      <Text style={styles.text}>{newText.localized}</Text>
+      <Text
+        style={styles.noText}
+        onPress={onPress}
+      >
+        {'Edit'.localized}
+      </Text>
     </View>
   );
 }

@@ -54,17 +54,15 @@ export default class Home extends Component {
     title: Routes.home.title
   };
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
-
+  // TODO: fix clic 'cancel'
   takePhoto = () => {
     ImagePicker.launchCamera(options, (response) => {
       console.log('Response = ', response);
       if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        const source = { uri: response.uri };
-        this.setState({
-          avatarSource: source
-        });
+        const source = response;
+        this.props.navigation.navigate(Routes.finalize.name, { source });
       }
     });
   };
@@ -75,7 +73,7 @@ export default class Home extends Component {
       if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        const source = response //{ uri: `data:image/jpeg;base64,${response.data}` };
+        const source = response;
         this.props.navigation.navigate(Routes.finalize.name, { source });
       }
     });
