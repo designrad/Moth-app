@@ -1,12 +1,45 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
-import MapView from 'react-native-maps';
-import { Routes, scale, scaleByVertical, screenWidth } from '../global/constants';
+import React, { Component, PropTypes } from 'react';
+import { View, StyleSheet, Image, Text, Button, Alert } from 'react-native';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setFinalize } from '../redux/actions/finalize';
+
+import MapView from 'react-native-maps';
+import { Routes } from '../global/constants';
+import { colors } from '../global';
+
+@connect(({ finalize }) => ({
+  ...finalize,
+}), dispatch => bindActionCreators({
+  setFinalize
+}, dispatch))
 export default class AddLocation extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation: { goBack, state }}) => ({
     title: Routes.addLocation.title.localized,
+    headerRight: (!state.params.show &&
+      <Button
+        title={'Save'}
+        color={colors.white}
+        onPress={() => goBack()}
+        icon={''}
+      />
+    )
+  });
+  static propTypes = {
+    navigation: PropTypes.shape({
+      setParams: PropTypes.func.isRequired
+    }).isRequired,
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    setFinalize: PropTypes.func.isRequired
   };
+
+  static defaultProps = {
+    latitude: null,
+    longitude: null
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +51,8 @@ export default class AddLocation extends Component {
       x: {
         latitude: 37.78825,
         longitude: -122.4324
-      }
+      },
+      fixed: false
     };
   }
   componentDidMount() {
@@ -27,21 +61,33 @@ export default class AddLocation extends Component {
         const initialPosition = position.coords;
         this.setState({ initialPosition });
       },
-      error => alert(JSON.stringify(error)),
+      error => Alert.alert(JSON.stringify(error)),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
       const lastPosition = position;
       this.setState({ lastPosition });
     });
+    const { longitude, latitude } = this.props;
+    if (longitude && latitude) {
+      const photoPos = { longitude, latitude };
+      this.initLocation(photoPos);
+    }
   }
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
-
+  setLocation(location) {
+    if (!this.state.fixed) {
+      this.setState({ x: location });
+      this.props.setFinalize({ latitude: location.latitude, longitude: location.longitude });
+    }
+  }
+  initLocation(location) {
+    this.setState({ x: location, initialPosition: location, fixed: true });
+  }
   render() {
-    console.log('asdkjlskajd', this.state.initialPosition);
     const { latitude, longitude } = this.state.initialPosition;
     const latitudeDelta = 0.0922;
     const longitudeDelta = 0.0421;
@@ -54,13 +100,13 @@ export default class AddLocation extends Component {
           latitudeDelta,
           longitudeDelta
         }}
-        onPress={e => this.setState({ x: e.nativeEvent.coordinate })}
+        onPress={e => this.setLocation(e.nativeEvent.coordinate)}
         showsUserLocation
       >
         <MapView.Marker
-          draggable
+          draggable={this.state.fixed}
           coordinate={this.state.x}
-          onDragEnd={e => this.setState({ x: e.nativeEvent.coordinate })}
+          onDragEnd={e => this.setLocation(e.nativeEvent.coordinate)}
         />
       </MapView>
     );

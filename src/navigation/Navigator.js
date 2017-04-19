@@ -36,10 +36,8 @@ export default StackNavigator({
 }, {
   headerMode: 'screen',
   navigationOptions: {
-    header: {
-      style: styles.header,
-      titleStyle: styles.title,
-      tintColor: 'white'
-    }
+    headerStyle: styles.header,
+    headerTitleStyle: styles.title,
+    headerTintColor: 'white'
   }
 });

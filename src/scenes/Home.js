@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
-import Button from '../components/Button';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { push } from '../redux/actions/navigation';
+import { setFinalize } from '../redux/actions/finalize';
+
+import ImagePicker from 'react-native-image-picker';
+import Button from '../components/Button';
 import { colors, images } from '../global';
 import { screenWidth, screenHeight, scale, Routes } from '../global/constants';
 
@@ -42,42 +44,51 @@ const options = {
   }
 };
 
-@connect(
-  state => ({}),
-  dispatch => bindActionCreators({ push }, dispatch)
-)
+@connect(({ finalize }) => ({
+  ...finalize,
+}), dispatch => bindActionCreators({
+  setFinalize
+}, dispatch))
+
 export default class Home extends Component {
   static navigationOptions = {
-    header: {
-      visible: false
-    },
+    headerVisible: false,
     title: Routes.home.title.localized
   };
+
+  static propTypes = {
+    navigation: PropTypes.shape({
+      state: PropTypes.shape({}),
+      navigate: PropTypes.func.isRequired
+    }).isRequired,
+    setFinalize: PropTypes.func.isRequired
+  };
+
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
-  // TODO: fix clic 'cancel'
   takePhoto = () => {
     ImagePicker.launchCamera(options, (response) => {
-      console.log('Response = ', response);
-      if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
-        const source = response;
-        this.props.navigation.navigate(Routes.finalize.name, { source });
-      }
+      this.sendPhoto(response);
     });
   };
 
   oldPhoto = () => {
     ImagePicker.launchImageLibrary(options, (response) => {
-      console.log('Response = ', response);
-      if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
-        const source = response;
-        this.props.navigation.navigate(Routes.finalize.name, { source });
-      }
+      this.sendPhoto(response);
     });
   };
+
+  sendPhoto(response) {
+    if (response.error) {} else if (response.didCancel) {} else {
+      this.props.setFinalize({
+        data: response.data,
+        timestamp: response.timestamp,
+        latitude: response.latitude,
+        longitude: response.longitude
+      });
+      this.props.navigation.navigate(Routes.finalize.name);
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>

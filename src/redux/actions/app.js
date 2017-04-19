@@ -2,7 +2,7 @@ import { NavigationActions } from 'react-navigation';
 import {
   SET_APP,
   SHOW_ALERT,
-  SHOW_YES_OR_NO_ALERT
+  SHOW_YES_OR_NO_ALERT,
 } from '../constants/index';
 // App
 export const setApp = payload => ({ type: SET_APP, payload });

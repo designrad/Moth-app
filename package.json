@@ -17,7 +17,7 @@
     "react-native-linear-gradient": "^2.0.0",
     "react-native-maps": "0.13.1",
     "react-native-vector-icons": "^4.0.1",
-    "react-navigation": "git+https://github.com/react-community/react-navigation.git#fb2a0ad33d476807c9380967c2570f944c4345d0",
+    "react-navigation": "git+https://github.com/react-community/react-navigation.git#ba98f7a1aeb34edc3e1ab99130b279e232dc09b7",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-saga": "^0.14.6"
