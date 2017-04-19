@@ -15,6 +15,7 @@
     "react-native-image-picker": "^0.26.3",
     "react-native-keyboard-aware-scroll-view": "git+https://github.com/AllmaxTeam/react-native-keyboard-aware-scroll-view.git#5311de6f709f472655651f8224e4c993cd7c327f",
     "react-native-linear-gradient": "^2.0.0",
+    "react-native-maps": "^0.14.0",
     "react-native-vector-icons": "^4.0.1",
     "react-navigation": "git+https://github.com/react-community/react-navigation.git#fb2a0ad33d476807c9380967c2570f944c4345d0",
     "react-redux": "^5.0.4",
@@ -34,6 +35,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "jest": "19.0.2",
+    "module-resolver": "^1.0.0",
     "react-test-renderer": "16.0.0-alpha.6",
     "remote-redux-devtools": "^0.5.7",
     "remote-redux-devtools-on-debugger": "^0.7.0"

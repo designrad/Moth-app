@@ -51,7 +51,7 @@ export default class Home extends Component {
     header: {
       visible: false
     },
-    title: Routes.home.title
+    title: Routes.home.title.localized
   };
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
   // TODO: fix clic 'cancel'
@@ -91,7 +91,7 @@ export default class Home extends Component {
           <TakeFotoButton image={images.photoMoth} onPress={this.takePhoto} />
           <Button icon={'picture-o'} title={'Send old photo'} onPress={this.oldPhoto} style={styles.buttonsContainer} />
           <Button icon={'map'} title={'Show map'} onPress={() => {}} style={styles.buttonsContainer} />
-          <Button icon={'info-circle'} title={'Learn More'} onPress={this.openLearnMore} style={styles.buttonsContainer} />
+          <Button icon={'info-circle'} title={'Learn more'} onPress={this.openLearnMore} style={styles.buttonsContainer} />
           <Button icon={'check-circle'} title={'Log'} onPress={() => {}} style={styles.buttonsContainer} />
         </View>
       </View>

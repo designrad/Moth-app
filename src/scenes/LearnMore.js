@@ -66,52 +66,52 @@ const styles = StyleSheet.create({
 
 export default class LearnMore extends Component {
   static navigationOptions = {
-    title: Routes.learnMore.title
+    title: Routes.learnMore.title.localized
   };
   render() {
     return (
       <ScrollView style={styles.container}>
         <Image source={images.photoMoth} style={styles.img} />
         <View style={styles.itemContainer}>
-          <Text style={styles.header}>{'Målerjakt app'}</Text>
+          <Text style={styles.header}>{'Målerjakt app'.localized}</Text>
           <Text style={styles.text}>
-            {'The overarching goal of the project is to' +
+            {('The overarching goal of the project is to' +
             ' engage volunteer observers in a campaign to' +
             ' map the current distribution of scarce umber' +
             ' moth. In doing so, we hope to achieve a' +
-            ' number of sub-goals:'}
+            ' number of sub-goals:').localized}
           </Text>
           <TextList
-            text={'To obtain an up-to-date overview of scarce' +
+            text={('To obtain an up-to-date overview of scarce' +
              ' umber moth presences north and east of the' +
-              ' known front of spread of the species.'}
+              ' known front of spread of the species.').localized}
           />
           <TextList
-            text={'To provide teachers with a low threshold' +
+            text={('To provide teachers with a low threshold' +
              ' opportunity for engaging school children in a' +
               ' practical educational activity which will' +
-               ' contribute to generating real data.'}
+               ' contribute to generating real data.').localized}
           />
           <TextList
-            text={'To provide a simple, fun and hands-on way' +
+            text={('To provide a simple, fun and hands-on way' +
              ' of engaging the public in science, and through' +
               ' that influence public awareness and attitudes' +
-               ' towards science.'}
+               ' towards science.').localized}
           />
           <TextList
-            text={'To gain valuable in-house experience in' +
+            text={('To gain valuable in-house experience in' +
              ' how simple apps can be designed and used in' +
-              ' targeted surveys of biodiversity.'}
+              ' targeted surveys of biodiversity.').localized}
           />
         </View>
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'Team Målerjakt'}</Text>
           <Text style={styles.text}>
-            {'The overarching goal of the project is to' +
+            {('The overarching goal of the project is to' +
             ' engage volunteer observers in a campaign to' +
             ' map the current distribution of scarce umber' +
             ' moth. In doing so, we hope to achieve a ' +
-            'number of sub-goals:'}
+            'number of sub-goals:').localized}
           </Text>
           <MembersList
             photo={images.photoJane}
@@ -136,8 +136,8 @@ export default class LearnMore extends Component {
           />
         </View>
         <View style={styles.itemContainer}>
-          <Text style={styles.header}>{'Sponsors and financing'}</Text>
-          <Text style={styles.text}>{'This app is sponsored by:'}</Text>
+          <Text style={styles.header}>{'Sponsors and financing'.localized}</Text>
+          <Text style={styles.text}>{'This app is sponsored by:'.localized}</Text>
         </View>
         <View style={styles.labelContainer}>
           <Image
@@ -152,10 +152,10 @@ export default class LearnMore extends Component {
           />
         </View>
         <View style={styles.itemContainer}>
-          <Text style={styles.header}>{'App utvikling'}</Text>
+          <Text style={styles.header}>{'App utvikling'.localized}</Text>
           <Text style={styles.text}>
-            {'This app is produced for NINA by Designråd, Tromsø and' +
-            ' all source code is open source and available on GitHub.'}
+            {('This app is produced for NINA by Designråd, Tromsø and' +
+            ' all source code is open source and available on GitHub.').localized}
           </Text>
         </View>
         <View style={styles.labelContainer}>
