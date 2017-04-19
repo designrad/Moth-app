@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Image, Text, Button, Alert } from 'react-native';
+import { Button, Alert } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -27,9 +27,6 @@ export default class AddLocation extends Component {
     )
   });
   static propTypes = {
-    navigation: PropTypes.shape({
-      setParams: PropTypes.func.isRequired
-    }).isRequired,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     setFinalize: PropTypes.func.isRequired
