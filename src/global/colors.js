@@ -7,7 +7,12 @@ const colors = {
   orange: '#FFD068',
   liteOrange: '#FFBD2C',
   black: '#000000',
-  mainOrange: '#FFCE62'
+  mainOrange: '#FFCE62',
+  white: '#FFFFFF',
+  gray: '#979797',
+  flatBlack: '#202020',
+  backgroundBtn: '#5D5B59',
+  borderGray: '#7E7E7E'
 };
 
 export default colors;

@@ -8,3 +8,5 @@ I18n.translations = { nb };
 Object.defineProperty(String.prototype, 'localized', {
   get () { return I18n.t(`${this}`, { defaultValue: `${this}` }); }
 });
+
+console.log('I18N: ', I18n);

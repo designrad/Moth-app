@@ -2,6 +2,8 @@ import { StackNavigator } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import Home from '../scenes/Home';
 import LearnMore from '../scenes/LearnMore';
+import Finalize from '../scenes/Finalize';
+import AddLocation from '../scenes/AddLocation';
 
 import { colors } from '../global';
 
@@ -24,14 +26,18 @@ export default StackNavigator({
   },
   [Routes.learnMore.name]: {
     screen: LearnMore
+  },
+  [Routes.finalize.name]: {
+    screen: Finalize
+  },
+  [Routes.addLocation.name]: {
+    screen: AddLocation
   }
 }, {
   headerMode: 'screen',
   navigationOptions: {
-    header: {
-      style: styles.header,
-      titleStyle: styles.title,
-      tintColor: 'white'
-    }
+    headerStyle: styles.header,
+    headerTitleStyle: styles.title,
+    headerTintColor: 'white'
   }
 });

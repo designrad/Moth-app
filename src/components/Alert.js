@@ -1,8 +1,5 @@
-/**
- * Created by Bardiaswift on 29/09/2016.
- */
 import React, { PropTypes } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 
 export const AlertTypes = {
   ok: 'ok',
@@ -38,6 +35,7 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   text: {
+    flex: 1,
     fontSize: 14,
     textAlign: 'center'
   },
@@ -95,7 +93,7 @@ Button.defaultProps = {
 /**
  * @return {null} if not visible.
  */
-export default function Alert ({
+export default function Alert({
   visible,
   title,
   text,
@@ -103,7 +101,8 @@ export default function Alert ({
   okHandler,
   noHandler,
   yesHandler,
-  children
+  children,
+  props
 }) {
   if (!visible) {
     return null;
@@ -115,7 +114,10 @@ export default function Alert ({
           {children || (
             <View>
               {title != null && <Text style={styles.title}>{title.localized}</Text>}
-              <Text style={styles.text}>{text.localized}</Text>
+              <TextInput
+                style={styles.text}
+                {...props}
+              />
             </View>
           )}
         </View>
