@@ -4,6 +4,7 @@ import Home from '../scenes/Home';
 import LearnMore from '../scenes/LearnMore';
 import Finalize from '../scenes/Finalize';
 import AddLocation from '../scenes/AddLocation';
+import Log from '../scenes/Log';
 
 import { colors } from '../global';
 
@@ -32,6 +33,9 @@ export default StackNavigator({
   },
   [Routes.addLocation.name]: {
     screen: AddLocation
+  },
+  [Routes.log.name]: {
+    screen: Log
   }
 }, {
   headerMode: 'screen',

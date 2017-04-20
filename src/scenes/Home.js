@@ -65,6 +65,7 @@ export default class Home extends Component {
   };
 
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
+  openLog = () => this.props.navigation.navigate(Routes.log.name);
   takePhoto = () => {
     ImagePicker.launchCamera(options, (response) => {
       this.sendPhoto(response);
@@ -106,7 +107,7 @@ export default class Home extends Component {
           <Button icon={'picture-o'} title={'Send old photo'} onPress={this.oldPhoto} style={styles.buttonsContainer} />
           <Button icon={'map'} title={'Show map'} onPress={() => {}} style={styles.buttonsContainer} />
           <Button icon={'info-circle'} title={'Learn more'} onPress={this.openLearnMore} style={styles.buttonsContainer} />
-          <Button icon={'check-circle'} title={'Log'} onPress={() => {}} style={styles.buttonsContainer} />
+          <Button icon={'check-circle'} title={'Log'} onPress={this.openLog} style={styles.buttonsContainer} />
         </View>
       </View>
     );

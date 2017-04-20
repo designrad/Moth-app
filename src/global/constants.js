@@ -18,6 +18,10 @@ export const Routes = {
   addLocation: {
     name: 'AddLocation',
     title: 'Add location'
+  },
+  log: {
+    name: 'Log',
+    title: 'Log'
   }
 };
 export const screenWidth = width;

@@ -12,7 +12,8 @@ const colors = {
   gray: '#979797',
   flatBlack: '#202020',
   backgroundBtn: '#5D5B59',
-  borderGray: '#7E7E7E'
+  borderGray: '#7E7E7E',
+  whiteOrange: '#FFF5DF'
 };
 
 export default colors;
