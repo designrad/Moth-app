@@ -85,15 +85,6 @@ export default class Finalize extends Component {
     latitude: null,
     longitude: null
   };
-  componentDidMount() {
-    this.getUid();
-  }
-
-  getUid() {
-    AsyncStorage.getItem('UID', (err, result) => {
-      this.props.setFinalize({ uid: result });
-    });
-  }
 
   render() {
     const {

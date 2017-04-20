@@ -2,21 +2,18 @@ import { put, call, fork, select } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { takeLatest } from 'redux-saga';
-import { showAlert } from '../actions/app';
+import { setApp } from '../actions/app';
 
-function* startup(action) {
+function* startup() {
   try {
-    const key = yield AsyncStorage.getItem('UID');
-    if (!key) {
-      const uid = DeviceInfo.getUniqueID();
-      try {
-        yield AsyncStorage.setItem('UID', uid);
-      } catch (error) {
-        console.log(error);
-      }
+    let deviceID = yield call(AsyncStorage.getItem, 'deviceID');
+    if (!deviceID) {
+      deviceID = DeviceInfo.getUniqueID();
+      yield call(AsyncStorage.setItem, 'deviceID', deviceID);
     }
+    yield put(setApp({ deviceID }));
   } catch (error) {
-    console.log(error);
+    console.log('error: ', error);
   }
 }
 
