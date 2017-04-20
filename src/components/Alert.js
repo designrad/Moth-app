@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   okButton: {
-    backgroundColor: '#6BBF6F',
+    backgroundColor: '#FFBD2C',
     borderBottomLeftRadius: borderRadius,
     borderBottomRightRadius: borderRadius
   },
