@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   textAndroid: {
-    backgroundColor: colors.mainOrange
+    color: colors.mainOrange
   }
 });
 
