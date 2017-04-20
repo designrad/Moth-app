@@ -11,7 +11,9 @@ const initialState = {
   team: '',
   email: '',
   modal: false,
-  comment: ''
+  comment: '',
+  imgName: '',
+  imgUri: ''
 };
 
 export default makeReducer(initialState, SET_FINALIZE);

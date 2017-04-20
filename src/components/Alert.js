@@ -114,10 +114,7 @@ export default function Alert({
           {children || (
             <View>
               {title != null && <Text style={styles.title}>{title.localized}</Text>}
-              <TextInput
-                style={styles.text}
-                {...props}
-              />
+              <Text style={styles.text}>{text.localized}</Text>
             </View>
           )}
         </View>

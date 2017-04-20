@@ -79,7 +79,10 @@ export default class Home extends Component {
 
   sendPhoto(response) {
     if (response.error) {} else if (response.didCancel) {} else {
+      console.log(response);
       this.props.setFinalize({
+        imgUri: response.uri,
+        imgName: response.fileName,
         data: response.data,
         timestamp: response.timestamp,
         latitude: response.latitude,
@@ -87,7 +90,7 @@ export default class Home extends Component {
       });
       this.props.navigation.navigate(Routes.finalize.name);
     }
-  };
+  }
 
   render() {
     return (

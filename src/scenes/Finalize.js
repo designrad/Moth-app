@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, Text, AsyncStorage } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setFinalize } from '../redux/actions/finalize';
+import { setFinalize, uploadPhoto } from '../redux/actions/finalize';
 
 import { Routes, scale, scaleByVertical, screenWidth } from '../global/constants';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
 @connect(({ finalize }) => ({
   ...finalize,
 }), dispatch => bindActionCreators({
-  setFinalize
+  setFinalize,
+  uploadPhoto,
 }, dispatch))
 export default class Finalize extends Component {
 
@@ -68,17 +69,14 @@ export default class Finalize extends Component {
       state: PropTypes.shape({
       }),
     }).isRequired,
-    uid: PropTypes.string.isRequired,
     data: PropTypes.string.isRequired,
     timestamp: PropTypes.string.isRequired,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
-    name: PropTypes.string.isRequired,
-    team: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
     modal: PropTypes.bool.isRequired,
     comment: PropTypes.string.isRequired,
-    setFinalize: PropTypes.func.isRequired
+    setFinalize: PropTypes.func.isRequired,
+    uploadPhoto: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -95,7 +93,8 @@ export default class Finalize extends Component {
       longitude,
       comment,
       modal,
-      setFinalize
+      setFinalize,
+      uploadPhoto
     } = this.props;
     const dataTime = Moment(timestamp).format('lll');
     const openEditor = show => setFinalize({ modal: show });
@@ -140,7 +139,7 @@ export default class Finalize extends Component {
             />
           </View>
           <View style={styles.bottomContainer}>
-            <SendButton longitude={longitude} latitude={latitude} onPress={() => {}} />
+            <SendButton longitude={longitude} latitude={latitude} onPress={uploadPhoto} />
           </View>
         </View>
         <CommentEditor
@@ -150,8 +149,6 @@ export default class Finalize extends Component {
           onChangeText={text => setFinalize({ comment: text })}
         />
       </KeyboardAwareScrollView>
-
-
     );
   }
 }
