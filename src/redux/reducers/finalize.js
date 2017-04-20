@@ -3,6 +3,7 @@ import { SET_FINALIZE } from '../constants/index';
 import makeReducer from './fabric';
 
 const initialState = {
+  uid: '',
   data: '',
   timestamp: '',
   latitude: '',

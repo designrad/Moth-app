@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, AsyncStorage } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -68,6 +68,7 @@ export default class Finalize extends Component {
       state: PropTypes.shape({
       }),
     }).isRequired,
+    uid: PropTypes.string.isRequired,
     data: PropTypes.string.isRequired,
     timestamp: PropTypes.string.isRequired,
     latitude: PropTypes.number,
@@ -84,6 +85,15 @@ export default class Finalize extends Component {
     latitude: null,
     longitude: null
   };
+  componentDidMount() {
+    this.getUid();
+  }
+
+  getUid() {
+    AsyncStorage.getItem('UID', (err, result) => {
+      this.props.setFinalize({ uid: result });
+    });
+  }
 
   render() {
     const {

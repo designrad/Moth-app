@@ -49,13 +49,13 @@ const styles = StyleSheet.create({
 
 export default function SendButton(props) {
   const { latitude, longitude, onPress } = props;
-  const active = latitude && longitude;
+  const active = !!((latitude && longitude));
   return (
     <View style={styles.container}>
       <Text style={styles.textWarning}>{!active ? 'Please add location to the image.'.localized : ''}</Text>
       <TouchableOpacity
         onPress={onPress}
-        disabled
+        disabled={!active}
       >
         <View style={[styles.button, !active ? styles.disabledBtn : styles.enabledBtn]}>
           <AIcon name={'cloud-upload'} style={[styles.icon, !active && styles.disableLabel]} />
