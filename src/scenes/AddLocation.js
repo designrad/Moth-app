@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Alert } from 'react-native';
+import MapView from 'react-native-maps';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setFinalize } from '../redux/actions/finalize';
 
-import MapView from 'react-native-maps';
 import { Routes } from '../global/constants';
 import { colors } from '../global';
 
@@ -47,6 +47,8 @@ export default class AddLocation extends Component {
       region: {
         latitude: 37.78825,
         longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
       },
       lastPosition: {},
       x: {
@@ -67,7 +69,7 @@ export default class AddLocation extends Component {
           this.setState({ region });
         },
         error => Alert.alert(JSON.stringify(error)),
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
       );
       this.watchID = navigator.geolocation.watchPosition((position) => {
         const lastPosition = position;
@@ -78,6 +80,9 @@ export default class AddLocation extends Component {
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
+  }
+  onRegionChange(region) {
+    this.setState({ region });
   }
   setLocation(location) {
     if (!this.state.fixed) {
@@ -94,23 +99,17 @@ export default class AddLocation extends Component {
       lastPosition.latitude : initialPosition.latitude;
     const longitude = (!this.props.longitude && lastPosition.longitude) ?
       lastPosition.longitude : initialPosition.longitude;
-    const latitudeDelta = 0.0922;
-    const longitudeDelta = 0.0421;
     return (
       <MapView
         style={{ flex: 1 }}
         initialRegion={{
-          latitude,
           longitude,
-          latitudeDelta,
-          longitudeDelta
+          latitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
         }}
-        region={{
-          latitude: region.latitude,
-          longitude: region.longitude,
-          latitudeDelta,
-          longitudeDelta
-        }}
+        region={region}
+        onRegionChange={e => this.onRegionChange(e)}
         onPress={e => this.setLocation(e.nativeEvent.coordinate)}
         showsUserLocation
       >

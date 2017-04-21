@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Image, Text, AsyncStorage, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getPhotoStatus } from '../redux/actions/log';
 
-import { Routes, scale, scaleByVertical, screenWidth } from '../global/constants';
-import { colors} from '../global';
+import { Routes, scale, scaleByVertical } from '../global/constants';
+import { colors } from '../global';
 import DisclosureButton from '../components/DisclosureButton';
 
 const styles = StyleSheet.create({
@@ -14,7 +15,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.mainOrange
   },
   topContainer: {
-    paddingHorizontal: scale(28)
+    paddingHorizontal: scale(28),
+    paddingBottom: scaleByVertical(16)
   },
   header: {
     color: colors.black,
@@ -34,12 +36,25 @@ const styles = StyleSheet.create({
     paddingVertical: scaleByVertical(5)
   }
 });
+@connect(({ log }) => ({
+  ...log,
+}), dispatch => bindActionCreators({
+  getPhotoStatus
+}, dispatch))
 
 export default class Log extends Component {
   static navigationOptions = {
     title: Routes.log.title.localized
   };
+  static propTypes = {
+    getPhotoStatus: PropTypes.func.isRequired,
+    photos: PropTypes.arrayOf.isRequired
+  };
+  componentDidMount() {
+    this.props.getPhotoStatus();
+  }
   render() {
+    const { photos } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
@@ -50,7 +65,15 @@ export default class Log extends Component {
           'available. You can also re-send them manually.').localized}</Text>
         </View>
         <ScrollView style={styles.scroller}>
-          <DisclosureButton onPress={ () => {}}/>
+          {photos.map(item => (
+            <DisclosureButton
+              status={item.identification}
+              date={item.date}
+              onPress={() => {}}
+              comment={item.comments}
+              key={item.id}
+            />
+          ))}
         </ScrollView>
       </View>
     );

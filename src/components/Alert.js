@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export const AlertTypes = {
   ok: 'ok',
@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: 'white'
+    fontWeight: 'bold',
+    color: 'black'
   }
 });
 
@@ -102,7 +103,6 @@ export default function Alert({
   noHandler,
   yesHandler,
   children,
-  props
 }) {
   if (!visible) {
     return null;
@@ -120,7 +120,7 @@ export default function Alert({
         </View>
         <View style={styles.buttonsContainer}>
           {type === AlertTypes.ok ? (
-              <Button style={styles.okButton} onPress={okHandler}>{'Ok'}</Button>
+            <Button style={styles.okButton} onPress={okHandler}>{'Ok'}</Button>
             ) : (
               <View style={styles.buttonsRow}>
                 <Button style={styles.noButton} onPress={noHandler}>{'No'}</Button>

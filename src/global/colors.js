@@ -1,7 +1,7 @@
 
 const colors = {
   flatBlue: '#007AFF',
-  flatGreen: '#2ecc71',
+  flatGreen: '#4CD964',
   flatRed: '#e74c3c',
   transparent: 'transparent',
   orange: '#FFD068',
@@ -13,7 +13,8 @@ const colors = {
   flatBlack: '#202020',
   backgroundBtn: '#5D5B59',
   borderGray: '#7E7E7E',
-  whiteOrange: '#FFF5DF'
+  whiteOrange: '#FFF5DF',
+  arrowGray: '#C7C7CC'
 };
 
 export default colors;

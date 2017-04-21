@@ -49,17 +49,17 @@ const styles = StyleSheet.create({
 
 export default function SendButton(props) {
   const { latitude, longitude, onPress } = props;
-  const active = !!((latitude && longitude));
+  const disable = !latitude || !longitude;
   return (
     <View style={styles.container}>
-      <Text style={styles.textWarning}>{!active ? 'Please add location to the image.'.localized : ''}</Text>
+      <Text style={styles.textWarning}>{disable ? 'Please add location to the image.'.localized : ''}</Text>
       <TouchableOpacity
         onPress={onPress}
-        disabled={!active}
+        disabled={disable}
       >
-        <View style={[styles.button, !active ? styles.disabledBtn : styles.enabledBtn]}>
-          <AIcon name={'cloud-upload'} style={[styles.icon, !active && styles.disableLabel]} />
-          <Text style={[styles.labelBtn, !active && styles.disableLabel]}>{'Send image'.localized}</Text>
+        <View style={[styles.button, disable ? styles.disabledBtn : styles.enabledBtn]}>
+          <AIcon name={'cloud-upload'} style={[styles.icon, disable && styles.disableLabel]} />
+          <Text style={[styles.labelBtn, disable && styles.disableLabel]}>{'Send image'.localized}</Text>
         </View>
       </TouchableOpacity>
     </View>
