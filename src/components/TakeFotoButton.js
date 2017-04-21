@@ -32,10 +32,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  textContainerAndroid: {
+    backgroundColor: colors.transparent
+  },
   text: {
     fontWeight: 'bold',
     fontSize: scale(30),
     textAlign: 'center'
+  },
+  textAndroid: {
+    color: colors.mainOrange
   }
 });
 
@@ -51,8 +57,8 @@ export default function TakeFotoBtn(props) {
           source={image}
           style={styles.img}
         />
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>{'Take photo'.localized}</Text>
+        <View style={[styles.textContainer, isAndroid && styles.textContainerAndroid]}>
+          <Text style={[styles.text, isAndroid && styles.textAndroid]}>{'Take photo'.localized}</Text>
         </View>
       </LinearGradient>
     </TouchableOpacity>

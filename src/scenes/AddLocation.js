@@ -15,9 +15,9 @@ import { colors } from '../global';
   setFinalize
 }, dispatch))
 export default class AddLocation extends Component {
-  static navigationOptions = ({ navigation: { goBack, state }}) => ({
+  static navigationOptions = ({ navigation: { goBack } }) => ({
     title: Routes.addLocation.title.localized,
-    headerRight: (!state.params.show &&
+    headerRight: (
       <Button
         title={'Save'}
         color={colors.white}
@@ -44,31 +44,35 @@ export default class AddLocation extends Component {
         latitude: 37.78825,
         longitude: -122.4324,
       },
-      lastPosition: '',
+      region: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+      },
+      lastPosition: {},
       x: {
         latitude: 37.78825,
         longitude: -122.4324
-      },
-      fixed: false
+      }
     };
   }
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const initialPosition = position.coords;
-        this.setState({ initialPosition });
-      },
-      error => Alert.alert(JSON.stringify(error)),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-    this.watchID = navigator.geolocation.watchPosition((position) => {
-      const lastPosition = position;
-      this.setState({ lastPosition });
-    });
     const { longitude, latitude } = this.props;
     if (longitude && latitude) {
       const photoPos = { longitude, latitude };
       this.initLocation(photoPos);
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const region = position.coords;
+          this.setState({ region });
+        },
+        error => Alert.alert(JSON.stringify(error)),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      );
+      this.watchID = navigator.geolocation.watchPosition((position) => {
+        const lastPosition = position;
+        this.setState({ lastPosition });
+      });
     }
   }
 
@@ -82,10 +86,14 @@ export default class AddLocation extends Component {
     }
   }
   initLocation(location) {
-    this.setState({ x: location, initialPosition: location, fixed: true });
+    this.setState({ x: location, initialPosition: location, region: location });
   }
   render() {
-    const { latitude, longitude } = this.state.initialPosition;
+    const { initialPosition, region, lastPosition } = this.state;
+    const latitude = (!this.props.latitude && lastPosition.latitude) ?
+      lastPosition.latitude : initialPosition.latitude;
+    const longitude = (!this.props.longitude && lastPosition.longitude) ?
+      lastPosition.longitude : initialPosition.longitude;
     const latitudeDelta = 0.0922;
     const longitudeDelta = 0.0421;
     return (
@@ -97,11 +105,16 @@ export default class AddLocation extends Component {
           latitudeDelta,
           longitudeDelta
         }}
+        region={{
+          latitude: region.latitude,
+          longitude: region.longitude,
+          latitudeDelta,
+          longitudeDelta
+        }}
         onPress={e => this.setLocation(e.nativeEvent.coordinate)}
         showsUserLocation
       >
         <MapView.Marker
-          draggable={this.state.fixed}
           coordinate={this.state.x}
           onDragEnd={e => this.setLocation(e.nativeEvent.coordinate)}
         />

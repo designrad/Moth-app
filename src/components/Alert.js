@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   okButton: {
-    backgroundColor: '#6BBF6F',
+    backgroundColor: '#FFBD2C',
     borderBottomLeftRadius: borderRadius,
     borderBottomRightRadius: borderRadius
   },
@@ -114,10 +114,7 @@ export default function Alert({
           {children || (
             <View>
               {title != null && <Text style={styles.title}>{title.localized}</Text>}
-              <TextInput
-                style={styles.text}
-                {...props}
-              />
+              <Text style={styles.text}>{text.localized}</Text>
             </View>
           )}
         </View>
