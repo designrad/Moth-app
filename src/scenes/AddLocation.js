@@ -56,22 +56,23 @@ export default class AddLocation extends Component {
     };
   }
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const region = position.coords;
-        this.setState({ region });
-      },
-      error => Alert.alert(JSON.stringify(error)),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-    this.watchID = navigator.geolocation.watchPosition((position) => {
-      const lastPosition = position;
-      this.setState({ lastPosition });
-    });
     const { longitude, latitude } = this.props;
     if (longitude && latitude) {
       const photoPos = { longitude, latitude };
       this.initLocation(photoPos);
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const region = position.coords;
+          this.setState({ region });
+        },
+        error => Alert.alert(JSON.stringify(error)),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      );
+      this.watchID = navigator.geolocation.watchPosition((position) => {
+        const lastPosition = position;
+        this.setState({ lastPosition });
+      });
     }
   }
 
@@ -89,8 +90,10 @@ export default class AddLocation extends Component {
   }
   render() {
     const { initialPosition, region, lastPosition } = this.state;
-    const latitude = lastPosition.latitude ? lastPosition.latitude : initialPosition.latitude;
-    const longitude = lastPosition.longitude ? lastPosition.longitude : initialPosition.longitude;
+    const latitude = (!this.props.latitude && lastPosition.latitude) ?
+      lastPosition.latitude : initialPosition.latitude;
+    const longitude = (!this.props.longitude && lastPosition.longitude) ?
+      lastPosition.longitude : initialPosition.longitude;
     const latitudeDelta = 0.0922;
     const longitudeDelta = 0.0421;
     return (

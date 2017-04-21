@@ -1,16 +1,19 @@
 import {
+  SET_APP,
   SHOW_ALERT,
   SHOW_YES_OR_NO_ALERT,
 } from '../constants';
 
 import { AlertTypes } from '../../components/Alert';
+import makeReducer from './fabric';
 
 const initialState = {
   isLoading: false,
-  alerts: []
+  alerts: [],
+  deviceID: ''
 };
 
-export default (state = initialState, action) => {
+export default makeReducer(initialState, SET_APP, (state, action) => {
   const { type } = action;
   switch (type) {
     case SHOW_ALERT:
@@ -41,4 +44,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+});
