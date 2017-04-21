@@ -1,4 +1,5 @@
 export default {
   upload: 'image/upload',
-  photos: 'photos'
+  photos: 'photos',
+  image: 'image'
 };

@@ -17,6 +17,7 @@ export function callApi(options) {
   return fetch(url, requestOptions)
     .then((response) => {
       const json = response.json();
+      console.log(requestOptions);
       return json.then((json) => {
         const { ok } = response;
         if (!ok) {

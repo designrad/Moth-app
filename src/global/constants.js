@@ -22,6 +22,10 @@ export const Routes = {
   log: {
     name: 'Log',
     title: 'Log'
+  },
+  moth: {
+    name: 'Moth',
+    title: 'Moth'
   }
 };
 export const screenWidth = width;
@@ -30,4 +34,5 @@ export const screenHeight = height;
 export const scale = value => (width / 414) * value;
 export const scaleByVertical = value => (height / 736) * value;
 
-export const dataFormat = 'lll';
+export const latitudeDelta = { latitudeDelta: 0.0922 };
+export const longitudeDelta = { longitudeDelta: 0.0421 };

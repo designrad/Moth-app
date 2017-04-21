@@ -48,11 +48,16 @@ export default class Log extends Component {
   };
   static propTypes = {
     getPhotoStatus: PropTypes.func.isRequired,
-    photos: PropTypes.arrayOf.isRequired
+    photos: PropTypes.arrayOf(PropTypes.object).isRequired,
+    navigation: PropTypes.shape({
+      state: PropTypes.shape({}),
+      navigate: PropTypes.func.isRequired
+    }).isRequired,
   };
   componentDidMount() {
     this.props.getPhotoStatus();
   }
+  openLog = id => this.props.navigation.navigate(Routes.moth.name, { id });
   render() {
     const { photos } = this.props;
     return (
@@ -69,7 +74,7 @@ export default class Log extends Component {
             <DisclosureButton
               status={item.identification}
               date={item.date}
-              onPress={() => {}}
+              onPress={() => this.openLog(item.id)}
               comment={item.comments}
               key={item.id}
             />

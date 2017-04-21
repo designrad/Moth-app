@@ -5,4 +5,6 @@ export const SET_FINALIZE = 'SET_FINALIZE';
 export const UPLOAD_PHOTO = 'UPLOAD_PHOTO';
 export const GET_PHOTO_STATUS = 'GET_PHOTO_STATUS';
 export const PUT_PHOTO_STATUS = 'PUT_PHOTO_STATUS';
+export const GET_MY_PHOTO = 'GET_MY_PHOTO';
+export const PUT_MY_PHOTO = 'PUT_MY_PHOTO';
 

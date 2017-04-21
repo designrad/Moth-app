@@ -5,6 +5,7 @@ import LearnMore from '../scenes/LearnMore';
 import Finalize from '../scenes/Finalize';
 import AddLocation from '../scenes/AddLocation';
 import Log from '../scenes/Log';
+import Moth from '../scenes/Moth';
 
 import { colors } from '../global';
 
@@ -36,6 +37,9 @@ export default StackNavigator({
   },
   [Routes.log.name]: {
     screen: Log
+  },
+  [Routes.moth.name]: {
+    screen: Moth
   }
 }, {
   headerMode: 'screen',

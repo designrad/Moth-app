@@ -43,12 +43,14 @@ export default class AddLocation extends Component {
       initialPosition: {
         latitude: 37.78825,
         longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
       },
       region: {
         latitude: 37.78825,
         longitude: -122.4324,
         latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        longitudeDelta: 0.0421
       },
       lastPosition: {},
       x: {
@@ -60,7 +62,7 @@ export default class AddLocation extends Component {
   componentDidMount() {
     const { longitude, latitude } = this.props;
     if (longitude && latitude) {
-      const photoPos = { longitude, latitude };
+      const photoPos = { longitude, latitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421 };
       this.initLocation(photoPos);
     } else {
       navigator.geolocation.getCurrentPosition(
