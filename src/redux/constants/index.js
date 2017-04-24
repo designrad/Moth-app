@@ -7,4 +7,6 @@ export const GET_PHOTO_STATUS = 'GET_PHOTO_STATUS';
 export const PUT_PHOTO_STATUS = 'PUT_PHOTO_STATUS';
 export const GET_MY_PHOTO = 'GET_MY_PHOTO';
 export const PUT_MY_PHOTO = 'PUT_MY_PHOTO';
+export const GET_LOCATIONS = 'GET_LOCATIONS';
+export const PUT_LOCATIONS = 'PUT_LOCATIONS';
 

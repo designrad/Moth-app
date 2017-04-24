@@ -76,7 +76,9 @@ export default class Moth extends Component {
       navigate: PropTypes.func.isRequired
     }).isRequired,
     getMyPhoto: PropTypes.func.isRequired,
-    image: PropTypes.objectOf(PropTypes.string).isRequired
+    image: PropTypes.objectOf(
+      PropTypes.string
+    ).isRequired
   };
 
   static defaultProps = {
@@ -93,12 +95,12 @@ export default class Moth extends Component {
       navigation,
       image
     } = this.props;
-    const dataTime = Moment(image.date).format('lll');
-    const openMap = () => {
-      navigation.navigate(Routes.addLocation.name, { disable: true });
-    };
     const longitude = parseFloat(image.longitude);
     const latitude = parseFloat(image.latitude);
+    const dataTime = Moment(image.date).format('lll');
+    const openMap = () => {
+      navigation.navigate(Routes.addLocation.name, { longitude, latitude, fixed: true });
+    };
     return (
       <KeyboardAwareScrollView
         style={styles.scrollView}

@@ -26,6 +26,10 @@ export const Routes = {
   moth: {
     name: 'Moth',
     title: 'Moth'
+  },
+  readLocation: {
+    name: 'readLocation',
+    title: 'Verified observations'
   }
 };
 export const screenWidth = width;
@@ -34,5 +38,6 @@ export const screenHeight = height;
 export const scale = value => (width / 414) * value;
 export const scaleByVertical = value => (height / 736) * value;
 
-export const latitudeDelta = { latitudeDelta: 0.0922 };
-export const longitudeDelta = { longitudeDelta: 0.0421 };
+export const latitudeDelta = 0.0922;
+export const longitudeDelta = 0.0421;
+

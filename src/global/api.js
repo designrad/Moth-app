@@ -10,7 +10,7 @@ export function callApi(options) {
   const requestOptions = {
     method: method || 'GET',
     headers: isFormData ? { 'cache-control': 'no-cache' } : { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+    body: isFormData ? payload : (JSON.stringify(payload))
   };
 
 

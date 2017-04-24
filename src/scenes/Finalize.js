@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Image, Text, AsyncStorage } from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setFinalize, uploadPhoto } from '../redux/actions/finalize';
 
 import { Routes, scale, scaleByVertical, screenWidth } from '../global/constants';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { colors } from '../global';
 import { Moment } from '../global/utils';
 import LocationButton from '../components/LocationButton';
@@ -99,8 +99,7 @@ export default class Finalize extends Component {
     const dataTime = Moment(timestamp).format('lll');
     const openEditor = show => setFinalize({ modal: show });
     const openMap = () => {
-      const btn = (latitude && longitude);
-      navigation.navigate(Routes.addLocation.name, { show: btn });
+      navigation.navigate(Routes.addLocation.name, { longitude, latitude, fixed: false });
     };
     return (
       <KeyboardAwareScrollView

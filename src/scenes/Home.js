@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setFinalize } from '../redux/actions/finalize';
 
-import ImagePicker from 'react-native-image-picker';
+
 import Button from '../components/Button';
 import { colors, images } from '../global';
 import { screenWidth, screenHeight, scale, Routes } from '../global/constants';
@@ -66,6 +67,7 @@ export default class Home extends Component {
 
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
   openLog = () => this.props.navigation.navigate(Routes.log.name);
+  openMap = () => this.props.navigation.navigate(Routes.readLocation.name);
   takePhoto = () => {
     ImagePicker.launchCamera(options, (response) => {
       this.sendPhoto(response);
@@ -79,18 +81,20 @@ export default class Home extends Component {
   };
 
   sendPhoto(response) {
-    if (response.error) {} else if (response.didCancel) {} else {
-      console.log(response);
-      this.props.setFinalize({
-        imgUri: response.uri,
-        imgName: response.fileName,
-        data: response.data,
-        timestamp: response.timestamp,
-        latitude: response.latitude,
-        longitude: response.longitude
-      });
-      this.props.navigation.navigate(Routes.finalize.name);
+    if (response.error) {
+      return;
+    } else if (response.didCancel) {
+      return;
     }
+    this.props.setFinalize({
+      imgUri: response.uri,
+      imgName: response.fileName,
+      data: response.data,
+      timestamp: response.timestamp,
+      latitude: response.latitude,
+      longitude: response.longitude
+    });
+    this.props.navigation.navigate(Routes.finalize.name);
   }
 
   render() {
@@ -105,7 +109,7 @@ export default class Home extends Component {
         <View style={styles.itemContainer}>
           <TakeFotoButton image={images.photoMoth} onPress={this.takePhoto} />
           <Button icon={'picture-o'} title={'Send old photo'} onPress={this.oldPhoto} style={styles.buttonsContainer} />
-          <Button icon={'map'} title={'Show map'} onPress={() => {}} style={styles.buttonsContainer} />
+          <Button icon={'map'} title={'Show map'} onPress={this.openMap} style={styles.buttonsContainer} />
           <Button icon={'info-circle'} title={'Learn more'} onPress={this.openLearnMore} style={styles.buttonsContainer} />
           <Button icon={'check-circle'} title={'Log'} onPress={this.openLog} style={styles.buttonsContainer} />
         </View>

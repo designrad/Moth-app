@@ -1,5 +1,6 @@
 export default {
   upload: 'image/upload',
   photos: 'photos',
-  image: 'image'
+  image: 'image',
+  geolocations: 'geolocations'
 };

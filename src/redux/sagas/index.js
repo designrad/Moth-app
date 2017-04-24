@@ -7,7 +7,8 @@ import { setApp, showAlert } from '../actions/app';
 import { putPhotoStatus } from '../actions/log';
 import { putMyPhoto } from '../actions/moth';
 import { callApi, Endpoints } from '../../global/api';
-import { UPLOAD_PHOTO, GET_PHOTO_STATUS, GET_MY_PHOTO } from '../constants';
+import { putLocations } from '../actions/readLocations';
+import { UPLOAD_PHOTO, GET_PHOTO_STATUS, GET_MY_PHOTO, GET_LOCATIONS } from '../constants';
 
 function* startup() {
   try {
@@ -83,14 +84,24 @@ function* getPhotoStatus() {
 
 function* getPhoto({ id }) {
   try {
-    console.log(id);
     const response = yield call(callApi, {
       endpoint: Endpoints.image,
       method: 'POST',
       payload: { id: `${id}` }
     });
-    console.log(response);
     yield put(putMyPhoto({ image: response.data.image }));
+  } catch (error) {
+    yield put(showAlert('Error'.localized));
+  }
+}
+
+function* getLocations() {
+  try {
+    const response = yield call(callApi, {
+      endpoint: Endpoints.geolocations,
+      method: 'GET'
+    });
+    yield put(putLocations({ locations: response.data.photos }));
   } catch (error) {
     yield put(showAlert('Error'.localized));
   }
@@ -101,4 +112,5 @@ export default function* rootSaga() {
   yield takeLatest(UPLOAD_PHOTO, uploadPhoto);
   yield takeLatest(GET_PHOTO_STATUS, getPhotoStatus);
   yield takeLatest(GET_MY_PHOTO, getPhoto);
+  yield takeLatest(GET_LOCATIONS, getLocations);
 }
