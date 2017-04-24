@@ -90,7 +90,8 @@ export default class AddLocation extends Component {
       this.watchID = navigator.geolocation.watchPosition((position) => {
         const { latitude, longitude } = position.coords;
         const region = { latitude, longitude, latitudeDelta, longitudeDelta };
-        this.setState({ region });
+        const x = { latitude, longitude };
+        this.setState({ region, x });
       });
     }
   }
