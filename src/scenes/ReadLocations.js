@@ -103,7 +103,9 @@ export default class ReadLocations extends Component {
           identifier={_id}
           key={_id}
         >
-          <MapView.Callout>
+          <MapView.Callout
+            onPress={() => this.openLog(_id)}
+          >
             <View>
               <Text>{newText}</Text>
               <Text

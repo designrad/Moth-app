@@ -55,7 +55,6 @@ export default class App extends Component {
     const {dispatch, navigation, app} = this.props;
     const {isLoading, alerts} = app;
     const lastAlert = alerts[alerts.length - 1];
-    console.log('last',lastAlert);
     return (
       <View style={styles.container}>
         <Navigator navigation={addNavigationHelpers({ dispatch, state: navigation })}/>

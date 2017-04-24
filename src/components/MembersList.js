@@ -19,12 +19,14 @@ const styles = StyleSheet.create({
     paddingTop: scaleByVertical(11)
   },
   name: {
+    color: colors.black,
     fontSize: scale(16),
     lineHeight: 19,
     fontWeight: '500',
     marginBottom: scale(6)
   },
   position: {
+    color: colors.black,
     fontSize: scale(14),
     lineHeight: 18,
     fontStyle: 'italic',

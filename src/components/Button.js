@@ -18,9 +18,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   icon: {
+    color: colors.black,
     fontSize: scale(36)
   },
   label: {
+    color: colors.black,
     marginLeft: scale(15),
     fontSize: scale(22),
     fontWeight: '500'

@@ -20,11 +20,13 @@ const styles = StyleSheet.create({
     paddingTop: scaleByVertical(30)
   },
   header: {
+    color: colors.black,
     fontSize: scale(24),
     fontWeight: 'bold',
     marginBottom: scaleByVertical(17)
   },
   text: {
+    color: colors.black,
     fontSize: scale(18),
     lineHeight: 21,
     marginBottom: scaleByVertical(15)
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   versionApp: {
+    color: colors.black,
     fontSize: scale(13)
   }
 });

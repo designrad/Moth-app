@@ -61,6 +61,7 @@ function* uploadPhoto() {
       payload: formData,
       isFormData: true
     });
+    console.log(formData);
     yield put(NavigationActions.back());
     yield put(showAlert('success'.localized));
   } catch (error) {

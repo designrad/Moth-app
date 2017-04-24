@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   data: {
+    color: colors.black,
     fontSize: scale(17)
   },
   inputName: {
