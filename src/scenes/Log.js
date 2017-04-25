@@ -69,7 +69,7 @@ export default class Log extends Component {
           'and will be uploaded later automatically when there’s network' +
           'available. You can also re-send them manually.').localized}</Text>
         </View>
-        <ScrollView style={styles.scroller}>
+        {photos && <ScrollView style={styles.scroller}>
           {photos.map(item => (
             <DisclosureButton
               status={item.identification}
@@ -80,6 +80,7 @@ export default class Log extends Component {
             />
           ))}
         </ScrollView>
+        }
       </View>
     );
   }

@@ -46,6 +46,7 @@ export default StackNavigator({
     screen: RearLocations
   }
 }, {
+  mode: 'modal',
   headerMode: 'screen',
   navigationOptions: {
     headerStyle: styles.header,

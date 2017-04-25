@@ -36,9 +36,11 @@ const styles = StyleSheet.create({
     borderColor: colors.borderGray
   },
   icon: {
+    color: colors.black,
     fontSize: scale(36)
   },
   labelBtn: {
+    color: colors.black,
     fontSize: scale(22),
     paddingLeft: scale(15)
   },

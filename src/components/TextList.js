@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { colors } from '../global';
 import { scale, scaleByVertical } from '../global/constants';
 
 const styles = StyleSheet.create({
@@ -7,11 +8,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   simbol: {
+    color: colors.black,
     fontSize: scale(18),
     lineHeight: 21,
   },
   text: {
     flex: 1,
+    color: colors.black,
     fontSize: scale(18),
     lineHeight: 21,
     marginBottom: scaleByVertical(15)

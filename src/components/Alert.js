@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   text: {
+    color: 'black',
     flex: 1,
     fontSize: 14,
     textAlign: 'center'
