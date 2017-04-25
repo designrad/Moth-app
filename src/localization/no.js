@@ -32,5 +32,6 @@ export default {
   'Below is a list of all submitted images. If you don’t have network available, the images are saved in the app and will be uploaded later automatically when there’s network available. You can also re-send them manually.': 'Nedenfor er en liste over alle innsendte bilder. Hvis du ikke har nettverk tilgjengelig, blir bildene lagret i mobilen, og vil bli lagt ut senere automatisk når det er nettverk tilgjengelig. Du kan også re-sende dem manuelt.',
 
   // read location
-  'Verified observations': 'Bekreftede observasjoner'
+  'Verified observations': 'Bekreftede observasjoner',
+  'More info': 'Mer info'
 };
