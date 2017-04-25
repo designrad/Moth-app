@@ -26,6 +26,7 @@ export default function CommentEditor(props) {
   const { show, close } = props;
   return (
     <Modal
+      onRequestClose={() => {}}
       animationType={'fade'}
       visible={show}
       transparent

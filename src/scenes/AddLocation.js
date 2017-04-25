@@ -1,17 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Alert, StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setFinalize } from '../redux/actions/finalize';
 
-import { Routes, latitudeDelta, longitudeDelta } from '../global/constants';
+import { Routes, latitudeDelta, longitudeDelta, screenHeight, screenWidth } from '../global/constants';
 import { colors } from '../global';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    width: screenWidth,
+    height: screenHeight
   },
 });
 
@@ -27,8 +28,8 @@ export default class AddLocation extends Component {
       !params.fixed &&
       <Button
         title={'Save'}
-        color={colors.white}
         onPress={() => goBack()}
+        color={isAndroid ? colors.black : colors.white}
         icon={''}
       />
     )
@@ -83,10 +84,7 @@ export default class AddLocation extends Component {
           const { latitude, longitude } = position.coords;
           const initialPosition = { latitude, longitude, latitudeDelta, longitudeDelta };
           this.setState({ initialPosition });
-        },
-        error => Alert.alert(JSON.stringify(error)),
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-      );
+        });
       this.watchID = navigator.geolocation.watchPosition((position) => {
         const { latitude, longitude } = position.coords;
         const region = { latitude, longitude, latitudeDelta, longitudeDelta };
@@ -124,6 +122,7 @@ export default class AddLocation extends Component {
         onRegionChange={e => this.onRegionChange(e)}
         onPress={e => this.setLocation(e.nativeEvent.coordinate)}
         showsUserLocation
+        cacheEnabled={isAndroid}
       >
         <MapView.Marker
           coordinate={x}

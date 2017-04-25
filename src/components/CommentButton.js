@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   text: {
+    color: colors.black,
     paddingTop: scaleByVertical(12),
     paddingRight: scale(4),
     fontSize: scale(13)

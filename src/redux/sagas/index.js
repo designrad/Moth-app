@@ -37,13 +37,14 @@ function* uploadPhoto() {
       imgUri,
       imgName,
     } = yield select(state => state.finalize);
+    yield put(setApp({ isLoading: true }));
     const formData = new FormData();
     formData.append(
       'file',
       {
         uri: imgUri,
         name: imgName || 'file1.jpg',
-        type: 'image/jpeg; image/png'
+        type: 'image/jpeg'
       }
     );
     formData.append('accuracy', 0);
@@ -61,10 +62,11 @@ function* uploadPhoto() {
       payload: formData,
       isFormData: true
     });
-    console.log(formData);
     yield put(NavigationActions.back());
+    yield put(setApp({ isLoading: false }));
     yield put(showAlert('success'.localized));
   } catch (error) {
+    console.log(error);
     yield put(showAlert('Error'.localized));
   }
 }

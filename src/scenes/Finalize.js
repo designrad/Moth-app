@@ -70,14 +70,14 @@ export default class Finalize extends Component {
       state: PropTypes.shape({
       }),
     }).isRequired,
-    data: PropTypes.string.isRequired,
     timestamp: PropTypes.string.isRequired,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     modal: PropTypes.bool.isRequired,
     comment: PropTypes.string.isRequired,
     setFinalize: PropTypes.func.isRequired,
-    uploadPhoto: PropTypes.func.isRequired
+    uploadPhoto: PropTypes.func.isRequired,
+    imgUri: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -88,12 +88,12 @@ export default class Finalize extends Component {
   render() {
     const {
       navigation,
-      data,
       timestamp,
       latitude,
       longitude,
       comment,
       modal,
+      imgUri,
       setFinalize,
       uploadPhoto
     } = this.props;
@@ -108,7 +108,7 @@ export default class Finalize extends Component {
       >
         <View style={styles.container}>
           <Image
-            source={{ uri: `data:image/jpeg;base64,${data}` }}
+            source={{ uri: imgUri }}
             style={styles.photo}
           />
           <View style={styles.itemContainer}>

@@ -32,9 +32,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   data: {
+    color: colors.black,
     fontSize: scale(17)
   },
   comment: {
+    color: colors.black,
     paddingTop: scaleByVertical(12),
     paddingRight: scale(4),
     fontSize: scale(13)
@@ -109,6 +111,7 @@ export default class Moth extends Component {
           <Image
             source={{ uri: `http://192.168.88.130:3001/image/${[image.name]}` }}
             style={styles.photo}
+            resizeMethod={'auto'}
           />
           <View style={styles.itemContainer}>
             <Text style={styles.data}>{dataTime}</Text>

@@ -1,4 +1,5 @@
 import endpoints from './endpoints';
+
 export const Endpoints = endpoints;
 
 export function callApi(options) {
@@ -8,18 +9,14 @@ export function callApi(options) {
     `http://192.168.88.130:3001/${endpoint}`;
   const requestOptions = {
     method: method || 'GET',
-    headers: isFormData ? { 'cache-control': 'no-cache' } : { 'Content-Type': 'application/json' },
+    headers: isFormData ? { 'Content-Type': 'multipart/form-data', } : { 'Content-Type': 'application/json' },
     body: isFormData ? (payload) : (JSON.stringify(payload))
   };
-
-
   return fetch(url, requestOptions)
     .then((response) => {
       const json = response.json();
-      console.log(requestOptions);
       return json.then((json) => {
         const { ok } = response;
-        alert(JSON.stringify(response))
         if (!ok) {
           return Promise.reject(json.msg);
         }

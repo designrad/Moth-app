@@ -1,17 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Alert, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLocations } from '../redux/actions/readLocations';
 
-import { Routes } from '../global/constants';
+import { Routes, screenWidth, screenHeight } from '../global/constants';
 import { colors } from '../global';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    width: screenWidth,
+    height: screenHeight
   },
   btnMore: {
     color: colors.flatBlue,
@@ -63,10 +64,7 @@ export default class ReadLocations extends Component {
         const { latitude, longitude } = position.coords;
         const initialPosition = { latitude, longitude, latitudeDelta, longitudeDelta };
         this.setState({ initialPosition });
-      },
-      error => Alert.alert(JSON.stringify(error)),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
+      });
     this.watchID = navigator.geolocation.watchPosition((position) => {
       const { latitude, longitude } = position.coords;
       const region = { latitude, longitude, latitudeDelta, longitudeDelta };
@@ -124,19 +122,22 @@ export default class ReadLocations extends Component {
     const { locations } = this.props;
     const { initialPosition, region } = this.state;
     return (
-      <MapView
-        initialRegion={initialPosition}
-        region={region}
-        style={styles.container}
-        mapType={'hybrid'}
-        onRegionChange={e => this.onRegionChange(e)}
-        showsUserLocation
-        showsMyLocationButton
-      >
-        {locations.map(item => (
-         this.renderPoint(item)
-        ))}
-      </MapView>
+      <View style={styles.container}>
+        <MapView
+          initialRegion={initialPosition}
+          region={region}
+          style={styles.container}
+          mapType={'hybrid'}
+          onRegionChange={e => this.onRegionChange(e)}
+          showsUserLocation
+          showsMyLocationButton
+          cacheEnabled={isAndroid}
+        >
+          {locations.map(item => (
+           this.renderPoint(item)
+          ))}
+        </MapView>
+      </View>
     );
   }
 }
