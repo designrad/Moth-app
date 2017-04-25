@@ -4,17 +4,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setFinalize, uploadPhoto } from '../redux/actions/finalize';
+import { getMyPhoto } from '../redux/actions/moth';
+
 
 import { Routes, scale, scaleByVertical, screenWidth } from '../global/constants';
+
 import { colors } from '../global';
 import { Moment } from '../global/utils';
 import LocationButton from '../components/LocationButton';
-import CommentButton from '../components/CommentButton';
-import Input from '../components/Input';
-import SendButton from '../components/SendButton';
-import CommentEditor from '../components/CommentEditor';
-
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -31,10 +28,16 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     paddingTop: scaleByVertical(19),
+    paddingHorizontal: scale(20),
     alignItems: 'center'
   },
   data: {
     fontSize: scale(17)
+  },
+  comment: {
+    paddingTop: scaleByVertical(12),
+    paddingRight: scale(4),
+    fontSize: scale(13)
   },
   inputName: {
     marginTop: scaleByVertical(20),
@@ -52,54 +55,51 @@ const styles = StyleSheet.create({
   }
 });
 
-@connect(({ finalize }) => ({
-  ...finalize,
+@connect(({ moth }) => ({
+  ...moth,
 }), dispatch => bindActionCreators({
-  setFinalize,
-  uploadPhoto,
+  getMyPhoto
 }, dispatch))
-export default class Finalize extends Component {
+export default class Moth extends Component {
 
   static navigationOptions = {
-    title: Routes.finalize.title.localized
+    title: Routes.moth.title.localized
   };
 
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
+        params: PropTypes.shape({
+          id: PropTypes.string.isRequired
+        })
       }),
+      navigate: PropTypes.func.isRequired
     }).isRequired,
-    data: PropTypes.string.isRequired,
-    timestamp: PropTypes.string.isRequired,
-    latitude: PropTypes.number,
-    longitude: PropTypes.number,
-    modal: PropTypes.bool.isRequired,
-    comment: PropTypes.string.isRequired,
-    setFinalize: PropTypes.func.isRequired,
-    uploadPhoto: PropTypes.func.isRequired
+    getMyPhoto: PropTypes.func.isRequired,
+    image: PropTypes.objectOf(
+      PropTypes.string
+    ).isRequired
   };
 
   static defaultProps = {
     latitude: null,
     longitude: null
   };
+  componentWillMount() {
+    const { getMyPhoto, navigation: { state } } = this.props;
+    getMyPhoto(state.params.id);
+  }
 
   render() {
     const {
       navigation,
-      data,
-      timestamp,
-      latitude,
-      longitude,
-      comment,
-      modal,
-      setFinalize,
-      uploadPhoto
+      image
     } = this.props;
-    const dataTime = Moment(timestamp).format('lll');
-    const openEditor = show => setFinalize({ modal: show });
+    const longitude = parseFloat(image.longitude);
+    const latitude = parseFloat(image.latitude);
+    const dataTime = Moment(image.date).format('lll');
     const openMap = () => {
-      navigation.navigate(Routes.addLocation.name, { longitude, latitude, fixed: false });
+      navigation.navigate(Routes.addLocation.name, { longitude, latitude, fixed: true });
     };
     return (
       <KeyboardAwareScrollView
@@ -107,7 +107,7 @@ export default class Finalize extends Component {
       >
         <View style={styles.container}>
           <Image
-            source={{ uri: `data:image/jpeg;base64,${data}` }}
+            source={{ uri: `http://192.168.88.130:3001/image/${[image.name]}` }}
             style={styles.photo}
           />
           <View style={styles.itemContainer}>
@@ -118,35 +118,10 @@ export default class Finalize extends Component {
               onPress={openMap}
               onPressNolocation={openMap}
             />
-            <CommentButton
-              onPress={() => openEditor(true)}
-              text={comment}
-            />
-            <Input
-              placeholder={'Name (optional)'.localized}
-              styleInput={styles.inputName}
-              onChangeText={text => setFinalize({ name: text })}
-            />
-            <Input
-              placeholder={'Team (optional)'.localized}
-              onChangeText={text => setFinalize({ team: text })}
-            />
-            <Input
-              placeholder={'Email (optional)'.localized}
-              type={'email-address'} styleInput={styles.inputEmail}
-              onChangeText={text => setFinalize({ email: text })}
-            />
-          </View>
-          <View style={styles.bottomContainer}>
-            <SendButton longitude={longitude} latitude={latitude} onPress={uploadPhoto} />
+            <Text style={styles.comment}>{image.comments}</Text>
+
           </View>
         </View>
-        <CommentEditor
-          show={modal}
-          close={() => openEditor(false)}
-          value={comment}
-          onChangeText={text => setFinalize({ comment: text })}
-        />
       </KeyboardAwareScrollView>
     );
   }

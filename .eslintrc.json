@@ -24,6 +24,9 @@
   },
   "globals": {
     "navigator": true,
-    "isAndroid": true
+    "isAndroid": true,
+    "FormData": true,
+    "__DEV__": true,
+    "fetch": true
   }
 }

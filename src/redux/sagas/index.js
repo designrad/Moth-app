@@ -1,12 +1,14 @@
 import { put, call, fork, select } from 'redux-saga/effects';
-import { Alert } from 'react-native';
 import { AsyncStorage } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
+import { NavigationActions } from 'react-navigation';
 import { takeLatest } from 'redux-saga';
 import { setApp, showAlert } from '../actions/app';
+import { putPhotoStatus } from '../actions/log';
+import { putMyPhoto } from '../actions/moth';
 import { callApi, Endpoints } from '../../global/api';
-import { UPLOAD_PHOTO } from '../constants';
-import { NavigationActions } from 'react-navigation';
+import { putLocations } from '../actions/readLocations';
+import { UPLOAD_PHOTO, GET_PHOTO_STATUS, GET_MY_PHOTO, GET_LOCATIONS } from '../constants';
 
 function* startup() {
   try {
@@ -22,7 +24,6 @@ function* startup() {
 }
 
 function* uploadPhoto() {
-  console.log('uploadPhoto');
   try {
     const { deviceID } = yield select(state => state.app);
     const {
@@ -45,19 +46,20 @@ function* uploadPhoto() {
         type: 'image/jpeg; image/png'
       }
     );
-    formData.append('accuracy', 0);//
-    formData.append('comments', comment);//
-    formData.append('latitude', latitude);//
-    formData.append('longitude', longitude);//
+    formData.append('accuracy', 0);
+    formData.append('comments', comment);
+    formData.append('latitude', latitude);
+    formData.append('longitude', longitude);
     formData.append('data', timestamp);
     formData.append('author', name);
     formData.append('team', team);
     formData.append('email', email);
-    formData.append('device', deviceID);//
+    formData.append('device', deviceID);
     yield call(callApi, {
       endpoint: Endpoints.upload,
       method: 'POST',
-      payload: formData
+      payload: formData,
+      isFormData: true
     });
     yield put(NavigationActions.back());
     yield put(showAlert('success'.localized));
@@ -66,7 +68,49 @@ function* uploadPhoto() {
   }
 }
 
+function* getPhotoStatus() {
+  try {
+    const device = yield select(({ app: { deviceID } }) => deviceID);
+    const response = yield call(callApi, {
+      endpoint: Endpoints.photos,
+      method: 'POST',
+      payload: { device: `${device}` }
+    });
+    yield put(putPhotoStatus({ photos: response.data.photos }));
+  } catch (error) {
+    yield put(showAlert('Error'.localized));
+  }
+}
+
+function* getPhoto({ id }) {
+  try {
+    const response = yield call(callApi, {
+      endpoint: Endpoints.image,
+      method: 'POST',
+      payload: { id: `${id}` }
+    });
+    yield put(putMyPhoto({ image: response.data.image }));
+  } catch (error) {
+    yield put(showAlert('Error'.localized));
+  }
+}
+
+function* getLocations() {
+  try {
+    const response = yield call(callApi, {
+      endpoint: Endpoints.geolocations,
+      method: 'GET'
+    });
+    yield put(putLocations({ locations: response.data.photos }));
+  } catch (error) {
+    yield put(showAlert('Error'.localized));
+  }
+}
+
 export default function* rootSaga() {
   yield fork(startup);
   yield takeLatest(UPLOAD_PHOTO, uploadPhoto);
+  yield takeLatest(GET_PHOTO_STATUS, getPhotoStatus);
+  yield takeLatest(GET_MY_PHOTO, getPhoto);
+  yield takeLatest(GET_LOCATIONS, getLocations);
 }

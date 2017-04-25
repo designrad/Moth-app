@@ -4,6 +4,9 @@ import Home from '../scenes/Home';
 import LearnMore from '../scenes/LearnMore';
 import Finalize from '../scenes/Finalize';
 import AddLocation from '../scenes/AddLocation';
+import Log from '../scenes/Log';
+import Moth from '../scenes/Moth';
+import RearLocations from '../scenes/ReadLocations';
 
 import { colors } from '../global';
 
@@ -32,6 +35,15 @@ export default StackNavigator({
   },
   [Routes.addLocation.name]: {
     screen: AddLocation
+  },
+  [Routes.log.name]: {
+    screen: Log
+  },
+  [Routes.moth.name]: {
+    screen: Moth
+  },
+  [Routes.readLocation.name]: {
+    screen: RearLocations
   }
 }, {
   headerMode: 'screen',

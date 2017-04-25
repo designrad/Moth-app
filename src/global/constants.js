@@ -18,6 +18,18 @@ export const Routes = {
   addLocation: {
     name: 'AddLocation',
     title: 'Add location'
+  },
+  log: {
+    name: 'Log',
+    title: 'Log'
+  },
+  moth: {
+    name: 'Moth',
+    title: 'Moth'
+  },
+  readLocation: {
+    name: 'readLocation',
+    title: 'Verified observations'
   }
 };
 export const screenWidth = width;
@@ -26,4 +38,6 @@ export const screenHeight = height;
 export const scale = value => (width / 414) * value;
 export const scaleByVertical = value => (height / 736) * value;
 
-export const dataFormat = 'lll';
+export const latitudeDelta = 0.0922;
+export const longitudeDelta = 0.0421;
+
