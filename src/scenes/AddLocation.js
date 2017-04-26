@@ -6,13 +6,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setFinalize } from '../redux/actions/finalize';
 
-import { Routes, latitudeDelta, longitudeDelta, screenHeight, screenWidth } from '../global/constants';
+import { Routes, latitudeDelta, longitudeDelta } from '../global/constants';
 import { colors } from '../global';
 
 const styles = StyleSheet.create({
   container: {
-    width: screenWidth,
-    height: screenHeight
+    flex: 1
   },
 });
 
