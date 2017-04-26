@@ -18,6 +18,7 @@ import CommentEditor from '../components/CommentEditor';
 
 const styles = StyleSheet.create({
   scrollView: {
+    flex: 1,
     backgroundColor: colors.mainOrange,
   },
   container: {

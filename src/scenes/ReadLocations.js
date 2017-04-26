@@ -107,7 +107,6 @@ export default class ReadLocations extends Component {
               <Text>{newText}</Text>
               <Text
                 style={styles.btnMore}
-                onPress={() => this.openLog(_id)}
               >{'More info'.localized}</Text>
             </View>
           </MapView.Callout>

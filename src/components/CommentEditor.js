@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     width: screenWidth,
     height: screenHeight,
     alignItems: 'center',
-    justifyContent: 'center'
+    paddingTop: screenHeight / 4
   },
   inputContainer: {
     backgroundColor: colors.white,
@@ -39,6 +39,7 @@ export default function CommentEditor(props) {
               multiline
               style={styles.input}
               onEndEditing={close}
+              underlineColorAndroid={colors.transparent}
               {...props}
             />
           </View>

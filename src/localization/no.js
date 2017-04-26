@@ -33,5 +33,6 @@ export default {
 
   // read location
   'Verified observations': 'Bekreftede observasjoner',
-  'More info': 'Mer info'
+  'More info': 'Mer info',
+  Save: 'Lagre'
 };

@@ -8,7 +8,7 @@ import { setApp } from '../redux/actions/app';
 
 import Navigator from './Navigator';
 
-// import OverlayActivityIndicator from '../components/OverlayActivityIndicator';
+import OverlayActivityIndicator from '../components/OverlayActivityIndicator';
 import Alert from '../components/Alert';
 
 const styles = StyleSheet.create({
@@ -52,13 +52,13 @@ export default class App extends Component {
     }
   };
   render() {
-    const {dispatch, navigation, app} = this.props;
-    const {isLoading, alerts} = app;
+    const { dispatch, navigation, app } = this.props;
+    const { isLoading, alerts } = app;
     const lastAlert = alerts[alerts.length - 1];
     return (
       <View style={styles.container}>
-        <Navigator navigation={addNavigationHelpers({ dispatch, state: navigation })}/>
-        {/*<OverlayActivityIndicator visible={isLoading}/>*/}
+        <Navigator navigation={addNavigationHelpers({ dispatch, state: navigation })} />
+        <OverlayActivityIndicator visible={isLoading} />
         <Alert
           title={lastAlert ? lastAlert.title : ''}
           text={lastAlert ? lastAlert.text : ''}
