@@ -6,13 +6,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLocations } from '../redux/actions/readLocations';
 
-import { Routes, screenWidth, screenHeight } from '../global/constants';
+import { Routes } from '../global/constants';
 import { colors } from '../global';
 
 const styles = StyleSheet.create({
   container: {
-    width: screenWidth,
-    height: screenHeight
+    flex: 1
   },
   btnMore: {
     color: colors.flatBlue,
