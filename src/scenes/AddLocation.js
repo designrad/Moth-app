@@ -70,6 +70,7 @@ export default class AddLocation extends Component {
     };
   }
   componentWillMount() {
+    pointlocation = this.state.x;
     const { navigation: { state }, setApp } = this.props;
     setApp({ isLoading: true });
     if (state.params.latitude !== null) {
@@ -90,11 +91,10 @@ export default class AddLocation extends Component {
         const { latitude, longitude } = position.coords;
         const region = { latitude, longitude, latitudeDelta, longitudeDelta };
         const x = { latitude, longitude };
-        this.setState({ region, x });
         pointlocation = x;
+        this.setState({ region, x });
       });
     }
-    pointlocation = this.state.x;
   }
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);

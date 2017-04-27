@@ -63,7 +63,7 @@ function* uploadPhoto() {
       isFormData: true
     });
     yield put(NavigationActions.back());
-    yield put(showAlert('success'.localized));
+    yield put(showAlert('Success'.localized));
   } catch (error) {
     yield put(showAlert('Error'.localized));
   }

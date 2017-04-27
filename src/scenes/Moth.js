@@ -111,9 +111,9 @@ export default class Moth extends Component {
       >
         <View style={styles.container}>
           <Image
-            source={{ uri: `http://192.168.88.130:3001/image/${[image.name]}` }}
+            source={{ uri: `http://78.47.117.65:3001/image/${[image.name]}` }}
             style={styles.photo}
-            resizeMethod={'auto'}
+            resizeMode={'contain'}
             onLoadStart={() => setApp({ isLoading: true })}
             onLoadEnd={() => setApp({ isLoading: false })}
           />

@@ -5,8 +5,8 @@ import makeReducer from './fabric';
 const initialState = {
   data: '',
   timestamp: '',
-  latitude: '',
-  longitude: '',
+  latitude: null,
+  longitude: null,
   name: '',
   team: '',
   email: '',

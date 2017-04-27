@@ -71,7 +71,7 @@ export default class Finalize extends Component {
       state: PropTypes.shape({
       }),
     }).isRequired,
-    timestamp: PropTypes.string.isRequired,
+    timestamp: PropTypes.string,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     modal: PropTypes.bool.isRequired,
@@ -83,9 +83,15 @@ export default class Finalize extends Component {
 
   static defaultProps = {
     latitude: null,
-    longitude: null
+    longitude: null,
+    timestamp: ''
   };
-
+  componentDidMount() {
+    if (!this.props.timestamp) {
+      const t = Moment().format('lll');
+      this.props.setFinalize({ timestamp: t });
+    }
+  }
   render() {
     const {
       navigation,
@@ -110,6 +116,7 @@ export default class Finalize extends Component {
         <View style={styles.container}>
           <Image
             source={{ uri: imgUri }}
+            resizeMode={'contain'}
             style={styles.photo}
           />
           <View style={styles.itemContainer}>

@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
   container: {
     height: scaleByVertical(50),
     width: scale(400),
-    paddingRight: scale(10),
-    borderBottomWidth: 0,
+    paddingRight: scale(15),
+    borderBottomWidth: scale(0.5),
     borderColor: colors.borderGray,
     flexDirection: 'row',
     alignItems: 'center',
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
     fontSize: scale(36)
   },
   border: {
-    borderBottomWidth: scale(0.5)
+    marginBottom: scaleByVertical(15),
+    borderBottomWidth: 0
   }
 });
 
@@ -90,7 +91,7 @@ export default function DisclosureButton(props) {
     <TouchableOpacity
       onPress={onPress}
     >
-      <View style={[styles.container, !last && styles.border]}>
+      <View style={[styles.container, last && styles.border]}>
         <View style={styles.containerLeft}>
           <AIcon name={styleStatus.icon} style={[styles.icon, styleStatus.colorIcon]} />
           <View style={styles.textContainer}>
