@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   },
 });
 
-let pointlocation;
 
 @connect(({ finalize }) => ({
   ...finalize,
@@ -46,7 +45,6 @@ export default class AddLocation extends Component {
       navigate: PropTypes.func.isRequired
     }).isRequired
   };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -69,8 +67,9 @@ export default class AddLocation extends Component {
       userPos: true
     };
   }
+
   componentWillMount() {
-    pointlocation = this.state.x;
+    this.pointlocation = this.state.x;
     const { navigation: { state }, setApp } = this.props;
     setApp({ isLoading: true });
     if (state.params.latitude !== null) {
@@ -78,7 +77,7 @@ export default class AddLocation extends Component {
       const initialPosition = { latitude, longitude, latitudeDelta, longitudeDelta };
       const region = { latitude, longitude, latitudeDelta, longitudeDelta };
       const x = { latitude, longitude };
-      pointlocation = x;
+      this.pointlocation = x;
       this.setState({ initialPosition, region, x });
     } else {
       navigator.geolocation.getCurrentPosition(
@@ -91,24 +90,33 @@ export default class AddLocation extends Component {
         const { latitude, longitude } = position.coords;
         const region = { latitude, longitude, latitudeDelta, longitudeDelta };
         const x = { latitude, longitude };
-        pointlocation = x;
+        this.pointlocation = x;
         this.setState({ region, x });
       });
     }
   }
+
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
+
   onRegionChange(region) {
     this.setState({ region });
   }
-  setLocation(location) {
+
+  setLocation() {
     const { navigation: { state } } = this.props;
     if (!state.params.fixed) {
-      this.setState({ x: location });
-      this.props.setFinalize({ latitude: location.latitude, longitude: location.longitude });
+      this.setState({ x: this.pointlocation });
+      this.props.setFinalize({
+        latitude: this.pointlocation.latitude,
+        longitude: this.pointlocation.longitude
+      });
     }
   }
+
+  pointlocation = { latitudeDelta, longitudeDelta };
+
   watchID: ?number = null;
   initLocation(region, point, initRegion, userPos) {
     this.setState({ x: point, initialPosition: initRegion, region, userPos });
@@ -123,17 +131,17 @@ export default class AddLocation extends Component {
         region={region}
         onRegionChange={e => this.onRegionChange(e)}
         onPress={(e) => {
-          pointlocation = e.nativeEvent.coordinate;
-          this.setLocation(pointlocation);
+          this.pointlocation = e.nativeEvent.coordinate;
+          this.setLocation();
         }}
         onRegionChangeComplete={() => setApp({ isLoading: false })}
         showsUserLocation
         cacheEnabled={isAndroid}
       >
         <MapView.Marker
-          coordinate={pointlocation}
-          onDrag={(e) => { pointlocation = e.nativeEvent.coordinate; }}
-          onDragEnd={() => this.setLocation(pointlocation)}
+          coordinate={this.pointlocation}
+          onDrag={(e) => { this.pointlocation = e.nativeEvent.coordinate; }}
+          onDragEnd={() => this.setLocation()}
           draggable={!state.params.fixed}
         />
       </MapView>
