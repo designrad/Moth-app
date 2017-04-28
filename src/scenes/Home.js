@@ -122,14 +122,14 @@ export default class Home extends Component {
     if (!response.latitude) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const { latitude, longitude } = position.coords;
+          const pos = position.coords;
           this.props.setFinalize({
             imgUri: response.uri,
             imgName: response.fileName,
             data: response.data,
             timestamp: response.timestamp,
-            latitude,
-            longitude
+            latitude: pos.latitude,
+            longitude: pos.longitude
           });
         });
     } else {
