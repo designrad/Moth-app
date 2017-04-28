@@ -25,6 +25,7 @@ function* startup() {
 
 function* uploadPhoto() {
   try {
+    yield put(setApp({ isLoading: true }));
     const { deviceID } = yield select(state => state.app);
     const {
       timestamp,
@@ -37,7 +38,6 @@ function* uploadPhoto() {
       imgUri,
       imgName,
     } = yield select(state => state.finalize);
-    yield put(setApp({ isLoading: true }));
     const formData = new FormData();
     formData.append(
       'file',

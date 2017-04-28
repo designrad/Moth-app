@@ -90,11 +90,11 @@ export default class Home extends Component {
 
   oldPhoto = () => {
     ImagePicker.launchImageLibrary(options, (response) => {
-      this.sendPhoto(response);
+      this.sendPhotoLibrary(response);
     });
   };
 
-  sendPhoto(response) {
+  sendPhotoLibrary(response) {
     this.props.setFinalize();
     if (response.error) {
       return;
@@ -109,6 +109,39 @@ export default class Home extends Component {
       latitude: response.latitude,
       longitude: response.longitude
     });
+    this.props.navigation.navigate(Routes.finalize.name);
+  }
+
+  sendPhoto(response) {
+    this.props.setFinalize();
+    if (response.error) {
+      return;
+    } else if (response.didCancel) {
+      return;
+    }
+    if (!response.latitude) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          this.props.setFinalize({
+            imgUri: response.uri,
+            imgName: response.fileName,
+            data: response.data,
+            timestamp: response.timestamp,
+            latitude,
+            longitude
+          });
+        });
+    } else {
+      this.props.setFinalize({
+        imgUri: response.uri,
+        imgName: response.fileName,
+        data: response.data,
+        timestamp: response.timestamp,
+        latitude: response.latitude,
+        longitude: response.longitude
+      });
+    }
     this.props.navigation.navigate(Routes.finalize.name);
   }
 
