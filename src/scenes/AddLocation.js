@@ -104,11 +104,14 @@ export default class AddLocation extends Component {
     this.setState({ region });
   }
 
-  setLocation(location) {
+  setLocation() {
     const { navigation: { state } } = this.props;
     if (!state.params.fixed) {
-      this.setState({ x: location });
-      this.props.setFinalize({ latitude: location.latitude, longitude: location.longitude });
+      this.setState({ x: this.pointlocation });
+      this.props.setFinalize({
+        latitude: this.pointlocation.latitude,
+        longitude: this.pointlocation.longitude
+      });
     }
   }
 
@@ -129,7 +132,7 @@ export default class AddLocation extends Component {
         onRegionChange={e => this.onRegionChange(e)}
         onPress={(e) => {
           this.pointlocation = e.nativeEvent.coordinate;
-          this.setLocation(this.pointlocation);
+          this.setLocation();
         }}
         onRegionChangeComplete={() => setApp({ isLoading: false })}
         showsUserLocation
@@ -138,7 +141,7 @@ export default class AddLocation extends Component {
         <MapView.Marker
           coordinate={this.pointlocation}
           onDrag={(e) => { this.pointlocation = e.nativeEvent.coordinate; }}
-          onDragEnd={() => this.setLocation(this.pointlocation)}
+          onDragEnd={() => this.setLocation()}
           draggable={!state.params.fixed}
         />
       </MapView>
