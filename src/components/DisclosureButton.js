@@ -47,6 +47,12 @@ const styles = StyleSheet.create({
 
 export default function DisclosureButton(props) {
   const { onPress, status, comment, date, last } = props;
+  let newText;
+  if (comment.length > 35) {
+    newText = `${comment.substr(0, 35)}...`;
+  } else {
+    newText = comment;
+  }
   let styleStatus = {
     text: {},
     icon: 'cloud-upload',
@@ -96,7 +102,7 @@ export default function DisclosureButton(props) {
           <AIcon name={styleStatus.icon} style={[styles.icon, styleStatus.colorIcon]} />
           <View style={styles.textContainer}>
             <Text style={[styles.textDate, styleStatus.text]}>{Moment(date).format('lll')}</Text>
-            <Text style={[styles.textComment, styleStatus.text]}>{comment}</Text>
+            <Text style={[styles.textComment, styleStatus.text]}>{newText}</Text>
           </View>
         </View>
         <AIcon name={'angle-right'} style={styles.arrow} />
