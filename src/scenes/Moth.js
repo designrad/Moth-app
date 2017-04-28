@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getMyPhoto } from '../redux/actions/moth';
+import { setApp } from '../redux/actions/app';
 
 
 import { Routes, scale, scaleByVertical, screenWidth } from '../global/constants';
@@ -60,7 +61,8 @@ const styles = StyleSheet.create({
 @connect(({ moth }) => ({
   ...moth,
 }), dispatch => bindActionCreators({
-  getMyPhoto
+  getMyPhoto,
+  setApp
 }, dispatch))
 export default class Moth extends Component {
 
@@ -77,10 +79,9 @@ export default class Moth extends Component {
       }),
       navigate: PropTypes.func.isRequired
     }).isRequired,
+    setApp: PropTypes.func.isRequired,
     getMyPhoto: PropTypes.func.isRequired,
-    image: PropTypes.objectOf(
-      PropTypes.string
-    ).isRequired
+    image: PropTypes.shape({}).isRequired
   };
 
   static defaultProps = {
@@ -95,7 +96,8 @@ export default class Moth extends Component {
   render() {
     const {
       navigation,
-      image
+      image,
+      setApp
     } = this.props;
     const longitude = parseFloat(image.longitude);
     const latitude = parseFloat(image.latitude);
@@ -109,9 +111,11 @@ export default class Moth extends Component {
       >
         <View style={styles.container}>
           <Image
-            source={{ uri: `http://192.168.88.130:3001/image/${[image.name]}` }}
+            source={{ uri: `http://78.47.117.65:3001/image/${[image.name]}` }}
             style={styles.photo}
-            resizeMethod={'auto'}
+            resizeMode={'contain'}
+            onLoadStart={() => setApp({ isLoading: true })}
+            onLoadEnd={() => setApp({ isLoading: false })}
           />
           <View style={styles.itemContainer}>
             <Text style={styles.data}>{dataTime}</Text>

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   container: {
     height: scaleByVertical(50),
     width: scale(400),
-    paddingRight: scale(10),
+    paddingRight: scale(15),
     borderBottomWidth: scale(0.5),
     borderColor: colors.borderGray,
     flexDirection: 'row',
@@ -38,11 +38,15 @@ const styles = StyleSheet.create({
   arrow: {
     color: colors.arrowGray,
     fontSize: scale(36)
+  },
+  border: {
+    marginBottom: scaleByVertical(15),
+    borderBottomWidth: 0
   }
 });
 
 export default function DisclosureButton(props) {
-  const { onPress, status, comment, date } = props;
+  const { onPress, status, comment, date, last } = props;
   let styleStatus = {
     text: {},
     icon: 'cloud-upload',
@@ -87,7 +91,7 @@ export default function DisclosureButton(props) {
     <TouchableOpacity
       onPress={onPress}
     >
-      <View style={styles.container}>
+      <View style={[styles.container, last && styles.border]}>
         <View style={styles.containerLeft}>
           <AIcon name={styleStatus.icon} style={[styles.icon, styleStatus.colorIcon]} />
           <View style={styles.textContainer}>
@@ -106,6 +110,7 @@ DisclosureButton.propTypes = {
   status: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   comment: PropTypes.string,
+  last: PropTypes.bool.isRequired
 };
 
 DisclosureButton.defaultProps = {

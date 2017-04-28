@@ -19,7 +19,7 @@ function* startup() {
     }
     yield put(setApp({ deviceID }));
   } catch (error) {
-    console.log('error: ', error);
+    yield put(showAlert('Error'.localized));
   }
 }
 
@@ -63,10 +63,8 @@ function* uploadPhoto() {
       isFormData: true
     });
     yield put(NavigationActions.back());
-    yield put(setApp({ isLoading: false }));
-    yield put(showAlert('success'.localized));
+    yield put(showAlert('Success'.localized));
   } catch (error) {
-    console.log(error);
     yield put(showAlert('Error'.localized));
   }
 }
@@ -100,11 +98,13 @@ function* getPhoto({ id }) {
 
 function* getLocations() {
   try {
+    yield put(setApp({ isLoading: true }));
     const response = yield call(callApi, {
       endpoint: Endpoints.geolocations,
       method: 'GET'
     });
     yield put(putLocations({ locations: response.data.photos }));
+    yield put(setApp({ isLoading: false }));
   } catch (error) {
     yield put(showAlert('Error'.localized));
   }

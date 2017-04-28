@@ -29,6 +29,8 @@ export default function Input(props) {
         placeholder={placeholder}
         maxLength={40}
         keyboardType={type}
+        disableFullscreenUI={false}
+        underlineColorAndroid={colors.transparent}
         {...props}
       />
     </View>

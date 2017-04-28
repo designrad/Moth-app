@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     borderWidth: scale(0.5),
     borderColor: colors.borderGray,
     paddingLeft: scale(16),
-    paddingVertical: scaleByVertical(5)
+    paddingVertical: scaleByVertical(5),
   }
 });
 @connect(({ log }) => ({
@@ -64,19 +64,20 @@ export default class Log extends Component {
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <Text style={styles.header}>{'Submitted images'.localized}</Text>
-          <Text style={styles.text}>{('Below is a list of all submitted images.' +
-          'If you don’t have network available, the images are saved in the app' +
-          'and will be uploaded later automatically when there’s network' +
-          'available. You can also re-send them manually.').localized}</Text>
+          <Text style={styles.header}>{('Below is a list of all submitted images. ' +
+          'If you don’t have network available, the images are saved in the app ' +
+          'and will be uploaded later automatically when there’s network available. ' +
+          'You can also re-send them manually.').localized}</Text>
         </View>
-        {photos && <ScrollView style={styles.scroller}>
-          {photos.map(item => (
+        {photos.length > 0 && <ScrollView style={styles.scroller}>
+          {photos.map((item, i) => (
             <DisclosureButton
               status={item.identification}
               date={item.date}
               onPress={() => this.openLog(item.id)}
               comment={item.comments}
               key={item.id}
+              last={i === (photos.length - 1)}
             />
           ))}
         </ScrollView>

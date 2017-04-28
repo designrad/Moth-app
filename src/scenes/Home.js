@@ -81,6 +81,7 @@ export default class Home extends Component {
   };
 
   sendPhoto(response) {
+    this.props.setFinalize();
     if (response.error) {
       return;
     } else if (response.didCancel) {
