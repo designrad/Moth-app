@@ -5,6 +5,7 @@ import ImagePicker from 'react-native-image-picker';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setFinalize } from '../redux/actions/finalize';
+import { setApp } from '../redux/actions/app';
 
 
 import Button from '../components/Button';
@@ -45,10 +46,12 @@ const options = {
   }
 };
 
-@connect(({ finalize }) => ({
+@connect(({ finalize, app }) => ({
   ...finalize,
+  ...app
 }), dispatch => bindActionCreators({
-  setFinalize
+  setFinalize,
+  setApp
 }, dispatch))
 
 export default class Home extends Component {
@@ -62,12 +65,23 @@ export default class Home extends Component {
       state: PropTypes.shape({}),
       navigate: PropTypes.func.isRequired
     }).isRequired,
-    setFinalize: PropTypes.func.isRequired
+    setFinalize: PropTypes.func.isRequired,
+    setApp: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired
   };
 
+  componentDidUpdate() {
+    if (this.props.isLoading) {
+      this.props.setApp({ isLoading: false });
+    }
+  }
+
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
+
   openLog = () => this.props.navigation.navigate(Routes.log.name);
+
   openMap = () => this.props.navigation.navigate(Routes.readLocation.name);
+
   takePhoto = () => {
     ImagePicker.launchCamera(options, (response) => {
       this.sendPhoto(response);
@@ -76,11 +90,11 @@ export default class Home extends Component {
 
   oldPhoto = () => {
     ImagePicker.launchImageLibrary(options, (response) => {
-      this.sendPhoto(response);
+      this.sendPhotoLibrary(response);
     });
   };
 
-  sendPhoto(response) {
+  sendPhotoLibrary(response) {
     this.props.setFinalize();
     if (response.error) {
       return;
@@ -95,6 +109,39 @@ export default class Home extends Component {
       latitude: response.latitude,
       longitude: response.longitude
     });
+    this.props.navigation.navigate(Routes.finalize.name);
+  }
+
+  sendPhoto(response) {
+    this.props.setFinalize();
+    if (response.error) {
+      return;
+    } else if (response.didCancel) {
+      return;
+    }
+    if (!response.latitude) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          this.props.setFinalize({
+            imgUri: response.uri,
+            imgName: response.fileName,
+            data: response.data,
+            timestamp: response.timestamp,
+            latitude,
+            longitude
+          });
+        });
+    } else {
+      this.props.setFinalize({
+        imgUri: response.uri,
+        imgName: response.fileName,
+        data: response.data,
+        timestamp: response.timestamp,
+        latitude: response.latitude,
+        longitude: response.longitude
+      });
+    }
     this.props.navigation.navigate(Routes.finalize.name);
   }
 

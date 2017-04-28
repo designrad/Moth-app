@@ -31,6 +31,7 @@ export default class ReadLocations extends Component {
   static navigationOptions = {
     title: Routes.readLocation.title.localized
   };
+
   static propTypes = {
     getLocations: PropTypes.func.isRequired,
     locations: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -38,6 +39,7 @@ export default class ReadLocations extends Component {
       navigate: PropTypes.func.isRequired
     }).isRequired,
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -78,6 +80,7 @@ export default class ReadLocations extends Component {
   onRegionChange(region) {
     this.setState({ region });
   }
+
   watchID: ?number = null;
   openLog = id => this.props.navigation.navigate(Routes.moth.name, { id });
 

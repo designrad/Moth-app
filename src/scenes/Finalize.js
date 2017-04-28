@@ -86,6 +86,7 @@ export default class Finalize extends Component {
     longitude: null,
     timestamp: ''
   };
+
   componentDidMount() {
     if (!this.props.timestamp) {
       const t = Moment().format('lll');

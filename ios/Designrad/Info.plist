@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Moth</string>
+	<string>Malerjakt</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>13</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -39,6 +39,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Application needs access to your Camera to work properly</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Application needs access to your Location to work properly</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Application needs access to your Location to work properly</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Application needs access to your Location to work properly</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -1311,8 +1311,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.allmax.Moth;
 				PRODUCT_NAME = Designrad;
-				PROVISIONING_PROFILE = "f15f8ec8-015e-4e43-8cc0-77b388cb5150";
-				PROVISIONING_PROFILE_SPECIFIER = com.allmax.Moth;
+				PROVISIONING_PROFILE = "141aba0f-d7bd-49a2-8875-bccbaa25b8a5";
+				PROVISIONING_PROFILE_SPECIFIER = com.allmax.multi;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
