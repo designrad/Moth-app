@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 @connect(({ finalize }) => ({
   ...finalize,
 }), dispatch => bindActionCreators({
@@ -31,6 +30,7 @@ export default class AddLocation extends Component {
       <SaveButton onPress={() => goBack()} />
     )
   });
+
   static propTypes = {
     setFinalize: PropTypes.func.isRequired,
     setApp: PropTypes.func.isRequired,
@@ -45,6 +45,7 @@ export default class AddLocation extends Component {
       navigate: PropTypes.func.isRequired
     }).isRequired
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -118,9 +119,7 @@ export default class AddLocation extends Component {
   pointlocation = { latitudeDelta, longitudeDelta };
 
   watchID: ?number = null;
-  initLocation(region, point, initRegion, userPos) {
-    this.setState({ x: point, initialPosition: initRegion, region, userPos });
-  }
+
   render() {
     const { initialPosition, region } = this.state;
     const { navigation: { state }, setApp } = this.props;

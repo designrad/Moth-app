@@ -8,8 +8,7 @@ import { getMyPhoto } from '../redux/actions/moth';
 import { setApp } from '../redux/actions/app';
 
 
-import { Routes, scale, scaleByVertical, screenWidth } from '../global/constants';
-
+import { Routes, scale, scaleByVertical, screenWidth, ipServer } from '../global/constants';
 import { colors } from '../global';
 import { Moment } from '../global/utils';
 import LocationButton from '../components/LocationButton';
@@ -88,6 +87,7 @@ export default class Moth extends Component {
     latitude: null,
     longitude: null
   };
+
   componentWillMount() {
     const { getMyPhoto, navigation: { state } } = this.props;
     getMyPhoto(state.params.id);
@@ -111,7 +111,7 @@ export default class Moth extends Component {
       >
         <View style={styles.container}>
           <Image
-            source={{ uri: `http://78.47.117.65:3001/image/${[image.name]}` }}
+            source={{ uri: `http://${ipServer}/image/${[image.name]}` }}
             style={styles.photo}
             resizeMode={'contain'}
             onLoadStart={() => setApp({ isLoading: true })}
