@@ -86,6 +86,7 @@ export default class AddLocation extends Component {
           const { latitude, longitude } = position.coords;
           const initialPosition = { latitude, longitude, latitudeDelta, longitudeDelta };
           this.setState({ initialPosition });
+          this.setLocation();
         });
       this.watchID = navigator.geolocation.watchPosition((position) => {
         const { latitude, longitude } = position.coords;

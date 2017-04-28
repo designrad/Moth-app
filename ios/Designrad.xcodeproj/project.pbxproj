@@ -1311,8 +1311,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.allmax.Moth;
 				PRODUCT_NAME = Designrad;
-				PROVISIONING_PROFILE = "f15f8ec8-015e-4e43-8cc0-77b388cb5150";
-				PROVISIONING_PROFILE_SPECIFIER = com.allmax.Moth;
+				PROVISIONING_PROFILE = "141aba0f-d7bd-49a2-8875-bccbaa25b8a5";
+				PROVISIONING_PROFILE_SPECIFIER = com.allmax.multi;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1565,7 +1565,7 @@
 				00E356F71AD99517003FC87E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Designrad" */ = {
 			isa = XCConfigurationList;
@@ -1574,7 +1574,7 @@
 				13B07F951A680F5B00A75B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Designrad-tvOS" */ = {
 			isa = XCConfigurationList;
@@ -1583,7 +1583,7 @@
 				2D02E4981E0B4A5E006451C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Designrad-tvOSTests" */ = {
 			isa = XCConfigurationList;
@@ -1592,7 +1592,7 @@
 				2D02E49A1E0B4A5E006451C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Designrad" */ = {
 			isa = XCConfigurationList;
@@ -1601,7 +1601,7 @@
 				83CBBA211A601CBA00E9B192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
