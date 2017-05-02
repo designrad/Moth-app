@@ -11,6 +11,7 @@ import DisclosureButton from '../components/DisclosureButton';
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingTop: scaleByVertical(32),
     backgroundColor: colors.mainOrange
   },
