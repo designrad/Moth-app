@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { setFinalize } from '../redux/actions/finalize';
 import { setApp } from '../redux/actions/app';
 
-
+import { Moment } from '../global/utils';
 import Button from '../components/Button';
 import { colors, images } from '../global';
 import { screenWidth, screenHeight, scale, Routes } from '../global/constants';
@@ -70,7 +70,7 @@ export default class Home extends Component {
     isLoading: PropTypes.bool.isRequired
   };
 
-  componentDidUpdate() {
+  componentDidMount() {
     if (this.props.isLoading) {
       this.props.setApp({ isLoading: false });
     }
@@ -104,8 +104,7 @@ export default class Home extends Component {
     this.props.setFinalize({
       imgUri: response.uri,
       imgName: response.fileName,
-      data: response.data,
-      timestamp: response.timestamp,
+      timestamp: Moment(response.timestamp).format('lll'),
       latitude: response.latitude,
       longitude: response.longitude
     });
@@ -126,8 +125,7 @@ export default class Home extends Component {
           this.props.setFinalize({
             imgUri: response.uri,
             imgName: response.fileName,
-            data: response.data,
-            timestamp: response.timestamp,
+            timestamp: Moment(response.timestamp).format('lll'),
             latitude: pos.latitude,
             longitude: pos.longitude
           });
@@ -136,8 +134,7 @@ export default class Home extends Component {
       this.props.setFinalize({
         imgUri: response.uri,
         imgName: response.fileName,
-        data: response.data,
-        timestamp: response.timestamp,
+        timestamp: Moment(response.timestamp).format('lll'),
         latitude: response.latitude,
         longitude: response.longitude
       });
