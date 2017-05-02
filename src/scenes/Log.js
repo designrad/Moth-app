@@ -71,15 +71,17 @@ export default class Log extends Component {
           'You can also re-send them manually.').localized}</Text>
         </View>
         {photos.length > 0 && <ScrollView style={styles.scroller}>
-          {photos.map((item, i) => (
-            <DisclosureButton
-              status={item.identification}
-              date={item.date}
-              onPress={() => this.openLog(item.id)}
-              comment={item.comments}
-              key={item.id}
-              last={i === (photos.length - 1)}
-            />
+          {photos
+            .reverse()
+            .map((item, i) => (
+              <DisclosureButton
+                status={item.identification}
+                date={item.date}
+                onPress={() => this.openLog(item.id)}
+                comment={item.comments}
+                key={item.id}
+                last={i === (photos.length - 1)}
+              />
           ))}
         </ScrollView>
         }
