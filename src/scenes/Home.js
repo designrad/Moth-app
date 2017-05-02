@@ -11,7 +11,6 @@ import { Moment } from '../global/utils';
 import Button from '../components/Button';
 import { colors, images } from '../global';
 import { screenWidth, screenHeight, scale, Routes } from '../global/constants';
-
 import TakeFotoButton from '../components/TakeFotoButton';
 
 

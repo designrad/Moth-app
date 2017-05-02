@@ -77,7 +77,10 @@ export default class Finalize extends Component {
     comment: PropTypes.string.isRequired,
     setFinalize: PropTypes.func.isRequired,
     uploadPhoto: PropTypes.func.isRequired,
-    imgUri: PropTypes.string.isRequired
+    imgUri: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    team: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -96,7 +99,10 @@ export default class Finalize extends Component {
       modal,
       imgUri,
       setFinalize,
-      uploadPhoto
+      uploadPhoto,
+      name,
+      team,
+      email
     } = this.props;
     const openEditor = show => setFinalize({ modal: show });
     const openMap = () => {
@@ -128,15 +134,24 @@ export default class Finalize extends Component {
               placeholder={'Name (optional)'.localized}
               styleInput={styles.inputName}
               onChangeText={text => setFinalize({ name: text })}
+              clear={() => setFinalize({ name: '' })}
+              clearBtn={name !== ''}
+              value={name}
             />
             <Input
               placeholder={'Team (optional)'.localized}
               onChangeText={text => setFinalize({ team: text })}
+              clear={() => setFinalize({ team: '' })}
+              clearBtn={team !== ''}
+              value={team}
             />
             <Input
               placeholder={'Email (optional)'.localized}
               type={'email-address'} styleInput={styles.inputEmail}
               onChangeText={text => setFinalize({ email: text })}
+              clear={() => setFinalize({ email: '' })}
+              clearBtn={email !== ''}
+              value={email}
             />
           </View>
           <View style={styles.bottomContainer}>
