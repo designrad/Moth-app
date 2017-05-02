@@ -8,6 +8,7 @@ import desingradLogo from '../imgs/designrad_logo.png';
 import framsenteretLogo from '../imgs/Framsenteret.png';
 import mitAndGitLogo from '../imgs/Group.png';
 import webLogo from '../imgs/logoweb.png';
+import learnImage from '../imgs/DSCN0922.png';
 
 const images = {
   background,
@@ -19,7 +20,8 @@ const images = {
   desingradLogo,
   framsenteretLogo,
   mitAndGitLogo,
-  webLogo
+  webLogo,
+  learnImage
 };
 
 export default images;
