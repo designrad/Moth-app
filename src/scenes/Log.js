@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, RefreshControl } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -37,16 +37,20 @@ const styles = StyleSheet.create({
     paddingVertical: scaleByVertical(5),
   }
 });
-@connect(({ log }) => ({
+
+@connect(({ log, app }) => ({
   ...log,
+  ...app
 }), dispatch => bindActionCreators({
   getPhotoStatus
 }, dispatch))
 
 export default class Log extends Component {
+
   static navigationOptions = {
     title: Routes.log.title.localized
   };
+
   static propTypes = {
     getPhotoStatus: PropTypes.func.isRequired,
     photos: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -54,11 +58,22 @@ export default class Log extends Component {
       state: PropTypes.shape({}),
       navigate: PropTypes.func.isRequired
     }).isRequired,
+    isLoading: PropTypes.bool.isRequired
   };
+
   componentDidMount() {
     this.props.getPhotoStatus();
   }
+
   openLog = id => this.props.navigation.navigate(Routes.moth.name, { id });
+
+  renderRefresh = (
+    <RefreshControl
+      refreshing={this.props.isLoading}
+      onRefresh={() => this.props.getPhotoStatus()}
+    />
+  );
+
   render() {
     const { photos } = this.props;
     return (
@@ -70,7 +85,13 @@ export default class Log extends Component {
           'and will be uploaded later automatically when there’s network available. ' +
           'You can also re-send them manually.').localized}</Text>
         </View>
-        {photos.length > 0 && <ScrollView style={styles.scroller}>
+        {photos.length > 0 &&
+        <ScrollView
+          style={styles.scroller}
+          refreshControl={
+            this.renderRefresh
+          }
+        >
           {photos
             .reverse()
             .map((item, i) => (

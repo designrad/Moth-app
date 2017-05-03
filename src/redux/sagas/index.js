@@ -51,7 +51,7 @@ function* uploadPhoto() {
     formData.append('comments', comment);
     formData.append('latitude', latitude);
     formData.append('longitude', longitude);
-    formData.append('data', timestamp);
+    formData.append('date', timestamp);
     formData.append('author', name);
     formData.append('team', team);
     formData.append('email', email);
