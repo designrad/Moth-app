@@ -70,15 +70,17 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
+    // Turn off the speaker if not turned off
     if (this.props.isLoading) {
       this.props.setApp({ isLoading: false });
     }
   }
 
+  // open Learn more screen
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
-
+  // open Log screen
   openLog = () => this.props.navigation.navigate(Routes.log.name);
-
+  // open Confirmed observations screen
   openMap = () => this.props.navigation.navigate(Routes.readLocation.name);
 
   takePhoto = () => {
