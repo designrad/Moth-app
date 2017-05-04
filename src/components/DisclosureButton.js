@@ -46,58 +46,40 @@ const styles = StyleSheet.create({
 });
 
 export default function DisclosureButton(props) {
-  const { onPress, status, comment, date, last } = props;
+  const { onPress, status, comment, date } = props;
   let newText;
+
   if (comment.length > 35) {
     newText = `${comment.substr(0, 35)}...`;
   } else {
     newText = comment;
   }
+
   let styleStatus = {
     text: {},
     icon: 'cloud-upload',
     colorIcon: {}
   };
-  switch (status) {
-    case 'other':
-      styleStatus = {
-        text: {},
-        icon: 'cloud-upload',
-        colorIcon: { color: colors.flatBlue }
-      };
-      break;
-    case 'correct':
-      styleStatus = {
-        text: {},
-        icon: 'check-circle',
-        colorIcon: { color: colors.flatGreen }
-      };
-      break;
-    case 'uncertain':
-      styleStatus = {
-        text: {},
-        icon: 'cloud-upload',
-        colorIcon: { color: colors.mainOrange }
-      };
-      break;
-    case 'delete':
-      styleStatus = {
-        text: { color: colors.flatRed },
-        icon: 'cloud-upload',
-        colorIcon: { color: colors.flatRed }
-      };
-      break;
-    default:
-      styleStatus = {
-        text: {},
-        icon: 'cloud-upload'
-      };
+
+  if (status) {
+    styleStatus = {
+      text: {},
+      icon: 'check-circle',
+      colorIcon: { color: colors.flatGreen }
+    };
+  } else {
+    styleStatus = {
+      text: { color: colors.flatRed },
+      icon: 'cloud-upload',
+      colorIcon: { color: colors.flatRed }
+    };
   }
+
   return (
     <TouchableOpacity
       onPress={onPress}
     >
-      <View style={[styles.container, last && styles.border]}>
+      <View style={styles.container}>
         <View style={styles.containerLeft}>
           <AIcon name={styleStatus.icon} style={[styles.icon, styleStatus.colorIcon]} />
           <View style={styles.textContainer}>
@@ -113,12 +95,12 @@ export default function DisclosureButton(props) {
 
 DisclosureButton.propTypes = {
   onPress: PropTypes.func.isRequired,
-  status: PropTypes.string.isRequired,
+  status: PropTypes.string,
   date: PropTypes.string.isRequired,
   comment: PropTypes.string,
-  last: PropTypes.bool.isRequired
 };
 
 DisclosureButton.defaultProps = {
-  comment: ''
+  comment: '',
+  status: ''
 };

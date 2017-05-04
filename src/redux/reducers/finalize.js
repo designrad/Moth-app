@@ -3,8 +3,7 @@ import { SET_FINALIZE } from '../constants/index';
 import makeReducer from './fabric';
 
 const initialState = {
-  data: '',
-  timestamp: '',
+  date: '',
   latitude: null,
   longitude: null,
   name: '',

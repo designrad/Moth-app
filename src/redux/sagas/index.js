@@ -27,8 +27,10 @@ function* uploadPhoto() {
   try {
     yield put(setApp({ isLoading: true }));
     const { deviceID } = yield select(state => state.app);
+    let moths = yield call(AsyncStorage.getItem, 'moths');
+    const mothsJson = JSON.parse(moths);
     const {
-      timestamp,
+      date,
       latitude,
       longitude,
       name,
@@ -38,6 +40,15 @@ function* uploadPhoto() {
       imgUri,
       imgName,
     } = yield select(state => state.finalize);
+    mothsJson.find((element, i) => {
+      if (element.imgUri === imgUri) {
+        mothsJson.splice(i, 1);
+        return mothsJson;
+      }
+      return false;
+    });
+    moths = JSON.stringify(mothsJson);
+    yield call(AsyncStorage.setItem, 'moths', moths);
     const formData = new FormData();
     formData.append(
       'file',
@@ -51,7 +62,7 @@ function* uploadPhoto() {
     formData.append('comments', comment);
     formData.append('latitude', latitude);
     formData.append('longitude', longitude);
-    formData.append('data', timestamp);
+    formData.append('date', date);
     formData.append('author', name);
     formData.append('team', team);
     formData.append('email', email);
@@ -65,6 +76,17 @@ function* uploadPhoto() {
     yield put(NavigationActions.back());
     yield put(showAlert('Success'.localized));
   } catch (error) {
+    let moths = yield call(AsyncStorage.getItem, 'moths');
+    const finalize = yield select(state => state.finalize);
+    if (!moths) {
+      moths = JSON.stringify([finalize]);
+    } else {
+      const mothsJson = JSON.parse(moths);
+      mothsJson.push(finalize);
+      moths = JSON.stringify(mothsJson);
+    }
+    yield call(AsyncStorage.setItem, 'moths', moths);
+    yield put(NavigationActions.back());
     yield put(showAlert('Error'.localized));
   }
 }
@@ -77,7 +99,9 @@ function* getPhotoStatus() {
       method: 'POST',
       payload: { device: `${device}` }
     });
-    yield put(putPhotoStatus({ photos: response.data.photos }));
+    const moths = yield call(AsyncStorage.getItem, 'moths');
+    const logs = response.data.photos.concat(JSON.parse(moths));
+    yield put(putPhotoStatus({ photos: logs }));
   } catch (error) {
     yield put(showAlert('Error'.localized));
   }

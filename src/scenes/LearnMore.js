@@ -75,7 +75,7 @@ export default class LearnMore extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Image source={images.photoMoth} style={styles.img} />
+        <Image source={images.learnImage} style={styles.img} />
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'Målerjakt app'.localized}</Text>
           <Text style={styles.text}>

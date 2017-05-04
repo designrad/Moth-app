@@ -50,20 +50,20 @@ export default class AddLocation extends Component {
     super(props);
     this.state = {
       region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 60.491403,
+        longitude: 8.391523,
         latitudeDelta: 0.3767730706970411,
         longitudeDelta: 0.294662356863725,
       },
       initialPosition: {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 60.491403,
+        longitude: 8.391523,
         latitudeDelta: 0.3767730706970411,
         longitudeDelta: 0.294662356863725,
       },
       x: {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 60.491403,
+        longitude: 8.391523,
       },
       userPos: true
     };

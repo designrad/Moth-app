@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, RefreshControl } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPhotoStatus } from '../redux/actions/log';
+import { setFinalize, uploadPhoto } from '../redux/actions/finalize';
 
 import { Routes, scale, scaleByVertical } from '../global/constants';
 import { colors } from '../global';
@@ -11,6 +12,7 @@ import DisclosureButton from '../components/DisclosureButton';
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingTop: scaleByVertical(32),
     backgroundColor: colors.mainOrange
   },
@@ -36,28 +38,66 @@ const styles = StyleSheet.create({
     paddingVertical: scaleByVertical(5),
   }
 });
-@connect(({ log }) => ({
+
+@connect(({ log, app }) => ({
   ...log,
+  ...app
 }), dispatch => bindActionCreators({
-  getPhotoStatus
+  getPhotoStatus,
+  setFinalize,
+  uploadPhoto
 }, dispatch))
 
 export default class Log extends Component {
+
   static navigationOptions = {
     title: Routes.log.title.localized
   };
+
   static propTypes = {
     getPhotoStatus: PropTypes.func.isRequired,
+    setFinalize: PropTypes.func.isRequired,
+    uploadPhoto: PropTypes.func.isRequired,
     photos: PropTypes.arrayOf(PropTypes.object).isRequired,
     navigation: PropTypes.shape({
       state: PropTypes.shape({}),
       navigate: PropTypes.func.isRequired
     }).isRequired,
+    isLoading: PropTypes.bool.isRequired
   };
-  componentDidMount() {
-    this.props.getPhotoStatus();
+
+  componentWillMount() {
+    this.getLogs();
   }
+  getLogs = () => {
+    this.props.getPhotoStatus();
+  };
+
+  sendOld = (log) => {
+    const { setFinalize, uploadPhoto } = this.props;
+    setFinalize({
+      date: log.date,
+      latitude: log.latitude,
+      longitude: log.longitude,
+      name: log.name,
+      team: log.team,
+      email: log.email,
+      comment: log.comment,
+      imgUri: log.imgUri,
+      imgName: log.imgName,
+    });
+    uploadPhoto();
+  };
+
   openLog = id => this.props.navigation.navigate(Routes.moth.name, { id });
+
+  renderRefresh = (
+    <RefreshControl
+      refreshing={this.props.isLoading}
+      onRefresh={this.getLogs}
+    />
+  );
+
   render() {
     const { photos } = this.props;
     return (
@@ -69,16 +109,27 @@ export default class Log extends Component {
           'and will be uploaded later automatically when there’s network available. ' +
           'You can also re-send them manually.').localized}</Text>
         </View>
-        {photos.length > 0 && <ScrollView style={styles.scroller}>
-          {photos.map((item, i) => (
-            <DisclosureButton
-              status={item.identification}
-              date={item.date}
-              onPress={() => this.openLog(item.id)}
-              comment={item.comments}
-              key={item.id}
-              last={i === (photos.length - 1)}
-            />
+        {photos.length > 0 &&
+        <ScrollView
+          style={styles.scroller}
+          refreshControl={
+            this.renderRefresh
+          }
+        >
+          {photos
+            .sort((a, b) => {
+              if (a.date < b.date) return 1;
+              return -1;
+            })
+            .map(item => (
+              <DisclosureButton
+                status={item.identification || ''}
+                date={item.date}
+                onPress={item.id ? () => { this.openLog(item.id); } :
+                () => { this.sendOld(item); }}
+                comment={item.comments || item.comment}
+                key={item.id || item.latitude}
+              />
           ))}
         </ScrollView>
         }

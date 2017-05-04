@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { colors } from '../global';
-import { scale } from '../global/constants';
+import { scale, scaleByVertical } from '../global/constants';
 
 const sizeContainer = scale(300);
 const sizeImage = scale(286);
@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     height: scale(63),
-    backgroundColor: colors.orange,
+    backgroundColor: colors.transparent,
     position: 'absolute',
     width: sizeContainer,
-    bottom: scale(42),
+    bottom: scaleByVertical(38),
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: 'bold',
     fontSize: scale(30),
-    textAlign: 'center'
+    textAlign: 'center',
+    color: colors.black
   },
   textAndroid: {
     color: colors.mainOrange
@@ -57,8 +58,8 @@ export default function TakeFotoBtn(props) {
           source={image}
           style={styles.img}
         />
-        <View style={[styles.textContainer, isAndroid && styles.textContainerAndroid]}>
-          <Text style={[styles.text, isAndroid && styles.textAndroid]}>{'Take photo'.localized}</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>{'Take photo'.localized}</Text>
         </View>
       </LinearGradient>
     </TouchableOpacity>

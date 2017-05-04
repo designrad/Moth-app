@@ -7,11 +7,9 @@ import { bindActionCreators } from 'redux';
 import { setFinalize } from '../redux/actions/finalize';
 import { setApp } from '../redux/actions/app';
 
-
 import Button from '../components/Button';
 import { colors, images } from '../global';
 import { screenWidth, screenHeight, scale, Routes } from '../global/constants';
-
 import TakeFotoButton from '../components/TakeFotoButton';
 
 
@@ -70,16 +68,18 @@ export default class Home extends Component {
     isLoading: PropTypes.bool.isRequired
   };
 
-  componentDidUpdate() {
+  componentDidMount() {
+    // Turn off the speaker if not turned off
     if (this.props.isLoading) {
       this.props.setApp({ isLoading: false });
     }
   }
 
+  // open Learn more screen
   openLearnMore = () => this.props.navigation.navigate(Routes.learnMore.name);
-
+  // open Log screen
   openLog = () => this.props.navigation.navigate(Routes.log.name);
-
+  // open Confirmed observations screen
   openMap = () => this.props.navigation.navigate(Routes.readLocation.name);
 
   takePhoto = () => {
@@ -104,8 +104,7 @@ export default class Home extends Component {
     this.props.setFinalize({
       imgUri: response.uri,
       imgName: response.fileName,
-      data: response.data,
-      timestamp: response.timestamp,
+      date: response.timestamp,
       latitude: response.latitude,
       longitude: response.longitude
     });
@@ -126,8 +125,7 @@ export default class Home extends Component {
           this.props.setFinalize({
             imgUri: response.uri,
             imgName: response.fileName,
-            data: response.data,
-            timestamp: response.timestamp,
+            date: response.timestamp,
             latitude: pos.latitude,
             longitude: pos.longitude
           });
@@ -136,8 +134,7 @@ export default class Home extends Component {
       this.props.setFinalize({
         imgUri: response.uri,
         imgName: response.fileName,
-        data: response.data,
-        timestamp: response.timestamp,
+        date: response.timestamp,
         latitude: response.latitude,
         longitude: response.longitude
       });

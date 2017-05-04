@@ -71,14 +71,17 @@ export default class Finalize extends Component {
       state: PropTypes.shape({
       }),
     }).isRequired,
-    timestamp: PropTypes.string,
+    date: PropTypes.string,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     modal: PropTypes.bool.isRequired,
     comment: PropTypes.string.isRequired,
     setFinalize: PropTypes.func.isRequired,
     uploadPhoto: PropTypes.func.isRequired,
-    imgUri: PropTypes.string.isRequired
+    imgUri: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    team: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -87,25 +90,21 @@ export default class Finalize extends Component {
     timestamp: ''
   };
 
-  componentDidMount() {
-    if (!this.props.timestamp) {
-      const t = Moment().format('lll');
-      this.props.setFinalize({ timestamp: t });
-    }
-  }
   render() {
     const {
       navigation,
-      timestamp,
+      date,
       latitude,
       longitude,
       comment,
       modal,
       imgUri,
       setFinalize,
-      uploadPhoto
+      uploadPhoto,
+      name,
+      team,
+      email
     } = this.props;
-    const dataTime = Moment(timestamp).format('lll');
     const openEditor = show => setFinalize({ modal: show });
     const openMap = () => {
       navigation.navigate(Routes.addLocation.name, { longitude, latitude, fixed: false });
@@ -121,7 +120,7 @@ export default class Finalize extends Component {
             style={styles.photo}
           />
           <View style={styles.itemContainer}>
-            <Text style={styles.data}>{dataTime}</Text>
+            <Text style={styles.data}>{Moment(date).format('lll')}</Text>
             <LocationButton
               longitude={longitude}
               latitude={latitude}
@@ -136,15 +135,24 @@ export default class Finalize extends Component {
               placeholder={'Name (optional)'.localized}
               styleInput={styles.inputName}
               onChangeText={text => setFinalize({ name: text })}
+              clear={() => setFinalize({ name: '' })}
+              clearBtn={name !== ''}
+              value={name}
             />
             <Input
               placeholder={'Team (optional)'.localized}
               onChangeText={text => setFinalize({ team: text })}
+              clear={() => setFinalize({ team: '' })}
+              clearBtn={team !== ''}
+              value={team}
             />
             <Input
               placeholder={'Email (optional)'.localized}
               type={'email-address'} styleInput={styles.inputEmail}
               onChangeText={text => setFinalize({ email: text })}
+              clear={() => setFinalize({ email: '' })}
+              clearBtn={email !== ''}
+              value={email}
             />
           </View>
           <View style={styles.bottomContainer}>
