@@ -8,6 +8,7 @@ import { setFinalize } from '../redux/actions/finalize';
 import { setApp } from '../redux/actions/app';
 
 import Button from '../components/Button';
+import { Moment } from '../global/utils';
 import { colors, images } from '../global';
 import { screenWidth, screenHeight, scale, Routes } from '../global/constants';
 import TakeFotoButton from '../components/TakeFotoButton';
@@ -95,6 +96,7 @@ export default class Home extends Component {
   };
 
   sendPhotoLibrary(response) {
+    const dt = Moment().format();
     this.props.setFinalize();
     if (response.error) {
       return;
@@ -104,7 +106,7 @@ export default class Home extends Component {
     this.props.setFinalize({
       imgUri: response.uri,
       imgName: response.fileName,
-      date: response.timestamp,
+      date: dt,
       latitude: response.latitude,
       longitude: response.longitude
     });
@@ -112,6 +114,7 @@ export default class Home extends Component {
   }
 
   sendPhoto(response) {
+    const dt = Moment().format();
     this.props.setFinalize();
     if (response.error) {
       return;
@@ -125,7 +128,7 @@ export default class Home extends Component {
           this.props.setFinalize({
             imgUri: response.uri,
             imgName: response.fileName,
-            date: response.timestamp,
+            date: dt,
             latitude: pos.latitude,
             longitude: pos.longitude
           });
@@ -134,7 +137,7 @@ export default class Home extends Component {
       this.props.setFinalize({
         imgUri: response.uri,
         imgName: response.fileName,
-        date: response.timestamp,
+        date: dt,
         latitude: response.latitude,
         longitude: response.longitude
       });
