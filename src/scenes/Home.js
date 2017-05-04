@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 import { setFinalize } from '../redux/actions/finalize';
 import { setApp } from '../redux/actions/app';
 
-import { Moment } from '../global/utils';
 import Button from '../components/Button';
 import { colors, images } from '../global';
 import { screenWidth, screenHeight, scale, Routes } from '../global/constants';
@@ -105,7 +104,7 @@ export default class Home extends Component {
     this.props.setFinalize({
       imgUri: response.uri,
       imgName: response.fileName,
-      timestamp: Moment(response.timestamp).format('lll'),
+      date: response.timestamp,
       latitude: response.latitude,
       longitude: response.longitude
     });
@@ -126,7 +125,7 @@ export default class Home extends Component {
           this.props.setFinalize({
             imgUri: response.uri,
             imgName: response.fileName,
-            timestamp: Moment(response.timestamp).format('lll'),
+            date: response.timestamp,
             latitude: pos.latitude,
             longitude: pos.longitude
           });
@@ -135,7 +134,7 @@ export default class Home extends Component {
       this.props.setFinalize({
         imgUri: response.uri,
         imgName: response.fileName,
-        timestamp: Moment(response.timestamp).format('lll'),
+        date: response.timestamp,
         latitude: response.latitude,
         longitude: response.longitude
       });

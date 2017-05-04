@@ -8,6 +8,7 @@ import { setFinalize, uploadPhoto } from '../redux/actions/finalize';
 
 import { Routes, scale, scaleByVertical, screenWidth } from '../global/constants';
 import { colors } from '../global';
+import { Moment } from '../global/utils';
 import LocationButton from '../components/LocationButton';
 import CommentButton from '../components/CommentButton';
 import Input from '../components/Input';
@@ -70,7 +71,7 @@ export default class Finalize extends Component {
       state: PropTypes.shape({
       }),
     }).isRequired,
-    timestamp: PropTypes.string,
+    date: PropTypes.string,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     modal: PropTypes.bool.isRequired,
@@ -92,7 +93,7 @@ export default class Finalize extends Component {
   render() {
     const {
       navigation,
-      timestamp,
+      date,
       latitude,
       longitude,
       comment,
@@ -119,7 +120,7 @@ export default class Finalize extends Component {
             style={styles.photo}
           />
           <View style={styles.itemContainer}>
-            <Text style={styles.data}>{timestamp}</Text>
+            <Text style={styles.data}>{Moment(date).format('lll')}</Text>
             <LocationButton
               longitude={longitude}
               latitude={latitude}

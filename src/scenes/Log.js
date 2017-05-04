@@ -4,6 +4,7 @@ import { View, StyleSheet, Text, ScrollView, RefreshControl } from 'react-native
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPhotoStatus } from '../redux/actions/log';
+import { setFinalize, uploadPhoto } from '../redux/actions/finalize';
 
 import { Routes, scale, scaleByVertical } from '../global/constants';
 import { colors } from '../global';
@@ -42,7 +43,9 @@ const styles = StyleSheet.create({
   ...log,
   ...app
 }), dispatch => bindActionCreators({
-  getPhotoStatus
+  getPhotoStatus,
+  setFinalize,
+  uploadPhoto
 }, dispatch))
 
 export default class Log extends Component {
@@ -53,6 +56,8 @@ export default class Log extends Component {
 
   static propTypes = {
     getPhotoStatus: PropTypes.func.isRequired,
+    setFinalize: PropTypes.func.isRequired,
+    uploadPhoto: PropTypes.func.isRequired,
     photos: PropTypes.arrayOf(PropTypes.object).isRequired,
     navigation: PropTypes.shape({
       state: PropTypes.shape({}),
@@ -61,16 +66,35 @@ export default class Log extends Component {
     isLoading: PropTypes.bool.isRequired
   };
 
-  componentDidMount() {
-    this.props.getPhotoStatus();
+  componentWillMount() {
+    this.getLogs();
   }
+  getLogs = () => {
+    this.props.getPhotoStatus();
+  };
+
+  sendOld = (log) => {
+    const { setFinalize, uploadPhoto } = this.props;
+    setFinalize({
+      date: log.date,
+      latitude: log.latitude,
+      longitude: log.longitude,
+      name: log.name,
+      team: log.team,
+      email: log.email,
+      comment: log.comment,
+      imgUri: log.imgUri,
+      imgName: log.imgName,
+    });
+    uploadPhoto();
+  };
 
   openLog = id => this.props.navigation.navigate(Routes.moth.name, { id });
 
   renderRefresh = (
     <RefreshControl
       refreshing={this.props.isLoading}
-      onRefresh={() => this.props.getPhotoStatus()}
+      onRefresh={this.getLogs}
     />
   );
 
@@ -93,15 +117,18 @@ export default class Log extends Component {
           }
         >
           {photos
-            .reverse()
-            .map((item, i) => (
+            .sort((a, b) => {
+              if (a.date < b.date) return 1;
+              return -1;
+            })
+            .map(item => (
               <DisclosureButton
-                status={item.identification}
+                status={item.identification || ''}
                 date={item.date}
-                onPress={() => this.openLog(item.id)}
-                comment={item.comments}
-                key={item.id}
-                last={i === (photos.length - 1)}
+                onPress={item.id ? () => { this.openLog(item.id); } :
+                () => { this.sendOld(item); }}
+                comment={item.comments || item.comment}
+                key={item.id || item.latitude}
               />
           ))}
         </ScrollView>
