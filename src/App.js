@@ -23,7 +23,7 @@ export default class App extends Component {
   }
 
   onBackPress = () => {
-    this.props.navigation.navigate(Routes.home.name);
+    // this.props.navigation.navigate(Routes.home.name);
     return true;
   };
   render() {
