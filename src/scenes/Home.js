@@ -8,9 +8,10 @@ import { setFinalize } from '../redux/actions/finalize';
 import { setApp } from '../redux/actions/app';
 
 import Button from '../components/Button';
+import { Moment } from '../global/utils';
 import { colors, images } from '../global';
 import { screenWidth, screenHeight, scale, Routes } from '../global/constants';
-import TakeFotoButton from '../components/TakeFotoButton';
+import TakePhotoButton from '../components/TakePhotoButton';
 
 
 const styles = StyleSheet.create({
@@ -81,20 +82,21 @@ export default class Home extends Component {
   openLog = () => this.props.navigation.navigate(Routes.log.name);
   // open Confirmed observations screen
   openMap = () => this.props.navigation.navigate(Routes.readLocation.name);
-
+  // Makes a photo from the camera
   takePhoto = () => {
     ImagePicker.launchCamera(options, (response) => {
       this.sendPhoto(response);
     });
   };
-
+  // Loads photos from the gallery
   oldPhoto = () => {
     ImagePicker.launchImageLibrary(options, (response) => {
       this.sendPhotoLibrary(response);
     });
   };
-
+  // Pulls out data from the photo and adds to the redux from the gallery
   sendPhotoLibrary(response) {
+    const dt = Moment().format();
     this.props.setFinalize();
     if (response.error) {
       return;
@@ -104,28 +106,29 @@ export default class Home extends Component {
     this.props.setFinalize({
       imgUri: response.uri,
       imgName: response.fileName,
-      date: response.timestamp,
+      date: dt,
       latitude: response.latitude,
       longitude: response.longitude
     });
     this.props.navigation.navigate(Routes.finalize.name);
   }
-
+  // Pulls out data from the photo and adds to the redux from the camera
   sendPhoto(response) {
+    const dt = Moment().format();
     this.props.setFinalize();
     if (response.error) {
       return;
     } else if (response.didCancel) {
       return;
     }
-    if (!response.latitude) {
+    if (!response.latitude) { // If the camera has not detected a geolocation
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const pos = position.coords;
           this.props.setFinalize({
             imgUri: response.uri,
             imgName: response.fileName,
-            date: response.timestamp,
+            date: dt,
             latitude: pos.latitude,
             longitude: pos.longitude
           });
@@ -134,7 +137,7 @@ export default class Home extends Component {
       this.props.setFinalize({
         imgUri: response.uri,
         imgName: response.fileName,
-        date: response.timestamp,
+        date: dt,
         latitude: response.latitude,
         longitude: response.longitude
       });
@@ -152,7 +155,7 @@ export default class Home extends Component {
           resizeMode={Image.resizeMode.contain}
         />
         <View style={styles.itemContainer}>
-          <TakeFotoButton image={images.photoMoth} onPress={this.takePhoto} />
+          <TakePhotoButton image={images.photoMoth} onPress={this.takePhoto} />
           <Button icon={'picture-o'} title={'Send old photo'} onPress={this.oldPhoto} style={styles.buttonsContainer} />
           <Button icon={'map'} title={'Show map'} onPress={this.openMap} style={styles.buttonsContainer} />
           <Button icon={'info-circle'} title={'Learn more'} onPress={this.openLearnMore} style={styles.buttonsContainer} />

@@ -71,7 +71,7 @@ export default class Finalize extends Component {
       state: PropTypes.shape({
       }),
     }).isRequired,
-    date: PropTypes.string,
+    date: PropTypes.string.isRequired,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     modal: PropTypes.bool.isRequired,
@@ -105,7 +105,9 @@ export default class Finalize extends Component {
       team,
       email
     } = this.props;
+    // Opens a comment editing window
     const openEditor = show => setFinalize({ modal: show });
+    // Go to map for geolocation mark
     const openMap = () => {
       navigation.navigate(Routes.addLocation.name, { longitude, latitude, fixed: false });
     };

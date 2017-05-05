@@ -73,6 +73,8 @@ export default class AddLocation extends Component {
     this.pointlocation = this.state.x;
     const { navigation: { state }, setApp } = this.props;
     setApp({ isLoading: true });
+    // If there is no geolocation mark, then it determines the current geolocation,
+    // if there is something showing the mark (similarly as in ReadLocation)
     if (state.params.latitude !== null) {
       const { latitude, longitude } = state.params;
       const initialPosition = { latitude, longitude, latitudeDelta, longitudeDelta };
@@ -105,7 +107,7 @@ export default class AddLocation extends Component {
   onRegionChange(region) {
     this.setState({ region });
   }
-
+  // Preserves the coordinates of the point
   setLocation() {
     const { navigation: { state } } = this.props;
     if (!state.params.fixed) {

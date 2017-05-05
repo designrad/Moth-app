@@ -10,7 +10,10 @@ import { callApi, Endpoints } from '../../global/api';
 import { putLocations } from '../actions/readLocations';
 import { UPLOAD_PHOTO, GET_PHOTO_STATUS, GET_MY_PHOTO, GET_LOCATIONS } from '../constants';
 
+// Run when the application starts
 function* startup() {
+  // If there is no unique ID then creates and saves,
+  // if the unique ID is got from memory and adds to the redux
   try {
     let deviceID = yield call(AsyncStorage.getItem, 'deviceID');
     if (!deviceID) {
@@ -22,8 +25,10 @@ function* startup() {
     yield put(showAlert('Error'.localized));
   }
 }
-
+// Sending photos to the server
 function* uploadPhoto() {
+  // If the sending does not occur, stores it into memory,
+  // checks if there is such a post in memory, if there is a delete
   try {
     yield put(setApp({ isLoading: true }));
     const { deviceID } = yield select(state => state.app);
@@ -90,7 +95,7 @@ function* uploadPhoto() {
     yield put(showAlert('Error'.localized));
   }
 }
-
+// Asks the server for logs
 function* getPhotoStatus() {
   try {
     const device = yield select(({ app: { deviceID } }) => deviceID);
@@ -106,7 +111,7 @@ function* getPhotoStatus() {
     yield put(showAlert('Error'.localized));
   }
 }
-
+// Request from the server for detailed information to the photo
 function* getPhoto({ id }) {
   try {
     const response = yield call(callApi, {
@@ -119,7 +124,7 @@ function* getPhoto({ id }) {
     yield put(showAlert('Error'.localized));
   }
 }
-
+// Request to the point coordinates server
 function* getLocations() {
   try {
     yield put(setApp({ isLoading: true }));

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function TakeFotoBtn(props) {
+export default function TakePhotoBtn(props) {
   const { onPress, image } = props;
   return (
     <TouchableOpacity onPress={onPress}>
@@ -65,7 +65,7 @@ export default function TakeFotoBtn(props) {
     </TouchableOpacity>
   );
 }
-TakeFotoBtn.propTypes = {
+TakePhotoBtn.propTypes = {
   onPress: PropTypes.func.isRequired,
   image: Image.propTypes.source.isRequired
 };
