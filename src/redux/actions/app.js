@@ -14,3 +14,4 @@ export const showYesOrNoAlert = (title, text, yesHandler, noHandler) => ({
   yesHandler,
   noHandler
 });
+export const navigateBack = () => ({ type: NavigationActions.BACK });
