@@ -1,4 +1,5 @@
 export default {
+  // Home screen
   Home: 'Hjem',
   'Take photo': 'Ta bilde',
   'Send old photo': 'Hent bilde fra galleri',

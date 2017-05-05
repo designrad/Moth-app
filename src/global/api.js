@@ -2,7 +2,7 @@ import endpoints from './endpoints';
 import { ipServer } from '../global/constants';
 
 export const Endpoints = endpoints;
-
+// Api for the server
 export function callApi(options) {
   const { endpoint, method, payload, isFormData } = options;
   const url = `http://${ipServer}/${endpoint}`;

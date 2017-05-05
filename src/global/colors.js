@@ -1,4 +1,4 @@
-
+// colors
 const colors = {
   flatBlue: '#007AFF',
   flatGreen: '#4CD964',

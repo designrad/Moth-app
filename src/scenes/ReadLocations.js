@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline'
   }
 });
-
+// Default coordinates for the map, if they do not exist and geolocation does not immediately appear, errors will occur
 const latitudeDelta = 0.3767730706970411;
 const longitudeDelta = 0.294662356863725;
 
@@ -58,13 +58,16 @@ export default class ReadLocations extends Component {
   }
 
   componentDidMount() {
+    // Receiving points from the server
     this.props.getLocations();
+    // When opening a scene, it requests the current geolocation
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
         const initialPosition = { latitude, longitude, latitudeDelta, longitudeDelta };
         this.setState({ initialPosition });
       });
+    // Begins to monitor the change in geolocation
     this.watchID = navigator.geolocation.watchPosition((position) => {
       const { latitude, longitude } = position.coords;
       const region = { latitude, longitude, latitudeDelta, longitudeDelta };
@@ -73,16 +76,20 @@ export default class ReadLocations extends Component {
   }
 
   componentWillUnmount() {
+    // When the page closes, it stops monitoring the geolocation change
     navigator.geolocation.clearWatch(this.watchID);
   }
 
   onRegionChange(region) {
+    // When the map svaype changes the region (that would not jump the map)
     this.setState({ region });
   }
 
   watchID: ?number = null;
+  // Opens a detailed description of the point
   openLog = id => this.props.navigation.navigate(Routes.moth.name, { id });
 
+  // The function adds points to the map
   renderPoint = (point) => {
     const { _id, latitude, longitude, identification, comments } = point;
     if (identification === 'correct') {

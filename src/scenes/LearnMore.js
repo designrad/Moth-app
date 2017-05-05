@@ -71,7 +71,7 @@ export default class LearnMore extends Component {
   static navigationOptions = {
     title: Routes.learnMore.title.localized
   };
-
+  // static screnn Learn More
   render() {
     return (
       <ScrollView style={styles.container}>

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-
+// Multifunctional alert
 export const AlertTypes = {
   ok: 'ok',
   yesOrNo: 'yesOrNo'

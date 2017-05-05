@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   }
 });
-
+// Button with icon
 export default function Button(props) {
   const { onPress, icon, title, style } = props;
   return (

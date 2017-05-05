@@ -69,10 +69,13 @@ export default class Log extends Component {
   componentWillMount() {
     this.getLogs();
   }
+
+  // Server request
   getLogs = () => {
     this.props.getPhotoStatus();
   };
 
+  // Sends an old photo (not sent) to the server
   sendOld = (log) => {
     const { setFinalize, uploadPhoto } = this.props;
     setFinalize({
@@ -116,6 +119,7 @@ export default class Log extends Component {
             this.renderRefresh
           }
         >
+          {/* Outputs logs sent and not sent, then sorts by date */}
           {photos
             .sort((a, b) => {
               if (a.date < b.date) return 1;

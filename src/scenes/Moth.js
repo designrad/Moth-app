@@ -90,7 +90,7 @@ export default class Moth extends Component {
 
   componentWillMount() {
     const { getMyPhoto, navigation: { state } } = this.props;
-    getMyPhoto(state.params.id);
+    getMyPhoto(state.params.id); // Request from the server a detailed description of the photo
   }
 
   render() {
@@ -126,7 +126,6 @@ export default class Moth extends Component {
               onPressNolocation={openMap}
             />
             <Text style={styles.comment}>{image.comments}</Text>
-
           </View>
         </View>
       </KeyboardAwareScrollView>
