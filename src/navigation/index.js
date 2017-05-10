@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { addNavigationHelpers } from 'react-navigation';
+import { BackAndroid } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setApp } from '../redux/actions/app';
+import { setApp, navigateBack } from '../redux/actions/app';
 
 import Navigator from './Navigator';
 
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
 }, dispatch => ({
   ...bindActionCreators({
     setApp,
+    navigateBack
   }, dispatch),
   dispatch
 }))
@@ -39,7 +41,25 @@ export default class App extends Component {
     }).isRequired,
     dispatch: PropTypes.func.isRequired,
     navigation: PropTypes.shape().isRequired,
-    setApp: PropTypes.func.isRequired
+    setApp: PropTypes.func.isRequired,
+    navigateBack: PropTypes.func.isRequired
+  };
+
+  componentWillMount() {
+    if (isAndroid) {
+      BackAndroid.addEventListener('onBackPress', this.onBackPress);
+    }
+  }
+
+  componentWillUnmount() {
+    if (isAndroid) {
+      BackAndroid.removeEventListener('onBackPress', this.onBackPress);
+    }
+  }
+
+  onBackPress = () => {
+    this.props.navigateBack();
+    return true;
   };
 
   closeLastAlert = (handler) => {
