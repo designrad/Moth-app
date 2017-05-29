@@ -50,7 +50,7 @@ export default function MembersList(props) {
       />
       <View style={styles.info}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.position}>{position}</Text>
+        {/*<Text style={styles.position}>{position}</Text>*/}
         <Text style={styles.position}>{institute}</Text>
         <Text
           style={styles.email}
