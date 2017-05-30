@@ -15,6 +15,7 @@ import learnImage2 from '../imgs/learnMoreImage1.png';
 import learnImage3 from '../imgs/learnMoreImage2.png';
 import coatLogo from '../imgs/coat_logo.png';
 import tromsLogo from '../imgs/troms-logo.png';
+import backArrow from '../imgs/Back.png';
 
 const images = {
   background,
@@ -32,7 +33,8 @@ const images = {
   learnImage2,
   learnImage3,
   coatLogo,
-  tromsLogo
+  tromsLogo,
+  backArrow
 };
 
 export default images;

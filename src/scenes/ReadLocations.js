@@ -9,6 +9,9 @@ import { getLocations } from '../redux/actions/readLocations';
 import { Routes } from '../global/constants';
 import { colors } from '../global';
 
+import { scale, scaleByVertical } from '../global/constants';
+import { Moment } from '../global/utils';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
@@ -16,11 +19,22 @@ const styles = StyleSheet.create({
   btnMore: {
     color: colors.flatBlue,
     textDecorationLine: 'underline'
-  }
+  },
+  location: {
+    paddingTop: scaleByVertical(12),
+    fontSize: scale(14),
+    color: colors.black,
+  },
+  date: {
+    color: colors.black,
+    fontSize: scale(17),
+  },
 });
 // Default coordinates for the map, if they do not exist and geolocation does not immediately appear, errors will occur
-const latitudeDelta = 0.3767730706970411;
-const longitudeDelta = 0.294662356863725;
+//const latitudeDelta = 0.3767730706970411;
+//const longitudeDelta = 0.294662356863725;
+const latitudeDelta = 0.01;
+const longitudeDelta = 0.01;
 
 @connect(({ readLocations }) => ({
   ...readLocations
@@ -91,7 +105,8 @@ export default class ReadLocations extends Component {
 
   // The function adds points to the map
   renderPoint = (point) => {
-    const { _id, latitude, longitude, identification, comments } = point;
+    const { _id, latitude, longitude, identification, comments, date } = point;
+    let readableDate = Moment(date).format('lll');
     if (identification === 'correct') {
       let newText;
       if (comments.length > 35) {
@@ -121,8 +136,37 @@ export default class ReadLocations extends Component {
           </MapView.Callout>
         </MapView.Marker>
       );
+    } else if(identification !== 'correct') {
+      let newText;
+      if (comments.length > 35) {
+        newText = `${comments.substr(0, 35)}...`;
+      } else {
+        newText = comments;
+      }
+      const markerColor = 'green';
+      return (
+        <MapView.Marker
+            coordinate={{
+              latitude: parseFloat(latitude),
+              longitude: parseFloat(longitude)
+            }}
+            identifier={_id}
+            key={_id}
+            pinColor={markerColor}
+          >
+            <MapView.Callout
+              onPress={() => {}}
+            >
+              <View>
+                <Text>{newText}</Text>
+                <Text style={styles.date}>{readableDate}</Text>
+                <Text style={styles.location}>{latitude}, {longitude}</Text>
+              </View>
+            </MapView.Callout>
+          </MapView.Marker>
+      );
     }
-    return null;
+    //return null;
   };
 
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, StyleSheet, Image, Text } from 'react-native';
+import { ScrollView, View, StyleSheet, Image, Text, TouchableOpacity, Linking } from 'react-native';
 import { colors, images } from '../global';
 import { Routes, screenWidth, scale, scaleByVertical } from '../global/constants';
 import TextList from '../components/TextList';
@@ -96,12 +96,31 @@ const styles = StyleSheet.create({
     fontSize: scale(18),
     textDecorationLine: 'underline',
     marginBottom: scaleByVertical(26),
+  },
+  backArrowCont: {
+    marginLeft: scale(8),
+    flexDirection: 'row'
+  },
+  backArrow: {
+    width: scale(13),
+    height: scaleByVertical(21),
+    marginRight: scale(7),
+  },
+  backText: {
+    color: colors.white,
+    fontSize: scale(17),
   }
 });
 
 export default class LearnMore extends Component {
-  static navigationOptions = {
-    title: Routes.learnMore.title.localized
+  static navigationOptions = (e) => {
+    return ({
+      headerLeft: <TouchableOpacity onPress={() => e.navigation.goBack()} style={styles.backArrowCont}>
+                    <Image source={images.backArrow} style={styles.backArrow} />
+                    <Text style={styles.backText}>Back</Text>
+                  </TouchableOpacity>,
+      title: Routes.learnMore.title.localized
+      });
   };
   // static screnn Learn More
   render() {
@@ -143,7 +162,9 @@ export default class LearnMore extends Component {
           />
         </View>
         <View style={{ alignItems: 'center' }}>
-          <Text style={styles.link}>http://artsdatabanken.no/Pages/144194</Text>
+          <TouchableOpacity onPress={() => Linking.openURL('http://artsdatabanken.no/Pages/144194')}>
+            <Text style={styles.link}>http://artsdatabanken.no/Pages/144194</Text>
+          </TouchableOpacity>
         </View>
         <Image source={images.learnImage2} style={styles.innerImg} />
         <Text style={styles.textUnderInnerImage}>Scarce umber moth male</Text>
@@ -194,27 +215,34 @@ export default class LearnMore extends Component {
           <Text style={styles.text}>{'This app is sponsored by:'.localized}</Text>
         </View>
         <View style={styles.labelContainer}>
-          <Image
-            source={images.framsenteretLogo}
-            style={styles.framsenteretLogo}
-            resizeMode={Image.resizeMode.contain}
-          />
-          <Image
-            source={images.coatLogo}
-            style={styles.coatLogo}
-            resizeMode={Image.resizeMode.contain}
-          />
-          <Image
-            source={images.webLogo}
-            style={styles.webLogo}
-            resizeMode={Image.resizeMode.contain}
-          />
-          <Image
-            source={images.tromsLogo}
-            style={styles.tromsLogo}
-            resizeMode={Image.resizeMode.contain}
-          />
-          
+          <TouchableOpacity onPress={() => Linking.openURL('http://www.framsenteret.no')}>
+            <Image
+              source={images.framsenteretLogo}
+              style={styles.framsenteretLogo}
+              resizeMode={Image.resizeMode.contain}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('http://coat.no')}>
+            <Image
+              source={images.coatLogo}
+              style={styles.coatLogo}
+              resizeMode={Image.resizeMode.contain}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('http://nina.no')}>
+            <Image
+              source={images.webLogo}
+              style={styles.webLogo}
+              resizeMode={Image.resizeMode.contain}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('http://uit.no')}>
+            <Image
+              source={images.tromsLogo}
+              style={styles.tromsLogo}
+              resizeMode={Image.resizeMode.contain}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'App development'.localized}</Text>
@@ -223,16 +251,20 @@ export default class LearnMore extends Component {
           </Text>
         </View>
         <View style={styles.labelContainer}>
-          <Image
-            source={images.desingradLogo}
-            style={styles.desingradLogo}
-            resizeMode={Image.resizeMode.contain}
-          />
-          <Image
-            source={images.mitAndGitLogo}
-            style={styles.mitAndGitLogo}
-            resizeMode={Image.resizeMode.contain}
-          />
+          <TouchableOpacity onPress={() => Linking.openURL('http://www.designrad.no')}>
+            <Image
+              source={images.desingradLogo}
+              style={styles.desingradLogo}
+              resizeMode={Image.resizeMode.contain}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://github.com/designrad/Malerjakt')}>
+            <Image
+              source={images.mitAndGitLogo}
+              style={styles.mitAndGitLogo}
+              resizeMode={Image.resizeMode.contain}
+            />
+           </TouchableOpacity>
         </View>
         <View style={styles.bottomContainer}>
           <Text style={styles.versionApp}>App version 1.0.2</Text>
