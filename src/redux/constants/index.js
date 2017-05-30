@@ -10,3 +10,5 @@ export const PUT_MY_PHOTO = 'PUT_MY_PHOTO';
 export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const PUT_LOCATIONS = 'PUT_LOCATIONS';
 
+export const SET_USER_OPTIONS = 'SET_USER_OPTIONS';
+

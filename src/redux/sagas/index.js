@@ -6,6 +6,7 @@ import { takeLatest } from 'redux-saga';
 import { setApp, showAlert } from '../actions/app';
 import { putPhotoStatus } from '../actions/log';
 import { putMyPhoto } from '../actions/moth';
+import { setUserOptions } from '../actions/finalize';
 import { callApi, Endpoints } from '../../global/api';
 import { putLocations } from '../actions/readLocations';
 import { UPLOAD_PHOTO, GET_PHOTO_STATUS, GET_MY_PHOTO, GET_LOCATIONS } from '../constants';
@@ -24,6 +25,19 @@ function* startup() {
   } catch (error) {
     yield put(showAlert('Error'.localized));
   }
+}
+// Getting user options when the application starts
+function* getUserOptions() {
+  const options = {};
+  try {
+    options.name = yield AsyncStorage.getItem('@name');
+    options.team = yield AsyncStorage.getItem('@team');
+    options.email = yield AsyncStorage.getItem('@email');
+    console.log(options);
+  } catch (e) {
+    yield put(showAlert('Error'.localized));
+  }
+  yield put(setUserOptions(options));
 }
 // Sending photos to the server
 function* uploadPhoto() {
@@ -80,6 +94,9 @@ function* uploadPhoto() {
     });
     yield put(NavigationActions.back());
     yield put(showAlert('Success'.localized));
+    yield call(AsyncStorage.setItem, '@name', name);
+    yield call(AsyncStorage.setItem, '@team', team);
+    yield call(AsyncStorage.setItem, '@email', email);
   } catch (error) {
     let moths = yield call(AsyncStorage.getItem, 'moths');
     const finalize = yield select(state => state.finalize);
@@ -141,6 +158,7 @@ function* getLocations() {
 
 export default function* rootSaga() {
   yield fork(startup);
+  yield fork(getUserOptions);
   yield takeLatest(UPLOAD_PHOTO, uploadPhoto);
   yield takeLatest(GET_PHOTO_STATUS, getPhotoStatus);
   yield takeLatest(GET_MY_PHOTO, getPhoto);

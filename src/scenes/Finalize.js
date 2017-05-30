@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 });
 
 @connect(({ finalize }) => ({
-  ...finalize,
+  ...finalize
 }), dispatch => bindActionCreators({
   setFinalize,
   uploadPhoto,
@@ -79,9 +79,9 @@ export default class Finalize extends Component {
     setFinalize: PropTypes.func.isRequired,
     uploadPhoto: PropTypes.func.isRequired,
     imgUri: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    team: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired
+    // name: PropTypes.string.isRequired,
+    // team: PropTypes.string.isRequired,
+    // email: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -90,8 +90,38 @@ export default class Finalize extends Component {
     timestamp: ''
   };
 
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+      team: '',
+      email: '',
+    };
+  }
+
+  componentWillMount() {
+    const { name, team, email } = this.props.options;
+    this.setState({
+      name,
+      team,
+      email,
+    });
+  }
+
+  changeNameField = (text = '') => {
+    this.props.setFinalize({ name: text });
+  }
+
+  changeTeamField = (text = '') => {
+    this.props.setFinalize({ team: text });
+  }
+
+  changeEmailField = (text = '') => {
+    this.props.setFinalize({ email: text });
+  }
+
   render() {
-    const {
+    let {
       navigation,
       date,
       latitude,
@@ -103,8 +133,18 @@ export default class Finalize extends Component {
       uploadPhoto,
       name,
       team,
-      email
+      email,
     } = this.props;
+
+    if (name === undefined) {
+      name = this.state.name;
+    }
+    if (team === undefined) {
+      team = this.state.team;
+    }
+    if (email === undefined) {
+      email = this.state.email;
+    }
     // Opens a comment editing window
     const openEditor = show => setFinalize({ modal: show });
     // Go to map for geolocation mark
@@ -136,23 +176,23 @@ export default class Finalize extends Component {
             <Input
               placeholder={'Name (optional)'.localized}
               styleInput={styles.inputName}
-              onChangeText={text => setFinalize({ name: text })}
-              clear={() => setFinalize({ name: '' })}
+              onChangeText={text => this.changeNameField(text)}
+              clear={() => this.changeNameField()}
               clearBtn={name !== ''}
               value={name}
             />
             <Input
               placeholder={'Team (optional)'.localized}
-              onChangeText={text => setFinalize({ team: text })}
-              clear={() => setFinalize({ team: '' })}
+              onChangeText={text => this.changeTeamField(text)}
+              clear={() => this.changeTeamField()}
               clearBtn={team !== ''}
               value={team}
             />
             <Input
               placeholder={'Email (optional)'.localized}
               type={'email-address'} styleInput={styles.inputEmail}
-              onChangeText={text => setFinalize({ email: text })}
-              clear={() => setFinalize({ email: '' })}
+              onChangeText={text => this.changeEmailField(text)}
+              clear={() => this.changeEmailField()}
               clearBtn={email !== ''}
               value={email}
             />

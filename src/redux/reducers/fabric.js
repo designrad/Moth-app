@@ -5,7 +5,7 @@ export default (initialState, actionType, customReducer) => (
     if (actionType && type === actionType) {
       const { payload } = action;
       if (!payload) {
-        return initialState;
+        return state;
       }
       return { ...state, ...payload };
     }

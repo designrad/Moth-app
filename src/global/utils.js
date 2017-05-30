@@ -1,4 +1,4 @@
-import { Linking } from 'react-native';
+import { Linking, AsyncStorage } from 'react-native';
 import I18n from 'react-native-i18n';
 import moment from 'moment';
 
