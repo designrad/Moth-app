@@ -56,18 +56,19 @@ export default class ReadLocations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      region: {
-        latitude: 60.491403,
-        longitude: 8.391523,
-        latitudeDelta: 0.3767730706970411,
-        longitudeDelta: 0.294662356863725,
-      },
-      initialPosition: {
-        latitude: 60.491403,
-        longitude: 8.391523,
-        latitudeDelta: 0.3767730706970411,
-        longitudeDelta: 0.294662356863725,
-      }
+      // region: {
+      //   latitude: 60.491403,
+      //   longitude: 8.391523,
+      //   latitudeDelta: 0.3767730706970411,
+      //   longitudeDelta: 0.294662356863725,
+      // },
+      // initialPosition: {
+      //   latitude: 60.491403,
+      //   latitude: 50.491403,
+      //   longitude: 8.391523,
+      //   latitudeDelta: 0.3767730706970411,
+      //   longitudeDelta: 0.294662356863725,
+      // }
     };
   }
 
