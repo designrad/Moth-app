@@ -41,5 +41,6 @@ export const scaleByVertical = value => (height / 736) * value;
 export const latitudeDelta = 0.0922;
 export const longitudeDelta = 0.0421;
 
-export const ipServer = '78.47.117.65:3001';
+export const ipServer = '192.168.88.17:3001';
+// 78.47.117.65
 
