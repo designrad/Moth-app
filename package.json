@@ -16,7 +16,7 @@
     "react-native-image-picker": "^0.26.3",
     "react-native-keyboard-aware-scroll-view": "git+https://github.com/AllmaxTeam/react-native-keyboard-aware-scroll-view.git#5311de6f709f472655651f8224e4c993cd7c327f",
     "react-native-linear-gradient": "^2.0.0",
-    "react-native-maps": "0.13.1",
+    "react-native-maps": "0.15.2",
     "react-native-vector-icons": "^4.0.1",
     "react-navigation": "git+https://github.com/react-community/react-navigation.git#7bd748a6bea125d6fa54ef617057daa7b23c1c89",
     "react-redux": "^5.0.4",
