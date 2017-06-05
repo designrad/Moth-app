@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { connect } from 'react-redux';
@@ -63,7 +63,11 @@ const styles = StyleSheet.create({
 export default class Finalize extends Component {
 
   static navigationOptions = {
-    title: Routes.finalize.title.localized
+    title: Routes.finalize.title.localized,
+    headerTitleStyle: {
+      textAlign: 'center',
+      width: Dimensions.get('window').width - scale(120),
+    },
   };
 
   static propTypes = {

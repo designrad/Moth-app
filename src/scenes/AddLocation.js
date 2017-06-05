@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { setFinalize } from '../redux/actions/finalize';
 import { setApp } from '../redux/actions/app';
 
-import { Routes, latitudeDelta, longitudeDelta } from '../global/constants';
+import { Routes, latitudeDelta, longitudeDelta, scale } from '../global/constants';
 import SaveButton from '../components/SaveButton';
 
 const styles = StyleSheet.create({
@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
 export default class AddLocation extends Component {
   static navigationOptions = ({ navigation: { goBack, state: { params } } }) => ({
     title: Routes.addLocation.title.localized,
+    headerTitleStyle: {
+      textAlign: 'center',
+      width: Dimensions.get('window').width - scale(120),
+    },
     headerRight: (
       !params.fixed &&
       <SaveButton onPress={() => goBack()} />
@@ -95,6 +99,10 @@ export default class AddLocation extends Component {
         const region = { latitude, longitude, latitudeDelta, longitudeDelta };
         const x = { latitude, longitude };
         this.pointlocation = x;
+        this.props.setFinalize({
+          latitude,
+          longitude,
+        });
         this.setState({ region, x });
       });
     }

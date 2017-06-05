@@ -53,9 +53,9 @@ export default class Log extends Component {
   static navigationOptions = {
     title: Routes.log.title.localized,
     headerTitleStyle: {
-        textAlign: 'center',
-        width: Dimensions.get('window').width - scale(120),
-      },
+      textAlign: 'center',
+      width: Dimensions.get('window').width - scale(120),
+    },
   };
 
   static propTypes = {
