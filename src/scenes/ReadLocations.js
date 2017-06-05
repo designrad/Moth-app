@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Dimensions } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { connect } from 'react-redux';
@@ -43,7 +43,11 @@ const longitudeDelta = 0.01;
 }, dispatch))
 export default class ReadLocations extends Component {
   static navigationOptions = {
-    title: Routes.readLocation.title.localized
+    title: Routes.readLocation.title.localized,
+    headerTitleStyle: {
+        textAlign: 'center',
+        width: Dimensions.get('window').width - scale(120),
+      },
   };
 
   static propTypes = {

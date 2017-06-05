@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, StyleSheet, Image, Text, TouchableOpacity, Linking } from 'react-native';
+import { ScrollView, View, StyleSheet, Image, Text, TouchableOpacity, Linking, Dimensions } from 'react-native';
 import { colors, images } from '../global';
 import { Routes, screenWidth, scale, scaleByVertical } from '../global/constants';
 import TextList from '../components/TextList';
@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
   },
   backArrowCont: {
     marginLeft: scale(8),
-    flexDirection: 'row'
+    flexDirection: 'row',
+    width: scale(60),
   },
   backArrow: {
     width: scale(13),
@@ -119,7 +120,11 @@ export default class LearnMore extends Component {
                     <Image source={images.backArrow} style={styles.backArrow} />
                     <Text style={styles.backText}>Back</Text>
                   </TouchableOpacity>,
-      title: Routes.learnMore.title.localized
+      title: <Text style={{alignSelf: 'center'}}>{Routes.learnMore.title.localized}</Text>,
+      headerTitleStyle: {
+        textAlign: 'center',
+        width: Dimensions.get('window').width - scale(120),
+      },
       });
   };
   // static screnn Learn More

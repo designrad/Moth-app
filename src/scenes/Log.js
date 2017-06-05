@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Text, ScrollView, RefreshControl } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, RefreshControl, Dimensions } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.whiteOrange,
     borderWidth: scale(0.5),
     borderColor: colors.borderGray,
-    paddingLeft: scale(16),
-    paddingVertical: scaleByVertical(5),
+    //paddingLeft: scale(16),
+    //paddingVertical: scaleByVertical(5),
   }
 });
 
@@ -51,7 +51,11 @@ const styles = StyleSheet.create({
 export default class Log extends Component {
 
   static navigationOptions = {
-    title: Routes.log.title.localized
+    title: Routes.log.title.localized,
+    headerTitleStyle: {
+        textAlign: 'center',
+        width: Dimensions.get('window').width - scale(120),
+      },
   };
 
   static propTypes = {

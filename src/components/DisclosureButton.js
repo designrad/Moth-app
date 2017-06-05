@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import { Moment } from '../global/utils';
 import { scale, scaleByVertical } from '../global/constants';
@@ -8,13 +8,13 @@ import { colors } from '../global';
 const styles = StyleSheet.create({
   container: {
     height: scaleByVertical(50),
-    width: scale(400),
-    paddingRight: scale(15),
+    flex: 1,
     borderBottomWidth: scale(0.5),
     borderColor: colors.borderGray,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginLeft: scale(15),
   },
   containerLeft: {
     paddingTop: scaleByVertical(6),
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   },
   arrow: {
     color: colors.arrowGray,
-    fontSize: scale(36)
+    fontSize: scale(36),
+    marginRight: scale(15),
   },
   border: {
     marginBottom: scaleByVertical(15),
