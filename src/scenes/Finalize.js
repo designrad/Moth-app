@@ -120,6 +120,16 @@ export default class Finalize extends Component {
     this.props.setFinalize({ email: text });
   }
 
+  onUploadPhoto = async () => {
+    let {
+      comment,
+      uploadPhoto,
+      setFinalize,
+    } = this.props;
+    await uploadPhoto();
+    setFinalize({ comment: '' });
+  }
+
   render() {
     let {
       navigation,
@@ -198,7 +208,7 @@ export default class Finalize extends Component {
             />
           </View>
           <View style={styles.bottomContainer}>
-            <SendButton longitude={longitude} latitude={latitude} onPress={uploadPhoto} />
+            <SendButton longitude={longitude} latitude={latitude} onPress={this.onUploadPhoto} />
           </View>
         </View>
         <CommentEditor
