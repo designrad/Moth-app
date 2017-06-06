@@ -104,6 +104,7 @@ export default class Finalize extends Component {
   }
 
   componentWillMount() {
+    this.props.setFinalize({ comment: '' });
     const { name, team, email } = this.props.options;
     this.setState({
       name,
@@ -122,16 +123,6 @@ export default class Finalize extends Component {
 
   changeEmailField = (text = '') => {
     this.props.setFinalize({ email: text });
-  }
-
-  onUploadPhoto = async () => {
-    let {
-      comment,
-      uploadPhoto,
-      setFinalize,
-    } = this.props;
-    await uploadPhoto();
-    setFinalize({ comment: '' });
   }
 
   render() {
@@ -212,7 +203,7 @@ export default class Finalize extends Component {
             />
           </View>
           <View style={styles.bottomContainer}>
-            <SendButton longitude={longitude} latitude={latitude} onPress={this.onUploadPhoto} />
+            <SendButton longitude={longitude} latitude={latitude} onPress={uploadPhoto} />
           </View>
         </View>
         <CommentEditor
