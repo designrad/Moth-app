@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     marginTop: scaleByVertical(14),
     marginBottom: scaleByVertical(25),
     marginLeft: scaleByVertical(19),
+    color: 'black',
   },
   itemContainer: {
     paddingLeft: scale(30),
