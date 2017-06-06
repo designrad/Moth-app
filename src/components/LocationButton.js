@@ -16,11 +16,16 @@ const styles = StyleSheet.create({
     color: colors.flatRed,
     textDecorationLine: 'underline',
     fontWeight: 'bold'
-  }
+  },
+  location2: {
+    paddingTop: scaleByVertical(12),
+    fontSize: scale(14),
+    color: 'black',
+  },
 });
 
 export default function LocationButton(props) {
-  const { latitude, longitude, onPressNolocation, onPress } = props;
+  const { latitude, longitude, onPressNolocation, onPress, noLink } = props;
   if (!latitude || !longitude) {
     return (
       <Text
@@ -28,6 +33,15 @@ export default function LocationButton(props) {
         style={styles.noLocation}
       >
         {'Add location'.localized}
+      </Text>
+    );
+  } else if (noLink) {
+    return (
+      <Text
+        onPress={() => {}}
+        style={styles.location2}
+      >
+        {`${latitude}, ${longitude}`}
       </Text>
     );
   }
@@ -45,10 +59,12 @@ LocationButton.propTypes = {
   latitude: PropTypes.number,
   longitude: PropTypes.number,
   onPressNolocation: PropTypes.func.isRequired,
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
+  noLink: PropTypes.boolean,
 };
 
 LocationButton.defaultProps = {
   latitude: null,
-  longitude: null
+  longitude: null,
+  noLink: false,
 };

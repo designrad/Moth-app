@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { connect } from 'react-redux';
@@ -66,7 +66,12 @@ const styles = StyleSheet.create({
 export default class Moth extends Component {
 
   static navigationOptions = {
-    title: Routes.moth.title.localized
+    //title: Routes.moth.title.localized,
+    title: 'Malerjakt',
+    headerTitleStyle: {
+      textAlign: 'center',
+      width: Dimensions.get('window').width - scale(120),
+    },
   };
 
   static propTypes = {
@@ -120,6 +125,7 @@ export default class Moth extends Component {
           <View style={styles.itemContainer}>
             <Text style={styles.data}>{dataTime}</Text>
             <LocationButton
+              noLink
               longitude={longitude}
               latitude={latitude}
               onPress={openMap}
