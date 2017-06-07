@@ -132,7 +132,17 @@ export default class Home extends Component {
             latitude: pos.latitude,
             longitude: pos.longitude
           });
-        }, error => console.error(error), { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 });
+          this.props.navigation.navigate(Routes.finalize.name);
+        }, () => {
+        this.props.setFinalize({
+          imgUri: response.uri,
+          imgName: response.fileName,
+          date: dt,
+          latitude: 0,
+          longitude: 0
+        });
+        this.props.navigation.navigate(Routes.finalize.name);
+      });
     } else {
       this.props.setFinalize({
         imgUri: response.uri,
@@ -141,8 +151,8 @@ export default class Home extends Component {
         latitude: response.latitude,
         longitude: response.longitude
       });
+      this.props.navigation.navigate(Routes.finalize.name);
     }
-    this.props.navigation.navigate(Routes.finalize.name);
   }
 
   render() {

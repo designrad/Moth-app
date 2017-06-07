@@ -59,13 +59,15 @@ function* uploadPhoto() {
       imgUri,
       imgName,
     } = yield select(state => state.finalize);
-    mothsJson.find((element, i) => {
-      if (element.imgUri === imgUri) {
-        mothsJson.splice(i, 1);
-        return mothsJson;
-      }
-      return false;
-    });
+    if (mothsJson) {
+      mothsJson.find((element, i) => {
+        if (element.imgUri === imgUri) {
+          mothsJson.splice(i, 1);
+          return mothsJson;
+        }
+        return false;
+      });
+    }
     moths = JSON.stringify(mothsJson);
     yield call(AsyncStorage.setItem, 'moths', moths);
     const formData = new FormData();

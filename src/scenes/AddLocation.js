@@ -120,6 +120,7 @@ export default class AddLocation extends Component {
     const { navigation: { state } } = this.props;
     if (!state.params.fixed) {
       this.setState({ x: this.pointlocation });
+      console.log(this.pointlocation.latitude, this.pointlocation.longitude);
       this.props.setFinalize({
         latitude: this.pointlocation.latitude,
         longitude: this.pointlocation.longitude
