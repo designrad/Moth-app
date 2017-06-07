@@ -124,7 +124,7 @@ function* getPhotoStatus() {
       payload: { device: `${device}` }
     });
     const moths = yield call(AsyncStorage.getItem, 'moths');
-    const logs = response.data.photos.concat(JSON.parse(moths));
+    const logs = moths ? response.data.photos.concat(JSON.parse(moths)) : response.data.photos;
     yield put(putPhotoStatus({ photos: logs }));
   } catch (error) {
     yield put(showAlert('Error'.localized));

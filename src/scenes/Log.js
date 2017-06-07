@@ -70,14 +70,8 @@ export default class Log extends Component {
     isLoading: PropTypes.bool.isRequired
   };
 
-  foo = () => {
-    return true;
-  }
-
-  async componentWillMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this.foo);
-    await this.getLogs();
-    BackAndroid.removeEventListener('hardwareBackPress', this.foo);
+  componentWillMount() {
+    this.getLogs();
   }
 
   // Server request
@@ -113,6 +107,9 @@ export default class Log extends Component {
 
   render() {
     const { photos } = this.props;
+    if (!photos || !photos.length) {
+      return null;
+    }
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
