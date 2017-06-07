@@ -67,9 +67,9 @@ function* uploadPhoto() {
         }
         return false;
       });
+      moths = JSON.stringify(mothsJson);
+      yield call(AsyncStorage.setItem, 'moths', moths);
     }
-    moths = JSON.stringify(mothsJson);
-    yield call(AsyncStorage.setItem, 'moths', moths);
     const formData = new FormData();
     formData.append(
       'file',
@@ -84,9 +84,9 @@ function* uploadPhoto() {
     formData.append('latitude', latitude);
     formData.append('longitude', longitude);
     formData.append('date', date);
-    formData.append('author', name);
-    formData.append('team', team);
-    formData.append('email', email);
+    formData.append('author', name || '');
+    formData.append('team', team || '');
+    formData.append('email', email || '');
     formData.append('device', deviceID);
     yield call(callApi, {
       endpoint: Endpoints.upload,
@@ -96,9 +96,9 @@ function* uploadPhoto() {
     });
     yield put(NavigationActions.back());
     yield put(showAlert('Success'.localized));
-    yield call(AsyncStorage.setItem, '@name', name);
-    yield call(AsyncStorage.setItem, '@team', team);
-    yield call(AsyncStorage.setItem, '@email', email);
+    yield call(AsyncStorage.setItem, '@name', name || '');
+    yield call(AsyncStorage.setItem, '@team', team || '');
+    yield call(AsyncStorage.setItem, '@email', email || '');
   } catch (error) {
     let moths = yield call(AsyncStorage.getItem, 'moths');
     const finalize = yield select(state => state.finalize);

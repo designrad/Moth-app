@@ -19,6 +19,7 @@ export function callApi(options) {
         if (!ok) {
           return Promise.reject(json.msg);
         }
+        console.log(json);
         return json;
       });
     });

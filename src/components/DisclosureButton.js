@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
   },
   textComment: {
     fontSize: scale(12),
-    color: colors.gray
+    color: colors.gray,
+    backgroundColor: 'transparent',
   },
   arrow: {
     color: colors.arrowGray,
