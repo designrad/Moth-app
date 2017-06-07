@@ -132,7 +132,7 @@ export default class Home extends Component {
             latitude: pos.latitude,
             longitude: pos.longitude
           });
-        });
+        }, error => console.error(error), { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 });
     } else {
       this.props.setFinalize({
         imgUri: response.uri,

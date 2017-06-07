@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Text, ScrollView, RefreshControl, Dimensions } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, RefreshControl, Dimensions, BackHandler, BackAndroid } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -70,8 +70,14 @@ export default class Log extends Component {
     isLoading: PropTypes.bool.isRequired
   };
 
-  componentWillMount() {
-    this.getLogs();
+  foo = () => {
+    return true;
+  }
+
+  async componentWillMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this.foo);
+    await this.getLogs();
+    BackAndroid.removeEventListener('hardwareBackPress', this.foo);
   }
 
   // Server request

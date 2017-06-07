@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Text, Dimensions } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, BackAndroid } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { connect } from 'react-redux';
@@ -76,15 +76,28 @@ export default class ReadLocations extends Component {
     };
   }
 
+  disableBackButton = () => {
+    return true;
+  }
+
+  getLoc = () => { 
+    this.props.getLocations();
+  }
+
+  componentWillMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this.disableBackButton);
+  }
+
   componentDidMount() {
     // Receiving points from the server
-    this.props.getLocations();
+    //this.props.getLocations();
+    this.getLoc();
     // When opening a scene, it requests the current geolocation
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
         const initialPosition = { latitude, longitude, latitudeDelta, longitudeDelta };
-        this.setState({ initialPosition });
+        this.setState({ initialPosition }, () => { BackAndroid.removeEventListener('hardwareBackPress', this.disableBackButton); });
       });
     // Begins to monitor the change in geolocation
     this.watchID = navigator.geolocation.watchPosition((position) => {

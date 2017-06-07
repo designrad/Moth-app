@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, Text, Dimensions, BackAndroid } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { connect } from 'react-redux';
@@ -98,7 +98,28 @@ export default class Moth extends Component {
     getMyPhoto(state.params.id); // Request from the server a detailed description of the photo
   }
 
+  foo = () => {
+    return true;
+  }
+
+  onLoadStart = () => {
+     const {
+      setApp
+    } = this.props;
+    setApp({ isLoading: true });
+    BackAndroid.addEventListener('hardwareBackPress', this.foo);
+  }
+
+  onLoadEnd = () => {
+     const {
+      setApp
+    } = this.props;
+    setApp({ isLoading: false });
+    BackAndroid.removeEventListener('hardwareBackPress', this.foo);
+  }
+
   render() {
+    console.log(this.props);
     const {
       navigation,
       image,
@@ -119,8 +140,8 @@ export default class Moth extends Component {
             source={{ uri: `http://${ipServer}/image/${[image.name]}` }}
             style={styles.photo}
             resizeMode={'contain'}
-            onLoadStart={() => setApp({ isLoading: true })}
-            onLoadEnd={() => setApp({ isLoading: false })}
+            onLoadStart={this.onLoadStart}
+            onLoadEnd={this.onLoadEnd}
           />
           <View style={styles.itemContainer}>
             <Text style={styles.data}>{dataTime}</Text>
