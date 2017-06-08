@@ -52,5 +52,5 @@ export default StackNavigator({
     headerStyle: styles.header,
     headerTitleStyle: styles.title,
     headerTintColor: 'white'
-  }
+  },
 });
