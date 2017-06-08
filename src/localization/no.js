@@ -8,7 +8,7 @@ export default {
   Log: 'Logg',
 
   // Learn More
-  Malerjakt : 'Målerjakt',
+  'Målerjakt' : 'Målerjakt',
   'Facts about geometrid moths': 'Fakta om målere',
   'Geometrid moths is a group of butterflies named after the way they move. They are also called ‘measuring worms’ because it looks like they are measuring the surface they walk on.' : 'Målere er en gruppe av sommerfugler som har fått navnet sitt etter den spesielle måten larvene beveger seg på. Det ser ut som om de «måler» seg bort over underlaget.',
   'In the birch forests of northern Norway, Sweden and Finland, a few species of geometrids occurs regularly in very high densities. We call it a “moth outbreak” when all of a sudden the forest is crawling with larvae in summer.': 'I bjørkeskogen i Norge, Sverige og Finland, forekommer enkelte arter av målere med mellomrom i enorme mengder. Man kaller det et «målerutbrudd» når bjørkeskogen plutselig kryr av larver på sommeren.',

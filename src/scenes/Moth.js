@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
 export default class Moth extends Component {
 
   static navigationOptions = {
-    //title: Routes.moth.title.localized,
-    title: 'Malerjakt',
+    title: Routes.moth.title.localized,
+    //title: 'Malerjakt',
     headerTitleStyle: {
       textAlign: 'center',
       width: Dimensions.get('window').width - scale(120),
