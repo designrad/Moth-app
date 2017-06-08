@@ -107,9 +107,6 @@ export default class Log extends Component {
 
   render() {
     const { photos } = this.props;
-    if (!photos || !photos.length) {
-      return null;
-    }
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
@@ -119,7 +116,7 @@ export default class Log extends Component {
           'and will be uploaded later automatically when there’s network available. ' +
           'You can also re-send them manually.').localized}</Text>
         </View>
-        {photos.length > 0 &&
+        {(photos && photos.length > 0) &&
         <ScrollView
           style={styles.scroller}
           refreshControl={

@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: scale(36),
-    color: colors.flatRed
+    color: colors.flatRed,
+    backgroundColor: 'transparent',
   },
   textContainer: {
     paddingLeft: scale(14)
