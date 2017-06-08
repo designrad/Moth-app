@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>32</string>
+	<string>33</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -37,6 +37,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Application needs access to your Bluetooth to work properly</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Application needs access to your Calendar to work properly</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Application needs access to your Camera to work properly</string>
 	<key>NSLocationAlwaysUsageDescription</key>
