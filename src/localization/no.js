@@ -37,21 +37,21 @@ export default {
   'Name (optional)': 'Navn (valgfritt)',
   'Team (optional)': 'Team (valgfritt)',
   'Email (optional)': 'E-post (valgfritt)',
-  'Please add location to the image.': 'Vennligst markere bildens posisjon',
+  'Please add location to the image.': 'Vennligst marker bildets posisjon.',
   'Send image': 'Send bilde',
 
   // Log
   'Submitted images': 'Dine innsendte bilder',
-  'Below is a list of all submitted images. If you don’t have network available, the images are saved in the app and will be uploaded later automatically when there’s network available. You can also re-send them manually.': 'Nedenfor er en liste over alle innsendte bilder. Hvis du ikke har nettverk tilgjengelig, blir bildene lagret i mobilen, og vil bli lagt ut senere automatisk når det er nettverk tilgjengelig. Du kan også re-sende dem manuelt.',
+  'Below is a list of all submitted images. If you don’t have network available, the images are saved in the app and will be uploaded later automatically when there’s network available. You can also re-send them manually.': 'Nedenfor er en liste over alle innsendte bilder. Hvis du ikke har nettverk tilgjengelig, blir bildene lagret i mobilen, og vil bli lagt ut senere automatisk når det er nettverk tilgjengelig. Du kan også sende de på nytt manuelt.',
 
   // read location
-  'Verified observations': 'Bekreftede observasjoner',
+  'Observations': 'Observasjoner',
   'More info': 'Mer info',
   Save: 'Lagre',
 
   // other
   Error: 'Feil',
   Success: 'Suksess',
-  Moth: 'Møll'
+  Moth: 'Målere'
 
 };
