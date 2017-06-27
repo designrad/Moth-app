@@ -133,7 +133,7 @@ export default class LearnMore extends Component {
     return (
       <ScrollView style={styles.container}>
         <Image source={images.learnImage} style={styles.img} />
-        <Text style={styles.textUnderlearnImage}>{'Scarce umber moth larvae on branch'.localized}</Text>
+        <Text style={styles.textUnderlearnImage}>{'Scarce umber moth larva on branch'.localized}</Text>
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'Facts about geometrid moths'.localized}</Text>
           <TextList
