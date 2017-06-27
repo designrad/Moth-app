@@ -175,7 +175,7 @@ export default class LearnMore extends Component {
         <Image source={images.learnImage2} style={styles.innerImg} />
         <Text style={styles.textUnderInnerImage}>Scarce umber moth male</Text>
         <Image source={images.learnImage3} style={styles.innerImg} />
-        <Text style={[styles.textUnderInnerImage, { marginBottom: scaleByVertical(0) }]}>Scarce umber moth male</Text>
+        <Text style={[styles.textUnderInnerImage, { marginBottom: scaleByVertical(0) }]}>Scarce umber moth female</Text>
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'How can you contribute?'.localized}</Text>
           <Text style={styles.text}>
@@ -199,11 +199,11 @@ export default class LearnMore extends Component {
             name={'Ingrid Jensvoll'}
             position={'Senior Researcher'}
             institute={'Norges arktiske universitet (UIT)'}
-            email={'jane.jepsen@nina.no'}
+            email={'ingrid.jensvoll@uit.no'}
           />
           <MembersList
             photo={images.photoPetter}
-            name={'Ole Petter Laksforsmo Vindustad'}
+            name={'Ole Petter Laksforsmo Vindstad'}
             position={'Postdoktor'}
             institute={'Arctic University of Norway (UIT)'}
             email={'ole.p.vindstad@uit.no'}
