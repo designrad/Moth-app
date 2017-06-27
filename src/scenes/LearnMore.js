@@ -119,7 +119,7 @@ export default class LearnMore extends Component {
     return ({
       headerLeft: <TouchableOpacity onPress={() => e.navigation.goBack()} style={styles.backArrowCont}>
                     <Image source={images.backArrow} style={styles.backArrow} />
-                    <Text style={styles.backText}>Back</Text>
+                    <Text style={styles.backText}>{'Back'.localized}</Text>
                   </TouchableOpacity>,
       title: <Text style={{alignSelf: 'center'}}>{Routes.learnMore.title.localized}</Text>,
       headerTitleStyle: {
