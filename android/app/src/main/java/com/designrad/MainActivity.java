@@ -1,4 +1,4 @@
-package com.designrad;
+package no.designrad.malerjakt;
 
 import com.facebook.react.ReactActivity;
 
