@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet, Text, Dimensions, BackAndroid } from 'react-native';
 import MapView from 'react-native-maps';
 
@@ -6,10 +7,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLocations } from '../redux/actions/readLocations';
 
-import { Routes } from '../global/constants';
+import { Routes, scale, scaleByVertical } from '../global/constants';
 import { colors } from '../global';
 
-import { scale, scaleByVertical } from '../global/constants';
 import { Moment } from '../global/utils';
 
 const styles = StyleSheet.create({

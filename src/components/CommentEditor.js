@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { View, TextInput, StyleSheet, Modal, TouchableOpacity } from 'react-native';
 import { scale, scaleByVertical, screenHeight, screenWidth } from '../global/constants';
 import { colors } from '../global';

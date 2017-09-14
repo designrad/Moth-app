@@ -1,0 +1,1 @@
+After upgrade RN to 0.48, I'm upgrade only Android version and do not touch iOS, I saved older native iOS project to the ios_old.

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Permissions from 'react-native-permissions';
 
 
@@ -13,14 +13,9 @@ const store = configureStore();
 export default class App extends Component {
 
   componentDidMount() {
-    Permissions.requestPermission('location')
+    Permissions.request('location')
       .then(response => {
         console.log('request', response);
-      });
-
-      Permissions.getPermissionStatus('location')
-      .then(response => {
-        console.log('check', response);
       });
   }
 

@@ -1,14 +1,14 @@
 package no.designrad.malerjakt;
 
 import android.app.Application;
+
 import com.facebook.react.ReactApplication;
-import com.joshblour.reactnativepermissions.ReactNativePermissionsPackage;
-import com.airbnb.android.react.maps.MapsPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.i18n.reactnativei18n.ReactNativeI18n;
-import com.imagepicker.ImagePickerPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.airbnb.android.react.maps.MapsPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.i18n.reactnativei18n.ReactNativeI18n;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -29,16 +29,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactNativePermissionsPackage(),
+            new VectorIconsPackage(),
             new MapsPackage(),
-            new RNDeviceInfo(),
-            new ReactNativeI18n(),
-            new ImagePickerPackage(),
             new LinearGradientPackage(),
-            new VectorIconsPackage()
+            new ImagePickerPackage(),
+            new ReactNativeI18n(),
+            new RNDeviceInfo()
       );
     }
-
   };
 
   @Override

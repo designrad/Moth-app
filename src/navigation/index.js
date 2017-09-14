@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { View, StyleSheet, BackAndroid } from 'react-native';
 import { addNavigationHelpers } from 'react-navigation';
-import { BackAndroid } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

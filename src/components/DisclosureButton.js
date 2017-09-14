@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import { Moment } from '../global/utils';
 import { scale, scaleByVertical } from '../global/constants';

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet, Image } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 
@@ -134,15 +135,15 @@ export default class Home extends Component {
           });
           this.props.navigation.navigate(Routes.finalize.name);
         }, () => {
-        this.props.setFinalize({
-          imgUri: response.uri,
-          imgName: response.fileName,
-          date: dt,
-          latitude: 0,
-          longitude: 0
+          this.props.setFinalize({
+            imgUri: response.uri,
+            imgName: response.fileName,
+            date: dt,
+            latitude: 0,
+            longitude: 0
+          });
+          this.props.navigation.navigate(Routes.finalize.name);
         });
-        this.props.navigation.navigate(Routes.finalize.name);
-      });
     } else {
       this.props.setFinalize({
         imgUri: response.uri,
