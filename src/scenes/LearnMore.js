@@ -158,10 +158,10 @@ export default class LearnMore extends Component {
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'Facts about the scarce umber moth'.localized}</Text>
           <TextList
-            text={('The scarce umber moth is easy to recognize. The adult males have bright golden wings of a similar color as a birch leaf in autumn. Their wing span is 3-4 cm. They are attracted to light and can often be found near garden lights in the autumn (early September – well into October). ').localized}
+            text={('The scarce umber moth is easy to recognize. The adult males have bright golden wings of a similar color as a birch leaf in autumn. Their wing span is 3-4 cm. They are attracted to light and can often be found near garden lights in the autumn (early September – well into October).').localized}
           />
           <TextList
-            text={('The female moths are rarely seen. They cannot fly and their wings are reduced to tiny stubs. If you are lucky, you might find females crawling the stems of birch trees on autumn nights on their way into the tree canopy to lay their eggs. ').localized}
+            text={('The female moths are rarely seen. They cannot fly and their wings are reduced to tiny stubs. If you are lucky, you might find females crawling the stems of birch trees on autumn nights on their way into the tree canopy to lay their eggs.').localized}
           />
           <TextList
             text={('Scarce umber moth is distributed all over Norway as far as Troms. We assume that the species is spreading further north and east, but very few observations exist. The current known distribution in Norway can be found at the Norwegian Biodiversity Information Centre webpage.').localized}
