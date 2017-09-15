@@ -173,9 +173,9 @@ export default class LearnMore extends Component {
           </TouchableOpacity>
         </View>
         <Image source={images.learnImage2} style={styles.innerImg} />
-        <Text style={styles.textUnderInnerImage}>Scarce umber moth male</Text>
+        <Text style={styles.textUnderInnerImage}>{'Scarce umber moth male'.localized}</Text>
         <Image source={images.learnImage3} style={styles.innerImg} />
-        <Text style={[styles.textUnderInnerImage, { marginBottom: scaleByVertical(0) }]}>Scarce umber moth female</Text>
+        <Text style={[styles.textUnderInnerImage, { marginBottom: scaleByVertical(0) }]}>{'Scarce umber moth female'.localized}</Text>
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'How can you contribute?'.localized}</Text>
           <Text style={styles.text}>
@@ -190,29 +190,29 @@ export default class LearnMore extends Component {
           <MembersList
             photo={images.photoJane}
             name={'Jane Uhd Jepsen'}
-            position={'Senior Researcher'}
-            institute={'Norwegian Institute for Nature Research (NINA)'}
+            position={'Senior Researcher'.localized}
+            institute={'Norwegian Institute for Nature Research (NINA)'.localized}
             email={'jane.jepsen@nina.no'}
           />
           <MembersList
             photo={images.photoIngrid}
             name={'Ingrid Jensvoll'}
-            position={'Senior Researcher'}
-            institute={'Norges arktiske universitet (UIT)'}
+            position={'Senior Researcher'.localized}
+            institute={'Norges arktiske universitet (UIT)'.localized}
             email={'ingrid.jensvoll@uit.no'}
           />
           <MembersList
             photo={images.photoPetter}
             name={'Ole Petter Laksforsmo Vindstad'}
-            position={'Postdoktor'}
-            institute={'Arctic University of Norway (UIT)'}
+            position={'Postdoktor'.localized}
+            institute={'Arctic University of Norway (UIT)'.localized}
             email={'ole.p.vindstad@uit.no'}
           />
           <MembersList
             photo={images.photoMalin}
             name={'Malin Ek'}
-            position={'PhD student'}
-            institute={'Arctic University of Norway (UIT)'}
+            position={'PhD student'.localized}
+            institute={'Arctic University of Norway (UIT)'.localized}
             email={'malin.ek@uit.no'}
           />
         </View>
