@@ -133,7 +133,7 @@ export default class LearnMore extends Component {
     return (
       <ScrollView style={styles.container}>
         <Image source={images.learnImage} style={styles.img} />
-        <Text style={styles.textUnderlearnImage}>{'Scarce umber moth larva on branch'.localized}</Text>
+        <Text style={styles.textUnderlearnImage}>{'Scarce umber moth larvae on a branch'.localized}</Text>
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'Facts about geometrid moths'.localized}</Text>
           <TextList
@@ -143,7 +143,7 @@ export default class LearnMore extends Component {
             text={('In the birch forests of northern Norway, Sweden and Finland, a few species of geometrids occurs regularly in very high densities. We call it a “moth outbreak” when all of a sudden the forest is crawling with larvae in summer.').localized}
           />
           <TextList
-            text={('The birch forest moth larvae hatch from eggs when the birch leaves come out in early summer. They pupate in late summer and appears again as adults in autumn. At that time the adult moths are easy to find, as they are swarming, especially near garden lights.').localized}
+            text={('The birch forest moth larvae hatch from eggs when the birch leaves come out in early summer. They pupate in late summer and appear again as adults in autumn. At that time the adult moths are easy to find, as they are swarming, especially near garden lights.').localized}
           />
           <TextList
             text={('The moth larvae feed on the leaves from birch and other deciduous trees, as well as bilberry and shrubs on the ground. A large moth outbreak can kill both trees and shrubs.').localized}
@@ -152,7 +152,7 @@ export default class LearnMore extends Component {
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'Why are we mapping geometrids?'.localized}</Text>
           <Text style={styles.text}>
-            {('During the last few decades moth outbreaks in the birch forest has occurred further north and further inland than previously. We think it is caused by a milder climate. It is therefore important to acquire updated information about the distribution of the moth species that cause outbreaks. The least known of the outbreaking moth species in the birch forest is the scarce umber moth (Agriopis aurantiaria). We know it has spread northwards as far as Troms. But exactly how far north and east is it present? Can it be found in inner parts of Troms? In Finnmark? In northernmost Sweden and Finland? We hope the app “Målerjakt” (Moth hunt”) and the efforts of many volunteer moth hunters will help answer these questions. We need your assistance!').localized}
+            {('During the last few decades moth outbreaks in the birch forest have occurred further north and further inland than previously. We think it is caused by a milder climate. It is therefore important to acquire updated information about the distribution of the moth species that cause outbreaks. The least known of the outbreaking moth species in the birch forest is the scarce umber moth (Agriopis aurantiaria). We know it has spread northwards as far as Troms. But exactly how far north and east is it present? Can it be found in inner parts of Troms? In Finnmark? In northernmost Sweden and Finland? We hope the app “Målerjakt” (Moth hunt”) and the efforts of many volunteer moth hunters will help answer these questions. We need your assistance!').localized}
           </Text>
         </View>
         <View style={styles.itemContainer}>
@@ -179,7 +179,7 @@ export default class LearnMore extends Component {
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'How can you contribute?'.localized}</Text>
           <Text style={styles.text}>
-            {('Download the app Målerjakt and let the hunt begin! Search near garden lights on your house, your cabin, on your way to school, or anywhere you go. When you find a moth you believe to be the scarce umber moth, take a picture with the app and send it. If you are unsure whether it is the right species, send it anyway. All pictures will be checked by an expert, and only those that are certain to be scarce umber moth are added as new records. Visit the map in Målerjakt to see how your observations help us a better picture of the distribution of scarce umber moth in the northern birch forests. If you give your name and email when you submit pictures, you will receive our newsletter with updates on the progress of the hunt.').localized}
+            {('Download the app Målerjakt and let the hunt begin! Search near garden lights on your house, your cabin, on your way to school, or anywhere you go. When you find a moth you believe to be the scarce umber moth, take a picture with the app and send it. If you are unsure whether it is the right species, send it anyway. All pictures will be checked by an expert, and only those that are certain to be scarce umber moth are added as new records. Visit the map in Målerjakt to see how your observations help us get a better picture of the distribution of scarce umber moth in the northern birch forests. If you give your name and email when you submit pictures, you will receive our newsletter with updates on the progress of the hunt.').localized}
           </Text>
         </View>
         <View style={styles.itemContainer}>
