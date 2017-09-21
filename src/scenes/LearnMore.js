@@ -198,7 +198,7 @@ export default class LearnMore extends Component {
             photo={images.photoIngrid}
             name={'Ingrid Jensvoll'}
             position={'Senior Researcher'.localized}
-            institute={'Norges arktiske universitet (UIT)'.localized}
+            institute={'Arctic University of Norway (UIT)'.localized}
             email={'ingrid.jensvoll@uit.no'}
           />
           <MembersList
