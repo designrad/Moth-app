@@ -12,6 +12,9 @@ import { colors } from '../global';
 
 import { Moment } from '../global/utils';
 
+import grayImage from '../imgs/marker-icon-gray.png';
+import greenImage from '../imgs/marker-icon-green.png';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
@@ -80,7 +83,7 @@ export default class ReadLocations extends Component {
     return true;
   }
 
-  getLoc = () => { 
+  getLoc = () => {
     this.props.getLocations();
   }
 
@@ -141,6 +144,7 @@ export default class ReadLocations extends Component {
           }}
           identifier={_id}
           key={_id}
+          image={greenImage}
         >
           <MapView.Callout
             onPress={() => this.openLog(_id)}
@@ -154,37 +158,36 @@ export default class ReadLocations extends Component {
           </MapView.Callout>
         </MapView.Marker>
       );
-    } else if(identification !== 'correct') {
+    } else if (identification !== 'correct') {
       let newText;
       if (comments.length > 35) {
         newText = `${comments.substr(0, 35)}...`;
       } else {
         newText = comments;
       }
-      const markerColor = 'green';
+
       return (
         <MapView.Marker
-            coordinate={{
-              latitude: parseFloat(latitude),
-              longitude: parseFloat(longitude)
-            }}
-            identifier={_id}
-            key={_id}
-            pinColor={markerColor}
+          coordinate={{
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude)
+          }}
+          identifier={_id}
+          key={_id}
+          image={grayImage}
+        >
+          <MapView.Callout
+            onPress={() => {}}
           >
-            <MapView.Callout
-              onPress={() => {}}
-            >
-              <View>
-                <Text>{newText}</Text>
-                <Text style={styles.date}>{readableDate}</Text>
-                <Text style={styles.location}>{latitude}, {longitude}</Text>
-              </View>
-            </MapView.Callout>
-          </MapView.Marker>
+            <View>
+              <Text>{newText}</Text>
+              <Text style={styles.date}>{readableDate}</Text>
+              <Text style={styles.location}>{latitude}, {longitude}</Text>
+            </View>
+          </MapView.Callout>
+        </MapView.Marker>
       );
     }
-    //return null;
   };
 
   render() {
