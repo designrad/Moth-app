@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFCE62',
   },
   buttonDisabled: {
-    backgroundColor: '#999999',
+    backgroundColor: '#C0BAB6',
   },
   label: {
     color: '#111111',
@@ -162,7 +162,6 @@ export default class ReadLocations extends Component {
       });
     // Begins to monitor the change in geolocation
     this.watchID = navigator.geolocation.watchPosition((position) => {
-      console.log('change');
       const { latitude, longitude } = position.coords;
       const region = { latitude, longitude, latitudeDelta, longitudeDelta };
       this.setState({ region });
@@ -175,7 +174,6 @@ export default class ReadLocations extends Component {
   }
 
   onRegionChange(region) {
-    console.log('chngs');
     // When the map swype changes the region (that would not jump the map)
     this.setState({ region });
   }
@@ -264,7 +262,7 @@ export default class ReadLocations extends Component {
           onRegionChange={e => this.onRegionChange(e)}
           showsUserLocation
           showsMyLocationButton
-          // cacheEnabled={isAndroid}
+          cacheEnabled={isAndroid}
         >
           {filteredLocations.map(item => (
            this.renderPoint(item)
