@@ -249,7 +249,7 @@ export default class ReadLocations extends Component {
   };
 
   render() {
-    const { locations, filterYear, availableYears, filteredLocations } = this.props;
+    const { filterYear, availableYears, filteredLocations } = this.props;
     const { initialPosition, region } = this.state;
 
     return (
