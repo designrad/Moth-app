@@ -16,9 +16,7 @@ const colors = {
   whiteOrange: '#FFF5DF',
   arrowGray: '#C7C7CC',
 
-
   buttonActive: '#C0BAB6',
-
 };
 
 export default colors;
