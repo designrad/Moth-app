@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, Text, Dimensions, BackAndroid } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, BackAndroid, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getLocations } from '../redux/actions/readLocations';
+import { getLocations, setFilterYear } from '../redux/actions/readLocations';
 
-import { Routes, scale, scaleByVertical } from '../global/constants';
+import { Routes, scale, scaleByVertical, filterYearsLimit } from '../global/constants';
 import { colors } from '../global';
 
 import { Moment } from '../global/utils';
+
+import grayImage from '../imgs/marker-icon-gray.png';
+import greenImage from '../imgs/marker-icon-green.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,37 +32,95 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: scale(17),
   },
+  filterContainer: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    padding: 10,
+    paddingBottom: 0,
+  },
+  filterButton: {
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: 'red',
+    borderRadius: 3,
+    marginBottom: 10,
+  },
+  buttonEnabled: {
+    backgroundColor: '#FFCE62',
+  },
+  buttonDisabled: {
+    backgroundColor: '#C0BAB6',
+  },
+  label: {
+    color: '#111111',
+    fontSize: 18,
+  }
 });
+
 // Default coordinates for the map, if they do not exist and geolocation does not immediately appear, errors will occur
-//const latitudeDelta = 0.3767730706970411;
-//const longitudeDelta = 0.294662356863725;
+
+// const latitudeDelta = 0.3767730706970411;
+// const longitudeDelta = 0.294662356863725;
+
 const latitudeDelta = 0.01;
 const longitudeDelta = 0.01;
 
-@connect(({ readLocations }) => ({
-  ...readLocations
-}), dispatch => bindActionCreators({
-  getLocations
+const mapStateToProps = (state) => {
+  const { readLocations } = state;
+  const { locations, filterYear } = readLocations;
+
+  const availableYears = locations.reduce((obj, { date }) => (
+    (date && obj.indexOf(Number(Moment(date).format('YYYY'))) >= 0)
+      ? obj
+      : [...obj, Number(Moment(date).format('YYYY'))]
+    ), []
+  ).sort((a, b) => Moment(b).diff(a));
+
+  const filteredLocations = filterYear
+    ? locations.filter(
+        ({ date }) => (date && Number(Moment(date).format('YYYY')) === filterYear)
+      )
+    : [...locations];
+
+  return {
+    ...readLocations,
+    availableYears,
+    filteredLocations,
+  };
+};
+
+@connect(mapStateToProps, dispatch => bindActionCreators({
+  getLocations,
+  setFilterYear,
 }, dispatch))
+
 export default class ReadLocations extends Component {
   static navigationOptions = {
     title: Routes.readLocation.title.localized,
     headerTitleStyle: {
-        textAlign: 'center',
-        width: Dimensions.get('window').width - scale(120),
-      },
+      textAlign: 'center',
+      width: Dimensions.get('window').width - scale(120),
+    },
   };
 
   static propTypes = {
+    setFilterYear: PropTypes.func.isRequired,
     getLocations: PropTypes.func.isRequired,
+    filterYear: PropTypes.number,
     locations: PropTypes.arrayOf(PropTypes.object).isRequired,
+    filteredLocations: PropTypes.arrayOf(PropTypes.object).isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired
     }).isRequired,
+    availableYears: PropTypes.arrayOf(PropTypes.number),
   };
+
   constructor(props) {
     super(props);
     this.state = {
+
       // region: {
       //   latitude: 60.491403,
       //   longitude: 8.391523,
@@ -78,11 +139,11 @@ export default class ReadLocations extends Component {
 
   disableBackButton = () => {
     return true;
-  }
+  };
 
-  getLoc = () => { 
+  getLoc = () => {
     this.props.getLocations();
-  }
+  };
 
   componentWillMount() {
     BackAndroid.addEventListener('hardwareBackPress', this.disableBackButton);
@@ -90,7 +151,7 @@ export default class ReadLocations extends Component {
 
   componentDidMount() {
     // Receiving points from the server
-    //this.props.getLocations();
+    // this.props.getLocations();
     this.getLoc();
     // When opening a scene, it requests the current geolocation
     navigator.geolocation.getCurrentPosition(
@@ -113,7 +174,7 @@ export default class ReadLocations extends Component {
   }
 
   onRegionChange(region) {
-    // When the map svaype changes the region (that would not jump the map)
+    // When the map swype changes the region (that would not jump the map)
     this.setState({ region });
   }
 
@@ -141,6 +202,7 @@ export default class ReadLocations extends Component {
           }}
           identifier={_id}
           key={_id}
+          image={greenImage}
         >
           <MapView.Callout
             onPress={() => this.openLog(_id)}
@@ -154,42 +216,42 @@ export default class ReadLocations extends Component {
           </MapView.Callout>
         </MapView.Marker>
       );
-    } else if(identification !== 'correct') {
+    } else if (identification !== 'correct') {
       let newText;
       if (comments.length > 35) {
         newText = `${comments.substr(0, 35)}...`;
       } else {
         newText = comments;
       }
-      const markerColor = 'green';
+
       return (
         <MapView.Marker
-            coordinate={{
-              latitude: parseFloat(latitude),
-              longitude: parseFloat(longitude)
-            }}
-            identifier={_id}
-            key={_id}
-            pinColor={markerColor}
+          coordinate={{
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude)
+          }}
+          identifier={_id}
+          key={_id}
+          image={grayImage}
+        >
+          <MapView.Callout
+            onPress={() => {}}
           >
-            <MapView.Callout
-              onPress={() => {}}
-            >
-              <View>
-                <Text>{newText}</Text>
-                <Text style={styles.date}>{readableDate}</Text>
-                <Text style={styles.location}>{latitude}, {longitude}</Text>
-              </View>
-            </MapView.Callout>
-          </MapView.Marker>
+            <View>
+              <Text>{newText}</Text>
+              <Text style={styles.date}>{readableDate}</Text>
+              <Text style={styles.location}>{latitude}, {longitude}</Text>
+            </View>
+          </MapView.Callout>
+        </MapView.Marker>
       );
     }
-    //return null;
   };
 
   render() {
-    const { locations } = this.props;
+    const { filterYear, availableYears, filteredLocations } = this.props;
     const { initialPosition, region } = this.state;
+
     return (
       <View style={styles.container}>
         <MapView
@@ -202,11 +264,36 @@ export default class ReadLocations extends Component {
           showsMyLocationButton
           cacheEnabled={isAndroid}
         >
-          {locations.map(item => (
+          {filteredLocations.map(item => (
            this.renderPoint(item)
           ))}
         </MapView>
+        <View style={styles.filterContainer}>
+          {
+            availableYears.slice(0, filterYearsLimit).map(year => (
+              <TouchableOpacity
+                style={[
+                  styles.filterButton,
+                  (
+                  filterYear === year
+                    ? styles.buttonEnabled
+                    : styles.buttonDisabled
+                  )
+                ]}
+                key={year}
+                onPress={() => this.props.setFilterYear(year)}
+              >
+                <Text style={styles.label}>{year}</Text>
+              </TouchableOpacity>
+            ))
+          }
+        </View>
       </View>
     );
   }
 }
+
+ReadLocations.defaultProps = {
+  filterYear: null,
+  availableYears: [],
+};

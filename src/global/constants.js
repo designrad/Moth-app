@@ -41,8 +41,11 @@ export const scaleByVertical = value => (height / 736) * value;
 export const latitudeDelta = 0.0922;
 export const longitudeDelta = 0.0421;
 
-//export const ipServer = '192.168.88.47:3001';
+// export const ipServer = '192.168.88.40:3001';
 export const ipServer = '78.47.117.65:3001';
+
+// how many years show in filter on map
+export const filterYearsLimit = 3;
 // 78.47.117.65:3001
 // 192.168.88.47:3001
 

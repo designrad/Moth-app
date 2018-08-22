@@ -14,7 +14,9 @@ const colors = {
   backgroundBtn: '#5D5B59',
   borderGray: '#7E7E7E',
   whiteOrange: '#FFF5DF',
-  arrowGray: '#C7C7CC'
+  arrowGray: '#C7C7CC',
+
+  buttonActive: '#C0BAB6',
 };
 
 export default colors;

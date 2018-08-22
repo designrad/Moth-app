@@ -12,3 +12,4 @@ export const PUT_LOCATIONS = 'PUT_LOCATIONS';
 
 export const SET_USER_OPTIONS = 'SET_USER_OPTIONS';
 
+export const SET_FILTER_YEAR = 'SET_FILTER_YEAR';
