@@ -274,8 +274,7 @@ export default class ReadLocations extends Component {
               <TouchableOpacity
                 style={[
                   styles.filterButton,
-                  (
-                  filterYear === year
+                  (filterYear === year || !filterYear
                     ? styles.buttonEnabled
                     : styles.buttonDisabled
                   )
