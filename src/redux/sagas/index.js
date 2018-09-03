@@ -8,7 +8,7 @@ import { putPhotoStatus } from '../actions/log';
 import { putMyPhoto } from '../actions/moth';
 import { setUserOptions } from '../actions/finalize';
 import { callApi, Endpoints } from '../../global/api';
-import { putLocations } from '../actions/readLocations';
+import { putLocations, setAvailableYears } from '../actions/readLocations';
 import { UPLOAD_PHOTO, GET_PHOTO_STATUS, GET_MY_PHOTO, GET_LOCATIONS } from '../constants';
 
 // Run when the application starts
@@ -152,6 +152,7 @@ function* getLocations() {
       method: 'GET'
     });
     yield put(putLocations({ locations: response.data.photos }));
+    yield put(setAvailableYears({ locations: response.data.photos }));
     yield put(setApp({ isLoading: false }));
   } catch (error) {
     yield put(showAlert('Error'.localized));

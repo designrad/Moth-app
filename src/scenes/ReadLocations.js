@@ -69,20 +69,12 @@ const longitudeDelta = 0.01;
 
 const mapStateToProps = (state) => {
   const { readLocations } = state;
-  const { locations, filterYear } = readLocations;
+  const { locations, availableYears, selectedYears } = readLocations;
 
-  const availableYears = locations.reduce((obj, { date }) => (
-    (date && obj.indexOf(Number(Moment(date).format('YYYY'))) >= 0)
-      ? obj
-      : [...obj, Number(Moment(date).format('YYYY'))]
-    ), []
-  ).sort((a, b) => Moment(b).diff(a));
-
-  const filteredLocations = filterYear
-    ? locations.filter(
-        ({ date }) => (date && Number(Moment(date).format('YYYY')) === filterYear)
-      )
-    : [...locations];
+  const filteredLocations = locations.filter(
+    ({ date }) => (date && Number(Moment(date).format('YYYY'))
+      && selectedYears.indexOf(Number(Moment(date).format('YYYY'))) >= 0)
+  );
 
   return {
     ...readLocations,
@@ -108,7 +100,8 @@ export default class ReadLocations extends Component {
   static propTypes = {
     setFilterYear: PropTypes.func.isRequired,
     getLocations: PropTypes.func.isRequired,
-    filterYear: PropTypes.number,
+    selectedYears: PropTypes.arrayOf(PropTypes.number),
+    availableYears: PropTypes.arrayOf(PropTypes.number),
     locations: PropTypes.arrayOf(PropTypes.object).isRequired,
     filteredLocations: PropTypes.arrayOf(PropTypes.object).isRequired,
     navigation: PropTypes.shape({
@@ -249,7 +242,7 @@ export default class ReadLocations extends Component {
   };
 
   render() {
-    const { filterYear, availableYears, filteredLocations } = this.props;
+    const { filterYear, availableYears, filteredLocations, selectedYears } = this.props;
     const { initialPosition, region } = this.state;
 
     return (
@@ -270,11 +263,11 @@ export default class ReadLocations extends Component {
         </MapView>
         <View style={styles.filterContainer}>
           {
-            availableYears.slice(0, filterYearsLimit).map(year => (
+            availableYears.map(year => (
               <TouchableOpacity
                 style={[
                   styles.filterButton,
-                  (filterYear === year || !filterYear
+                  (selectedYears.indexOf(year) >= 0
                     ? styles.buttonEnabled
                     : styles.buttonDisabled
                   )
