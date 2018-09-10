@@ -168,9 +168,9 @@ export default class LearnMore extends Component {
           />
         </View>
         <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => Linking.openURL('http://artsdatabanken.no/Pages/144194')}>
-            <Text style={styles.link}>http://artsdatabanken.no/Pages/144194</Text>
-          </TouchableOpacity>
+          {/* <TouchableOpacity onPress={() => Linking.openURL('http://artsdatabanken.no/Pages/144194')}> */}
+            <Text style={styles.text}>http://artsdatabanken.no/Pages/144194</Text>
+          {/* </TouchableOpacity> */}
         </View>
         <Image source={images.learnImage2} style={styles.innerImg} />
         <Text style={styles.textUnderInnerImage}>{'Scarce umber moth male'.localized}</Text>
@@ -192,28 +192,28 @@ export default class LearnMore extends Component {
             name={'Jane Uhd Jepsen'}
             position={'Senior Researcher'.localized}
             institute={'Norwegian Institute for Nature Research (NINA)'.localized}
-            email={'jane.jepsen@nina.no'}
+            email={''}
           />
           <MembersList
             photo={images.photoIngrid}
             name={'Ingrid Jensvoll'}
             position={'Senior Researcher'.localized}
             institute={'Arctic University of Norway (UIT)'.localized}
-            email={'ingrid.jensvoll@uit.no'}
+            email={''}
           />
           <MembersList
             photo={images.photoPetter}
             name={'Ole Petter Laksforsmo Vindstad'}
             position={'Postdoktor'.localized}
             institute={'Arctic University of Norway (UIT)'.localized}
-            email={'ole.p.vindstad@uit.no'}
+            email={''}
           />
           <MembersList
             photo={images.photoMalin}
             name={'Malin Ek'}
             position={'PhD student'.localized}
             institute={'Arctic University of Norway (UIT)'.localized}
-            email={'malin.ek@uit.no'}
+            email={''}
           />
         </View>
         <View style={styles.itemContainer}>
@@ -221,59 +221,59 @@ export default class LearnMore extends Component {
           <Text style={styles.text}>{'This app is sponsored by:'.localized}</Text>
         </View>
         <View style={styles.labelContainer}>
-          <TouchableOpacity onPress={() => Linking.openURL('http://www.framsenteret.no')}>
+        {/* <TouchableOpacity onPress={() => Linking.openURL('http://www.framsenteret.no')}> */}
             <Image
               source={images.framsenteretLogo}
               style={styles.framsenteretLogo}
               resizeMode={Image.resizeMode.contain}
             />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => Linking.openURL('http://coat.no')}>
+          {/* </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('http://coat.no')}> */}
             <Image
               source={images.coatLogo}
               style={styles.coatLogo}
               resizeMode={Image.resizeMode.contain}
             />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => Linking.openURL('http://nina.no')}>
+          {/* </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('http://nina.no')}> */}
             <Image
               source={images.webLogo}
               style={styles.webLogo}
               resizeMode={Image.resizeMode.contain}
             />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => Linking.openURL('http://uit.no')}>
+          {/* </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('http://uit.no')}> */}
             <Image
               source={images.tromsLogo}
               style={styles.tromsLogo}
               resizeMode={Image.resizeMode.contain}
             />
-          </TouchableOpacity>
+          {/* </TouchableOpacity> */}
         </View>
         <View style={styles.itemContainer}>
           <Text style={styles.header}>{'App development'.localized}</Text>
           <Text style={styles.text}>
-            {('This app is produced for COAT by Designråd, Tromsø. This app is open sourced and all code is available on GitHub.').localized}
+            {('This app is produced for COAT by Designråd, Tromsø. The app is open sourced and all code is available on GitHub, github.com/designrad').localized}
           </Text>
         </View>
         <View style={styles.labelContainer}>
-          <TouchableOpacity onPress={() => Linking.openURL('http://www.designrad.no')}>
+          {/* <TouchableOpacity onPress={() => Linking.openURL('http://www.designrad.no')}> */}
             <Image
               source={images.desingradLogo}
               style={styles.desingradLogo}
               resizeMode={Image.resizeMode.contain}
             />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => Linking.openURL('https://github.com/designrad/Malerjakt')}>
+          {/* </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://github.com/designrad')}> */}
             <Image
               source={images.mitAndGitLogo}
               style={styles.mitAndGitLogo}
               resizeMode={Image.resizeMode.contain}
             />
-           </TouchableOpacity>
+           {/* </TouchableOpacity> */}
         </View>
         <View style={styles.bottomContainer}>
-          <Text style={styles.versionApp}>App version 1.0.3</Text>
+          <Text style={styles.versionApp}>App version 1.2</Text>
         </View>
       </ScrollView>
     );

@@ -32,7 +32,7 @@ export default {
   'Sponsors and financing' : 'Sponsorer og finansiering',
   'This app is sponsored by:' : 'Denne appen er finansiert av:',
   'App development' : 'App utvikling',
-  'This app is produced for COAT by Designråd, Tromsø. This app is open sourced and all code is available on GitHub.' : 'Appen er produsert for COAT av Designråd, Tromsø. All kildekode er open source og tilgjengelig på GitHub.',
+  'This app is produced for COAT by Designråd, Tromsø. The app is open sourced and all code is available on GitHub, github.com/designrad' : 'Appen er produsert for COAT av Designråd, Tromsø. All kildekode er open source og tilgjengelig på GitHub, github.com/designrad',
 
 
   // Finalize screen
