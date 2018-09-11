@@ -207,11 +207,11 @@ export default class ReadLocations extends Component {
         >
           <Image
             source={greenImage}
-            style={[styles.markerImage, { zIndex: index }]}
+            style={[styles.markerImage]}
           />
           <MapView.Callout
             onPress={() => this.openLog(_id)}
-            style={{ flex: -1, position: 'absolute', minWidth: 150, minHeight: 60, zIndex: 99999 }}
+            style={{ flex: -1, minWidth: 150 }}
           >
             <View>
               <Text>{newText}</Text>
@@ -241,11 +241,11 @@ export default class ReadLocations extends Component {
         >
           <Image
             source={grayImage}
-            style={[styles.markerImage, { zIndex: index }]}
+            style={[styles.markerImage]}
           />
           <MapView.Callout
             onPress={() => {}}
-            style={{ flex: -1, position: 'absolute', minWidth: 150, minHeight: 60, zIndex: 99999 }}
+            style={{ flex: -1, minWidth: 150 }}
           >
             <View>
               <Text>{newText}</Text>
@@ -263,6 +263,7 @@ export default class ReadLocations extends Component {
     const { initialPosition, region } = this.state;
 
     return (
+      <View style={styles.container}>
         <MapView
           initialRegion={initialPosition}
           // region={region}
@@ -276,27 +277,28 @@ export default class ReadLocations extends Component {
           {filteredLocations.map((item, index) => (
            this.renderPoint(item, index)
           ))}
-
-          <View style={styles.filterContainer}>
-            {
-              availableYears.map(year => (
-                <TouchableOpacity
-                  style={[
-                    styles.filterButton,
-                    (selectedYears.indexOf(year) >= 0
-                        ? styles.buttonEnabled
-                        : styles.buttonDisabled
-                    )
-                  ]}
-                  key={year}
-                  onPress={() => this.props.setFilterYear(year)}
-                >
-                  <Text style={styles.label}>{year}</Text>
-                </TouchableOpacity>
-              ))
-            }
-          </View>
         </MapView>
+
+        <View style={styles.filterContainer}>
+          {
+            availableYears.map(year => (
+              <TouchableOpacity
+                style={[
+                  styles.filterButton,
+                  (selectedYears.indexOf(year) >= 0
+                      ? styles.buttonEnabled
+                      : styles.buttonDisabled
+                  )
+                ]}
+                key={year}
+                onPress={() => this.props.setFilterYear(year)}
+              >
+                <Text style={styles.label}>{year}</Text>
+              </TouchableOpacity>
+            ))
+          }
+        </View>
+      </View>
     );
   }
 }
