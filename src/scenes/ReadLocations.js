@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, Text, Dimensions, BackAndroid, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, BackAndroid, TouchableOpacity, Image } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLocations, setFilterYear } from '../redux/actions/readLocations';
 
-import { Routes, scale, scaleByVertical, filterYearsLimit } from '../global/constants';
+import { Routes, scale, scaleByVertical } from '../global/constants';
 import { colors } from '../global';
 
 import { Moment } from '../global/utils';
@@ -56,6 +56,10 @@ const styles = StyleSheet.create({
   label: {
     color: '#111111',
     fontSize: 18,
+  },
+  markerImage: {
+    width: 26,
+    height: 41,
   }
 });
 
@@ -176,9 +180,10 @@ export default class ReadLocations extends Component {
   openLog = id => this.props.navigation.navigate(Routes.moth.name, { id });
 
   // The function adds points to the map
-  renderPoint = (point) => {
+  renderPoint = (point, index) => {
     const { _id, latitude, longitude, identification, comments, date } = point;
-    let readableDate = Moment(date).format('lll');
+    const readableDate = Moment(date).format('lll');
+
     if (identification === 'correct') {
       let newText;
       if (comments.length > 35) {
@@ -195,10 +200,15 @@ export default class ReadLocations extends Component {
           }}
           identifier={_id}
           key={_id}
-          image={greenImage}
+          style={{ zIndex: index }}
         >
+          <Image
+            source={greenImage}
+            style={[styles.markerImage, { zIndex: index }]}
+          />
           <MapView.Callout
             onPress={() => this.openLog(_id)}
+            style={{ flex: -1, position: 'absolute', minWidth: 150, minHeight: 60 }}
           >
             <View>
               <Text>{newText}</Text>
@@ -225,10 +235,17 @@ export default class ReadLocations extends Component {
           }}
           identifier={_id}
           key={_id}
-          image={grayImage}
+          style={{
+            zIndex: index,
+          }}
         >
+          <Image
+            source={grayImage}
+            style={[styles.markerImage, { zIndex: index }]}
+          />
           <MapView.Callout
             onPress={() => {}}
+            style={{ flex: -1, position: 'absolute', minWidth: 150, minHeight: 60 }}
           >
             <View>
               <Text>{newText}</Text>
@@ -248,7 +265,7 @@ export default class ReadLocations extends Component {
     return (
         <MapView
           initialRegion={initialPosition}
-          region={region}
+          // region={region}
           style={styles.container}
           mapType={'hybrid'}
           onRegionChange={e => this.onRegionChange(e)}
@@ -256,8 +273,8 @@ export default class ReadLocations extends Component {
           showsMyLocationButton
           cacheEnabled={isAndroid}
         >
-          {filteredLocations.map(item => (
-           this.renderPoint(item)
+          {filteredLocations.map((item, index) => (
+           this.renderPoint(item, index)
           ))}
           <View style={styles.filterContainer}>
             {
