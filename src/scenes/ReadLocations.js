@@ -179,6 +179,10 @@ export default class ReadLocations extends Component {
   // Opens a detailed description of the point
   openLog = id => this.props.navigation.navigate(Routes.moth.name, { id });
 
+  update = () => {
+    this.forceUpdate();
+  };
+
   // The function adds points to the map
   renderPoint = (point, index) => {
     const { _id, latitude, longitude, identification, comments, date } = point;
@@ -200,7 +204,6 @@ export default class ReadLocations extends Component {
           }}
           identifier={_id}
           key={_id}
-          style={{ zIndex: index }}
         >
           <Image
             source={greenImage}
@@ -208,7 +211,7 @@ export default class ReadLocations extends Component {
           />
           <MapView.Callout
             onPress={() => this.openLog(_id)}
-            style={{ flex: -1, position: 'absolute', minWidth: 150, minHeight: 60 }}
+            style={{ flex: -1, position: 'absolute', minWidth: 150, minHeight: 60, zIndex: 99999 }}
           >
             <View>
               <Text>{newText}</Text>
@@ -235,9 +238,6 @@ export default class ReadLocations extends Component {
           }}
           identifier={_id}
           key={_id}
-          style={{
-            zIndex: index,
-          }}
         >
           <Image
             source={grayImage}
@@ -245,7 +245,7 @@ export default class ReadLocations extends Component {
           />
           <MapView.Callout
             onPress={() => {}}
-            style={{ flex: -1, position: 'absolute', minWidth: 150, minHeight: 60 }}
+            style={{ flex: -1, position: 'absolute', minWidth: 150, minHeight: 60, zIndex: 99999 }}
           >
             <View>
               <Text>{newText}</Text>
@@ -276,6 +276,7 @@ export default class ReadLocations extends Component {
           {filteredLocations.map((item, index) => (
            this.renderPoint(item, index)
           ))}
+
           <View style={styles.filterContainer}>
             {
               availableYears.map(year => (
