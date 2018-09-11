@@ -169,7 +169,7 @@ export default class LearnMore extends Component {
         </View>
         <View style={{ alignItems: 'center' }}>
           {/* <TouchableOpacity onPress={() => Linking.openURL('http://artsdatabanken.no/Pages/144194')}> */}
-            <Text style={styles.text}>http://artsdatabanken.no/Pages/144194</Text>
+            <Text style={styles.link}>http://artsdatabanken.no/Pages/144194</Text>
           {/* </TouchableOpacity> */}
         </View>
         <Image source={images.learnImage2} style={styles.innerImg} />
@@ -192,28 +192,28 @@ export default class LearnMore extends Component {
             name={'Jane Uhd Jepsen'}
             position={'Senior Researcher'.localized}
             institute={'Norwegian Institute for Nature Research (NINA)'.localized}
-            email={''}
+            email={'jane.jepsen@nina.no'}
           />
           <MembersList
             photo={images.photoIngrid}
             name={'Ingrid Jensvoll'}
             position={'Senior Researcher'.localized}
             institute={'Arctic University of Norway (UIT)'.localized}
-            email={''}
+            email={'ingrid.jensvoll@uit.no'}
           />
           <MembersList
             photo={images.photoPetter}
             name={'Ole Petter Laksforsmo Vindstad'}
             position={'Postdoktor'.localized}
             institute={'Arctic University of Norway (UIT)'.localized}
-            email={''}
+            email={'ole.p.vindstad@uit.no'}
           />
           <MembersList
             photo={images.photoMalin}
             name={'Malin Ek'}
             position={'PhD student'.localized}
             institute={'Arctic University of Norway (UIT)'.localized}
-            email={''}
+            email={'malin.ek@uit.no'}
           />
         </View>
         <View style={styles.itemContainer}>
