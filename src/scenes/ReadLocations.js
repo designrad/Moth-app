@@ -70,7 +70,7 @@ const longitudeDelta = 0.01;
 const mapStateToProps = (state) => {
   const { readLocations } = state;
   const { locations, availableYears, selectedYears } = readLocations;
-
+  console.log('LOC', locations);
   const filteredLocations = locations.filter(
     ({ date }) => (date && Number(Moment(date).format('YYYY'))
       && selectedYears.indexOf(Number(Moment(date).format('YYYY'))) >= 0)
@@ -242,11 +242,10 @@ export default class ReadLocations extends Component {
   };
 
   render() {
-    const { filterYear, availableYears, filteredLocations, selectedYears } = this.props;
+    const { availableYears, filteredLocations, selectedYears } = this.props;
     const { initialPosition, region } = this.state;
 
     return (
-      <View style={styles.container}>
         <MapView
           initialRegion={initialPosition}
           region={region}
@@ -260,27 +259,26 @@ export default class ReadLocations extends Component {
           {filteredLocations.map(item => (
            this.renderPoint(item)
           ))}
+          <View style={styles.filterContainer}>
+            {
+              availableYears.map(year => (
+                <TouchableOpacity
+                  style={[
+                    styles.filterButton,
+                    (selectedYears.indexOf(year) >= 0
+                        ? styles.buttonEnabled
+                        : styles.buttonDisabled
+                    )
+                  ]}
+                  key={year}
+                  onPress={() => this.props.setFilterYear(year)}
+                >
+                  <Text style={styles.label}>{year}</Text>
+                </TouchableOpacity>
+              ))
+            }
+          </View>
         </MapView>
-        <View style={styles.filterContainer}>
-          {
-            availableYears.map(year => (
-              <TouchableOpacity
-                style={[
-                  styles.filterButton,
-                  (selectedYears.indexOf(year) >= 0
-                    ? styles.buttonEnabled
-                    : styles.buttonDisabled
-                  )
-                ]}
-                key={year}
-                onPress={() => this.props.setFilterYear(year)}
-              >
-                <Text style={styles.label}>{year}</Text>
-              </TouchableOpacity>
-            ))
-          }
-        </View>
-      </View>
     );
   }
 }
