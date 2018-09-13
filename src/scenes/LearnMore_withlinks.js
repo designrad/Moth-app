@@ -273,7 +273,7 @@ export default class LearnMore extends Component {
            </TouchableOpacity>
         </View>
         <View style={styles.bottomContainer}>
-          <Text style={styles.versionApp}>App version 1.2</Text>
+          <Text style={styles.versionApp}>App version 1.2.3</Text>
         </View>
       </ScrollView>
     );
