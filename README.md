@@ -6,7 +6,7 @@
 2. _(Make changes if needed:)_
     `npm install`
     
-3. _(Change versionCode and versionName in build.gradle by incrementing +1:)_
+3. _(Change verionCode and versionName in build.gradle by incrementing +1:)_
         
 4. _Install requirement:_
     `npm install`
