@@ -97,8 +97,8 @@ android {
         applicationId "no.designrad.malerjakt"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 11
-        versionName "11"
+        versionCode 13
+        versionName "13"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -149,8 +149,8 @@ dependencies {
         exclude group: 'com.google.android.gms', module: 'play-services-base'
         exclude group: 'com.google.android.gms', module: 'play-services-maps'
     }
-    compile 'com.google.android.gms:play-services-base:11.+'
-    compile 'com.google.android.gms:play-services-maps:11.+'
+    compile 'com.google.android.gms:play-services-base:+'
+    compile 'com.google.android.gms:play-services-maps:+'
     compile project(':react-native-linear-gradient')
     compile project(':react-native-image-picker')
     compile project(':react-native-i18n')
