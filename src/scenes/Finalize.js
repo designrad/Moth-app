@@ -157,7 +157,7 @@ export default class Finalize extends Component {
     const openMap = () => {
       navigation.navigate(Routes.addLocation.name, { longitude, latitude, fixed: false });
     };
-    console.log('PROPS', this.props);
+
     return (
       <KeyboardAwareScrollView
         style={styles.scrollView}

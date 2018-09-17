@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, Text, Dimensions, BackAndroid, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, BackAndroid, TouchableOpacity, Image } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLocations, setFilterYear } from '../redux/actions/readLocations';
 
-import { Routes, scale, scaleByVertical, filterYearsLimit } from '../global/constants';
+import { Routes, scale, scaleByVertical } from '../global/constants';
 import { colors } from '../global';
 
 import { Moment } from '../global/utils';
@@ -56,6 +56,10 @@ const styles = StyleSheet.create({
   label: {
     color: '#111111',
     fontSize: 18,
+  },
+  markerImage: {
+    width: 26,
+    height: 41,
   }
 });
 
@@ -69,20 +73,12 @@ const longitudeDelta = 0.01;
 
 const mapStateToProps = (state) => {
   const { readLocations } = state;
-  const { locations, filterYear } = readLocations;
-
-  const availableYears = locations.reduce((obj, { date }) => (
-    (date && obj.indexOf(Number(Moment(date).format('YYYY'))) >= 0)
-      ? obj
-      : [...obj, Number(Moment(date).format('YYYY'))]
-    ), []
-  ).sort((a, b) => Moment(b).diff(a));
-
-  const filteredLocations = filterYear
-    ? locations.filter(
-        ({ date }) => (date && Number(Moment(date).format('YYYY')) === filterYear)
-      )
-    : [...locations];
+  const { locations, availableYears, selectedYears } = readLocations;
+  console.log('LOC', locations);
+  const filteredLocations = locations.filter(
+    ({ date }) => (date && Number(Moment(date).format('YYYY'))
+      && selectedYears.indexOf(Number(Moment(date).format('YYYY'))) >= 0)
+  );
 
   return {
     ...readLocations,
@@ -108,7 +104,8 @@ export default class ReadLocations extends Component {
   static propTypes = {
     setFilterYear: PropTypes.func.isRequired,
     getLocations: PropTypes.func.isRequired,
-    filterYear: PropTypes.number,
+    selectedYears: PropTypes.arrayOf(PropTypes.number),
+    availableYears: PropTypes.arrayOf(PropTypes.number),
     locations: PropTypes.arrayOf(PropTypes.object).isRequired,
     filteredLocations: PropTypes.arrayOf(PropTypes.object).isRequired,
     navigation: PropTypes.shape({
@@ -182,10 +179,15 @@ export default class ReadLocations extends Component {
   // Opens a detailed description of the point
   openLog = id => this.props.navigation.navigate(Routes.moth.name, { id });
 
+  update = () => {
+    this.forceUpdate();
+  };
+
   // The function adds points to the map
-  renderPoint = (point) => {
+  renderPoint = (point, index) => {
     const { _id, latitude, longitude, identification, comments, date } = point;
-    let readableDate = Moment(date).format('lll');
+    const readableDate = Moment(date).format('lll');
+
     if (identification === 'correct') {
       let newText;
       if (comments.length > 35) {
@@ -202,10 +204,14 @@ export default class ReadLocations extends Component {
           }}
           identifier={_id}
           key={_id}
-          image={greenImage}
         >
+          <Image
+            source={greenImage}
+            style={[styles.markerImage]}
+          />
           <MapView.Callout
             onPress={() => this.openLog(_id)}
+            style={{ flex: -1, minWidth: 150 }}
           >
             <View>
               <Text>{newText}</Text>
@@ -232,10 +238,14 @@ export default class ReadLocations extends Component {
           }}
           identifier={_id}
           key={_id}
-          image={grayImage}
         >
+          <Image
+            source={grayImage}
+            style={[styles.markerImage]}
+          />
           <MapView.Callout
             onPress={() => {}}
+            style={{ flex: -1, minWidth: 150 }}
           >
             <View>
               <Text>{newText}</Text>
@@ -249,14 +259,14 @@ export default class ReadLocations extends Component {
   };
 
   render() {
-    const { filterYear, availableYears, filteredLocations } = this.props;
+    const { availableYears, filteredLocations, selectedYears } = this.props;
     const { initialPosition, region } = this.state;
 
     return (
       <View style={styles.container}>
         <MapView
           initialRegion={initialPosition}
-          region={region}
+          // region={region}
           style={styles.container}
           mapType={'hybrid'}
           onRegionChange={e => this.onRegionChange(e)}
@@ -264,20 +274,20 @@ export default class ReadLocations extends Component {
           showsMyLocationButton
           cacheEnabled={isAndroid}
         >
-          {filteredLocations.map(item => (
-           this.renderPoint(item)
+          {filteredLocations.map((item, index) => (
+           this.renderPoint(item, index)
           ))}
         </MapView>
+
         <View style={styles.filterContainer}>
           {
-            availableYears.slice(0, filterYearsLimit).map(year => (
+            availableYears.map(year => (
               <TouchableOpacity
                 style={[
                   styles.filterButton,
-                  (
-                  filterYear === year
-                    ? styles.buttonEnabled
-                    : styles.buttonDisabled
+                  (selectedYears.indexOf(year) >= 0
+                      ? styles.buttonEnabled
+                      : styles.buttonDisabled
                   )
                 ]}
                 key={year}
