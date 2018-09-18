@@ -12,7 +12,7 @@
     `npm install`
     
 5. _Create signed APK bundle on terminal:_
-    - add keystore passwords to android/gradle.properties
+    - add keystore passwords to `android/gradle.properties`
     - run in android directory: `./gradlew assembleRelease`
     - removed password, so not to accidentally push to github
     
