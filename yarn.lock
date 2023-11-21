@@ -3210,8 +3210,8 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
 js-yaml@^3.5.1, js-yaml@^3.7.0:
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.10.0.tgz#2e78441646bd4682e963f22b6e92823c309c62dc"
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -4333,9 +4333,9 @@ react-native-image-picker@^0.26.3:
   dependencies:
     react-timer-mixin "^0.13.3"
 
-react-native-linear-gradient@^2.0.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.3.0.tgz#757997197e35edf52e290891a11566e462845da1"
+react-native-linear-gradient@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.4.0.tgz#51d8ea12bb72a59bede9edc87b694b16b64cf435"
   dependencies:
     prop-types "^15.5.10"
 
@@ -4343,9 +4343,9 @@ react-native-maps@0.16.3:
   version "0.16.3"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.16.3.tgz#c061b78a9cca83b814efcf56006cc90020f720f7"
 
-react-native-permissions@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.0.0.tgz#96a79c8fe525d9d4813febdcbb3d35dc66268956"
+react-native-permissions@^1.1.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.2.1.tgz#cb1f6e53b8992b3912de5a4cfc1553ac2e82d0f6"
 
 react-native-tab-view@^0.0.59:
   version "0.0.59"
